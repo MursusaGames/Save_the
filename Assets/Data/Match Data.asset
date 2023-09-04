@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faf2327df9c39204498c3dfaf70f6ca7, type: 3}
+  m_Name: Match Data
+  m_EditorClassIdentifier: 
+  localizationData: {fileID: 11400000, guid: cc55b141c076aa440a6a8a343d92ebca, type: 2}
+  appleSpawnChance: 75
+  level: 1
+  levelNumber: 1
+  stage: 0
+  gameStage: 0
+  oceanStage: 0
+  fermStage: 0
+  forestStage: 0
+  hellStage: 0
+  technoStage: 0
+  numberOffKnifes: 0
+  tryCount: 3
+  isGift: 1
+  ringSprite: {fileID: 0}
+  bossSprite: {fileID: 21300000, guid: 19feb417925fa2b49a756f28d5b4daa0, type: 3}
+  moneyData: {fileID: 11400000, guid: 165c1fb4826f6614d8155db13b7f89ea, type: 2}
+  CustomDataContainer: {fileID: 11400000, guid: 00b42e9e1b8f93a48835864716cc112e, type: 2}
+  currentKnife: {fileID: 21300000, guid: 65dd06acab4f3aa47b5ce0576e429eae, type: 3}
+  state:
+    value: 0

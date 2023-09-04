@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b15f18d06a574934dbfc7b0c11b20989, type: 3}
+  m_Name: BossKn_1
+  m_EditorClassIdentifier: 
+  _customsItems:
+  - {fileID: 11400000, guid: 6d1bbe0bd5abb8445a7022b093768a76, type: 2}
+  - {fileID: 11400000, guid: d402031b71cc36741b25ee7c10be88c6, type: 2}
+  - {fileID: 11400000, guid: 1bf7cd1e73f2c6f4683ba2d596f2db04, type: 2}
+  - {fileID: 11400000, guid: 9733f25c1c29f714f8856855f776782d, type: 2}

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dcff09e88d59e74b90d39686644b5fc, type: 3}
+  m_Name: Stage_2
+  m_EditorClassIdentifier: 
+  appleSpawnChance: 0
+  score: 10
+  stage: 2
+  tryCount: 3
+  ring: {fileID: 0}
+  prizKnife: {fileID: 0}
+  bossSprite: {fileID: 0}
+  monsterSprite: {fileID: 0}
+  monsterHalf1: {fileID: 0}
+  monsterHalf2: {fileID: 0}
+  id: 0
+  changeRotate: 0
+  timeToEnd: 10
+  monsterTag: iron
