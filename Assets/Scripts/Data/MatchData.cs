@@ -18,6 +18,7 @@ public class MatchData : ScriptableObject
     public int numberOffKnifes;
     public int tryCount;
     public bool isGift;
+    public int firstDay;
     public Sprite ringSprite;
     public Sprite bossSprite;
     public MoneyData moneyData;

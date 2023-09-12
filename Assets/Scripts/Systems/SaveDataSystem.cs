@@ -5,6 +5,8 @@ public class SaveDataSystem : MonoBehaviour
 {
     [SerializeField] private MatchData data;
     [SerializeField] private UserData userData;
+    [SerializeField] private Sprite defoultSprite;
+    [SerializeField] private GetForAppleSystem getForAppleSystem;
 
     private void Start()
     {
@@ -44,6 +46,16 @@ public class SaveDataSystem : MonoBehaviour
         data.hellStage = PlayerPrefs.GetInt(Constants.HELLSTAGE, 0);
         data.oceanStage = PlayerPrefs.GetInt(Constants.OCEANSTAGE, 0);
         userData.apple.Value = PlayerPrefs.GetInt(Constants.SCORE);
+        if (PlayerPrefs.HasKey("FirstDay"))
+        {
+            data.firstDay = PlayerPrefs.GetInt("FirstDay");
+        }
+        data.currentTag = PlayerPrefs.GetString("CurentTag", "Knife");
+        /*data.currentKnife = defoultSprite;
+        data.currentTag = "Knife";
+        getForAppleSystem.data.currentKnife = defoultSprite;
+        getForAppleSystem.knifesMenu.UpgradeKnifeImage();
+        getForAppleSystem.mainMenu.knifeImg.sprite = defoultSprite;*/
     }
    
     #endregion

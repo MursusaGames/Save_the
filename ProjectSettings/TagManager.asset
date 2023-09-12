@@ -11,6 +11,20 @@ TagManager:
   - Hero
   - Iron
   - Tomate
+  - Ches
+  - superKnife
+  - stone
+  - poop
+  - bullet
+  - egg
+  - silverBullet
+  - bomb
+  - churiken
+  - gas
+  - blessedSword
+  - lightsaber
+  - rocet
+  - nuclear
   layers:
   - Default
   - TransparentFX

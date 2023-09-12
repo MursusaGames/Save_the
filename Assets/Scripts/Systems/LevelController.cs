@@ -26,7 +26,7 @@ public class LevelController : MonoBehaviour
     [SerializeField] private TMP_Text score;
     [SerializeField] private MatchData data;
     [SerializeField] private string thisStageName;
-    [SerializeField] private Image monster;
+    [SerializeField] private Monster monster;
     [SerializeField] private Image monsterLeft;
     [SerializeField] private Image monsterRight;
     [SerializeField] private int thisSceneNumber;
@@ -35,11 +35,14 @@ public class LevelController : MonoBehaviour
     [SerializeField] private UserData userData;
     [SerializeField] private List<GameObject> bossAnim;
     [SerializeField] private List<GameObject> monsterAnim;
+    [SerializeField] private GameObject finishWindow;
+    [SerializeField] private Herous player;
 
     public int currentStage;
     private int tryCount;
     public bool bossFight;
     public bool bossFirstFight;
+    private bool lastStage;
 
     private void Start()
     {
@@ -52,38 +55,66 @@ public class LevelController : MonoBehaviour
             case "Game":
                 stageNumber.text = "Stage " + data.gameStage.ToString();
                 currentStage = data.gameStage;
+                if (currentStage > 5)
+                {
+                    lastStage = true;
+                }
                 break;
             case "WildOcean":
                 stageNumber.text = "Stage " + data.oceanStage.ToString();
                 currentStage = data.oceanStage;
+                if (currentStage > 4)
+                {
+                    lastStage = true;
+                }
                 break;
             case "WildFerm":
                 stageNumber.text = "Stage " + data.fermStage.ToString();
                 currentStage = data.fermStage;
+                if(currentStage > 5)
+                {
+                    lastStage = true;
+                }
                 break;
             case "WildForest":
                 stageNumber.text = "Stage "+ data.forestStage.ToString();
                 currentStage = data.forestStage;
+                if (currentStage > 4)
+                {
+                    lastStage = true;
+                }
                 break;
             case "Hell":
                 stageNumber.text = "Stage "+data.hellStage.ToString();
                 currentStage = data.hellStage;
+                if (currentStage > 4)
+                {
+                    lastStage = true;
+                }
                 break;
             case "Technopolis":
                 stageNumber.text = "Stage "+data.technoStage.ToString();
                 currentStage = data.technoStage;
+                if (currentStage > 4)
+                {
+                    lastStage = true;
+                }
                 break;
         }
+        if (lastStage)
+        {
+            ShowFinishWindow();
+            return;
+        }
+        
         if (data.level == 4)
         {
-            monster.enabled = false;
             bossAnim[stages[currentStage].id].SetActive(true);
             bossFight = true;
             greenLine.SetActive(true);
         }
         else
         {
-            monster.enabled = false;
             monsterAnim[stages[currentStage].id].SetActive(true);
         }
         monster.gameObject.tag = stages[currentStage].monsterTag;
@@ -102,6 +133,29 @@ public class LevelController : MonoBehaviour
             tryIcons[i].gameObject.SetActive(true);
         }*/
         SetKnife();
+    }
+    public void IsTomate()
+    {
+        Debug.Log("Tomate");
+    }
+    public void IsStone()
+    {
+        Debug.Log("Stone");
+    }
+    public void IsChes()
+    {
+        timeController.GetPause();
+        player.GetPause();
+        monster.GetPause();
+        monsterAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Stop", true);
+        /*if (stages[currentStage].id == 3)
+        {
+            monsterAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Stop", true);
+        }   */    
+    }
+    private void ShowFinishWindow()
+    {
+        finishWindow.SetActive(true);
     }
     public void ResetAnim()
     {
@@ -123,6 +177,14 @@ public class LevelController : MonoBehaviour
         {
             knife.GetComponent<Knife>()._knife = true;
         }
+        else if(data.currentTag == "superKnife")
+        {
+            knife.GetComponent<Knife>()._superKnife = true;
+        }
+        else if (data.currentTag == "Tomate")
+        {
+            knife.GetComponent<Knife>()._tomate = true;
+        }
     }
     public void IsTime()
     {
@@ -133,6 +195,10 @@ public class LevelController : MonoBehaviour
     }
     public void Fall()
     {
+        player.LetsPlay();
+        monster.LetsPlay();
+        timeController.LetsPlay();
+        monsterAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Stop", false);              
         if (bossFirstFight)
         {
             greenLine.SetActive(false);

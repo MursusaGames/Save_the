@@ -1,9 +1,12 @@
 using UnityEngine;
+using TMPro;
 
 public class GetForAppleSystem : MonoBehaviour
 {
     [SerializeField] GameObject textForSmoulBtn;
     [SerializeField] GameObject textForBigBtn;
+    [SerializeField] private TextMeshProUGUI subscribe;
+    [SerializeField] private SubscribeDataContainer subscribeData;
     public MatchData _data;
     public KnifesMenu knifesMenu;
     public MainMenu mainMenu;
@@ -22,6 +25,11 @@ public class GetForAppleSystem : MonoBehaviour
         currentScript = script;
         GetBtn.Show();
         GetBtn.GetComponent<UnluckNowBtnScript>().knifeCost.text = price.ToString();
+    }
+
+    public void SetSubscribe(int id, int index)
+    {
+        subscribe.text = subscribeData.CustomsItems[id].Subscribe[index];
     }
 
     public void TryGetKnifeForApple( )

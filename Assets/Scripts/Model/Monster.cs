@@ -11,16 +11,27 @@ public class Monster : MonoBehaviour
     private bool isGoRight;
     private float randDist;
     private bool increaseDist;
+    private bool pause;
     
     void OnEnable()
     {
         isGoLeft = true;
-        randDist = UnityEngine.Random.Range(0.5f, 5f);
+        randDist = UnityEngine.Random.Range(3, 15);
         increaseDist = false;        
     }
 
+    public void GetPause()
+    {
+        pause = true;
+    }
+
+    public void LetsPlay()
+    {
+        pause = false;
+    }
     void FixedUpdate()
     {
+        if (pause) return;
         CheckScale();
         if (isGoLeft)
         {
@@ -93,6 +104,6 @@ public class Monster : MonoBehaviour
         var trans = gameObject.transform.localScale;
         trans.x *= -1;
         gameObject.transform.localScale = trans;
-        randDist = UnityEngine.Random.Range(0.5f, 5f);
+        randDist = UnityEngine.Random.Range(3, 15);
     }
 }

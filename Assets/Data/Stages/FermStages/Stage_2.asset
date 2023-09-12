@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dcff09e88d59e74b90d39686644b5fc, type: 3}
   m_Name: Stage_2
   m_EditorClassIdentifier: 
-  weaponID: 0
+  weaponID: 2
   score: 10
   stage: 2
   tryCount: 3
   ring: {fileID: 0}
-  prizKnife: {fileID: 0}
-  bossSprite: {fileID: 21300000, guid: 905833238b4ac664abc53d8b13b7a043, type: 3}
-  monsterSprite: {fileID: 21300000, guid: 7494aa42769a48940968f1c51239726f, type: 3}
-  monsterHalf1: {fileID: 21300000, guid: a2b4704f3d8be6346a96879f70fe95c1, type: 3}
-  monsterHalf2: {fileID: 21300000, guid: 9ea21538c0e70b84093589d0c6f0b848, type: 3}
-  id: 0
+  prizKnife: {fileID: 21300000, guid: c1fe38d8e55ec374da406c53680374c5, type: 3}
+  bossSprite: {fileID: 21300000, guid: 4f04a8049fcf45d44bc5d05f658d726b, type: 3}
+  monsterSprite: {fileID: 21300000, guid: 4f04a8049fcf45d44bc5d05f658d726b, type: 3}
+  monsterHalf1: {fileID: 21300000, guid: ed2d1df9ef994074988de671d328de72, type: 3}
+  monsterHalf2: {fileID: 21300000, guid: 30ef54e66224594488fc809d45dba56b, type: 3}
+  id: 2
   changeRotate: 0
-  timeToEnd: 10
+  timeToEnd: 17
   monsterTag: Monster

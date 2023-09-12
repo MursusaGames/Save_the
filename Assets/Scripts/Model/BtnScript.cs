@@ -48,7 +48,15 @@ public class BtnScript : MonoBehaviour
             getForAppleSystem.knifesMenu.UpgradeKnifeImage();
             getForAppleSystem.mainMenu.knifeImg.sprite = knifeImg.sprite;
         }
-    
-
+        if (parentId >  3)
+        {
+            data.currentKnife = knifeImg.sprite;
+            data.currentTag = knifeImg.gameObject.tag;
+            getForAppleSystem.data.currentKnife = knifeImg.sprite;
+            getForAppleSystem.knifesMenu.UpgradeKnifeImage();
+            getForAppleSystem.mainMenu.knifeImg.sprite = knifeImg.sprite;
+        }
+        getForAppleSystem.SetSubscribe(parentId, id);
+        PlayerPrefs.SetString("CurentTag", data.currentTag);
     }
 }

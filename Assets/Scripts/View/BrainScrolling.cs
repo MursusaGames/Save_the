@@ -36,18 +36,31 @@ public class BrainScrolling : MonoBehaviour
     public bool isScrolling;
     public string buyBtnTitle = "BUY";
 
-    public ScrollRect scrollRect;
+    public ScrollRect scrollRect;    
     [SerializeField] private TextMeshProUGUI bossBagKnifeNumber;    
     [SerializeField] private TextMeshProUGUI videoBagKnifeNumber;
+    [SerializeField] private TextMeshProUGUI prizeBagKnifeNumber;
     [SerializeField] private CustomsDataContainer bossKnife_1_Container;
+    [SerializeField] private CustomsDataContainer bossKnife_2_Container;
+    [SerializeField] private CustomsDataContainer prizeKnife_1_Container;
     [SerializeField] private CustomsDataContainer appleKnife_1_Container;
     private void Awake()
     {
         if (!PlayerPrefs.HasKey(Constants.APPLE_1_DATA + 0)) PlayerPrefs.SetInt(Constants.APPLE_1_DATA + 0, 1);
     }
-
+    private void OnDisable()
+    {
+        foreach (var item in instPans)
+        {
+            Destroy(item);
+        }
+    }
     private void OnEnable()
     {
+        /*if(!PlayerPrefs.HasKey(Constants.PRIZE_BAG + 0))
+        {
+            PlayerPrefs.SetString(Constants.PRIZE_BAG + 0, "yes");
+        }*/
         panCount = 5; //System.Enum.GetValues(typeof(SkinType)).Length;       
         panScale = new Vector2[panCount];
         contentRect = GetComponent<RectTransform>();
@@ -74,7 +87,7 @@ public class BrainScrolling : MonoBehaviour
                     break;                
                 case 1:
                     bgTopText.color = Color.blue;
-                    bossBagKnifeNumber.text = PlayerPrefs.GetInt(Constants.VIDEO_BAG).ToString();
+                    videoBagKnifeNumber.text = PlayerPrefs.GetInt(Constants.VIDEO_BAG).ToString();
                     break;                
                 case 2:
                     bgTopText.color = Color.red;
@@ -96,10 +109,39 @@ public class BrainScrolling : MonoBehaviour
                     break;
                 case 3:
                     bgTopText.color = Color.red;
-                    bossBagKnifeNumber.text = PlayerPrefs.GetInt(Constants.BOSS_BAG).ToString();
+                    bossBagKnifeNumber.text = PlayerPrefs.GetInt(Constants.BOSS_BAG1).ToString();
+                    for (int j = 0; j < bossKnife_2_Container.CustomsItems.Count; j++)
+                    {
+                        panelScript.buttonsImg[j].gameObject.GetComponent<BtnScript>().knifeImg.sprite = bossKnife_2_Container.CustomsItems[j].CustomSprites;
+                        panelScript.buttonsImg[j].gameObject.GetComponent<BtnScript>().knifeImg.gameObject.tag = bossKnife_2_Container.CustomsItems[j].CustomNames;
+                        if (PlayerPrefs.HasKey(Constants.BOSS_BAG1 + j))
+                        {
+                            panelScript.buttonsImg[j].gameObject.GetComponent<BtnScript>().knifeImg.color = Color.white;
+                            panelScript.buttonsImg[j].gameObject.GetComponent<Button>().interactable = true;
+                        }
+                        else
+                        {
+                            panelScript.buttonsImg[j].gameObject.GetComponent<Button>().interactable = false;
+                        }
+                    }
                     break;                
                 case 4:
                     bgTopText.color = Color.gray;
+                    prizeBagKnifeNumber.text = PlayerPrefs.GetInt(Constants.PRIZE_BAG).ToString();
+                    for (int j = 0; j < prizeKnife_1_Container.CustomsItems.Count; j++)
+                    {
+                        panelScript.buttonsImg[j].gameObject.GetComponent<BtnScript>().knifeImg.sprite = prizeKnife_1_Container.CustomsItems[j].CustomSprites;
+                        panelScript.buttonsImg[j].gameObject.GetComponent<BtnScript>().knifeImg.gameObject.tag = prizeKnife_1_Container.CustomsItems[j].CustomNames;
+                        if (PlayerPrefs.HasKey(Constants.PRIZE_BAG + j))
+                        {
+                            panelScript.buttonsImg[j].gameObject.GetComponent<BtnScript>().knifeImg.color = Color.white;
+                            panelScript.buttonsImg[j].gameObject.GetComponent<Button>().interactable = true;
+                        }
+                        else
+                        {
+                            panelScript.buttonsImg[j].gameObject.GetComponent<Button>().interactable = false;
+                        }
+                    }
                     break;
             }
             if (i == 0) continue;

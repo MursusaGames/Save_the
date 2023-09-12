@@ -12,11 +12,25 @@ public class Herous : MonoBehaviour
     [SerializeField] private float boardYm;
     [SerializeField] private float speed;
     [SerializeField] private MatchData data;
+    [SerializeField] private Animator anim;
     private float speedY;
     private bool upDown;
     private bool isGoLeft;
     private bool isGoRight;
     private Vector3 pos;
+    private bool pause;
+    public void GetPause()
+    {
+        pause = true;
+        anim.SetBool("Stop", true);
+
+    }
+
+    public void LetsPlay()
+    {
+        anim.SetBool("Stop", false);
+        pause = false;
+    }
     void OnEnable()
     {
         GetWords();
@@ -44,6 +58,8 @@ public class Herous : MonoBehaviour
     }
     void Update()
     {
+        if (pause)
+            return;
         CheckScale();
         if (isGoLeft)
         {

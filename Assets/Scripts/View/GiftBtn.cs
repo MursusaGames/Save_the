@@ -11,24 +11,30 @@ public class GiftBtn : MonoBehaviour
     bool colorCh;
     [SerializeField] float delay = 0.5f;
     float temp;
-    private string date;
+    private int date;
 
     private void Awake()
     {
         btnImg = GetComponent<Image>();
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        date = DateTime.Now.DayOfYear.ToString();
-        if(date == PlayerPrefs.GetString("Date", "0"))
+        date = DateTime.Now.DayOfYear;
+        int firstDay = data.firstDay;
+        int sub = date - firstDay;
+        for (int i = 0; i <= sub; i++)
         {
-            data.isGift = false;
-        }
-        else
-        {
-            data.isGift = true;
-        }
+            if(!PlayerPrefs.HasKey(Constants.PRIZE_BAG + i))
+            {
+                data.isGift = true;
+            }
+            else
+            {
+                data.isGift = false;
+                btnImg.color = Color.cyan;
+            }
+        }          
     }
 
     private void FixedUpdate()

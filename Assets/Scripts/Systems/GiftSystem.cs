@@ -7,44 +7,37 @@ using System;
 
 public class GiftSystem : MonoBehaviour
 {
-    [SerializeField] TimerSystem timerSystem;
-    [SerializeField] GameObject giftWindow;
-    [SerializeField] MatchData data;
-    [SerializeField] GameObject blockerWindow;
-    [SerializeField] TextMeshProUGUI blockerText;
-    [SerializeField] Image giftBtnImg;
+    [SerializeField] private MatchData data;
+    [SerializeField] private List<Button> giftBtns;    
     [SerializeField] private UserData userData;
-    private string date;
+    private int date;
+    private int index;
 
     private void OnEnable()
     {
-        date = DateTime.Now.DayOfYear.ToString();
-    }
-    public void StartGiftMode()
-    {
-        var _date = PlayerPrefs.GetString("Date", "0");
-        if (date == _date)
+        date = DateTime.Now.DayOfYear;
+        if (!PlayerPrefs.HasKey("DateOfYear"))
         {
-            blockerWindow.Show();
-            blockerText.text =  "IN NEXT DAY";
-            Invoke(nameof(HideBlockerWindow), 1.3f);
-            return;
+            PlayerPrefs.SetInt("DateOfYear", date);
+            PlayerPrefs.SetInt("FirstDay", date);
+            data.firstDay = date;
         }
-        
-        giftWindow.Show();
-    }
-    public void StopGiftMode()
-    {
-        PlayerPrefs.SetInt(Constants.SCORE, userData.apple.Value);
-        data.isGift = false;
-        giftWindow.Hide();
-        timerSystem.StartTimer();
-        giftBtnImg.color = Color.cyan;
-        PlayerPrefs.SetString("Date", date);
+        else
+        {
+            data.firstDay = PlayerPrefs.GetInt("FirstDay");
+            index = date - data.firstDay;
+        }
+        for (int i = 0; i <= index; i++)
+        {
+            giftBtns[i].interactable = true;
+        } 
     }
     
-    void HideBlockerWindow()
+    
+    public void GetPrize(int id)
     {
-        blockerWindow.Hide();
+        PlayerPrefs.SetString(Constants.PRIZE_BAG + id, "yes");
+        data.isGift = false;
     }
+   
 }

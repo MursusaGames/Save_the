@@ -10,7 +10,17 @@ public class TimeController : MonoBehaviour
     private bool startTimer;
     private float timeToEnd;
     private float increaseTime;
+    private bool pause;
 
+    public void GetPause()
+    {
+        pause = true;
+    }
+
+    public void LetsPlay()
+    {
+        pause = false;
+    }
     public void SetTime()
     {
         timeToEnd = levelController.timeToEnd;
@@ -20,6 +30,7 @@ public class TimeController : MonoBehaviour
 
     void Update()
     {
+        if (pause) return;
         if (startTimer)
         {
             increaseTime += Time.deltaTime;

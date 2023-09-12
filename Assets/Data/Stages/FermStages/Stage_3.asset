@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dcff09e88d59e74b90d39686644b5fc, type: 3}
+  m_Name: Stage_3
+  m_EditorClassIdentifier: 
+  weaponID: 3
+  score: 13
+  stage: 3
+  tryCount: 3
+  ring: {fileID: 0}
+  prizKnife: {fileID: 21300000, guid: 8cd57cc14c90298448ecb6edf88d8982, type: 3}
+  bossSprite: {fileID: 21300000, guid: 7494aa42769a48940968f1c51239726f, type: 3}
+  monsterSprite: {fileID: 21300000, guid: 7494aa42769a48940968f1c51239726f, type: 3}
+  monsterHalf1: {fileID: 21300000, guid: 4fa53e15d3c730a48a3fad81d18e1a0a, type: 3}
+  monsterHalf2: {fileID: 21300000, guid: 582f1eb0347171949bf00b76fcfcb144, type: 3}
+  id: 3
+  changeRotate: 0
+  timeToEnd: 15
+  monsterTag: Ches
