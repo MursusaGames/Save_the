@@ -22,8 +22,8 @@ EditorBuildSettings:
     guid: ce7191fef560d964191128408b1b3579
   - enabled: 1
     path: Assets/Scenes/4_SuperiorWorld.unity
-    guid: 4b2c0573c72aae64c85d8d2596398c7d
-  - enabled: 1
-    path: Assets/Scenes/5_TechnoWorld.unity
     guid: 64b5fa6dba7beb646bf2267c8c4d0505
+  - enabled: 1
+    path: Assets/Scenes/5_Techno.unity
+    guid: 4b2c0573c72aae64c85d8d2596398c7d
   m_configObjects: {}

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92f772eddfc7c1d4288042cc7fed04d0, type: 3}
   m_Name: Bosss_5
   m_EditorClassIdentifier: 
-  _customSprites: {fileID: 21300000, guid: f6a9f4ae3bb8620409cc678933b9d878, type: 3}
+  _customSprites: {fileID: 21300000, guid: 783ba121c6e7e774184061e7146b097d, type: 3}
   _customSubscribe: 
-  _customNames: Knife
+  _customNames: Tykw
   _customSubscribeEN: 
   _customNamesEN: 
   _customPrices: 0

@@ -16,7 +16,7 @@ public class Monster : MonoBehaviour
     void OnEnable()
     {
         isGoLeft = true;
-        randDist = UnityEngine.Random.Range(3, 15);
+        randDist = UnityEngine.Random.Range(1, 5);
         increaseDist = false;        
     }
 
@@ -67,14 +67,15 @@ public class Monster : MonoBehaviour
                 Flip();
             }
         }
-        if(distance < 150)
+        if(distance < 100)
         {
             increaseDist = true;            
         }
-        if (distance > 300)
+        if (distance > 400)
         {
             increaseDist = false;           
         }
+        randDist = UnityEngine.Random.Range(1, 5);
         if (increaseDist)
         {
             distance += randDist;

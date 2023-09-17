@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Knife : MonoBehaviour
 {
+    [SerializeField] private AudioSource ai;
     [SerializeField] private AudioSource tzong;
     [SerializeField] private AudioSource tsssss;
+    [SerializeField] private GameObject smoke;
     private TouchScreenSystem touchScreenSystem;
     private LevelController levelController;
     private Animator anim;
@@ -24,6 +26,8 @@ public class Knife : MonoBehaviour
     public bool _tomate;
     public bool _fire;
     public bool _racet;
+    public bool _tykw;
+    public bool _shark;
     public bool _carrot;
     private bool isRotate;
     void Awake()
@@ -37,7 +41,13 @@ public class Knife : MonoBehaviour
         soundKnifeInTree = GetComponent<AudioSource>();
         halfMonster = touchScreenSystem._halfMonster;
     }
-
+    private void OnEnable()
+    {
+        if (_tykw)
+        {
+            smoke.SetActive(true);
+        }
+    }
     public void KnifeGo()
     {
         rg.AddForce(Vector2.up * speed, ForceMode2D.Impulse);
@@ -82,7 +92,7 @@ public class Knife : MonoBehaviour
         }
         if (_knife)
         {
-            if (collision.gameObject.CompareTag("Monster"))
+            if (collision.gameObject.CompareTag("Monster")|| collision.gameObject.CompareTag("Shark"))
             {
                 win = true;
                 Handheld.Vibrate();
@@ -129,10 +139,23 @@ public class Knife : MonoBehaviour
                 levelController.IsChes();                
                 Invoke(nameof(GetFall), 3f);
             }
+            if (collision.gameObject.CompareTag("Tykw"))
+            {
+                Handheld.Vibrate();
+                rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+                rg.velocity = Vector2.zero;
+                img.color = Color.green;
+                ai.Play();
+                levelController.IsChes();
+                rg.constraints = RigidbodyConstraints2D.None;
+                rg.gravityScale = 0.2f;
+                //isRotate = true;
+                Invoke(nameof(GetFall), 3f);
+            }
         }
         if (_superKnife)
         {
-            if (collision.gameObject.CompareTag("Monster") || collision.gameObject.CompareTag("Ches"))
+            if (collision.gameObject.CompareTag("Monster") || collision.gameObject.CompareTag("Ches") || collision.gameObject.CompareTag("Shark"))
             {
                 win = true;
                 Handheld.Vibrate();
@@ -170,7 +193,20 @@ public class Knife : MonoBehaviour
                 isRotate = true;
                 Invoke(nameof(GetFall), 1f);
             }
-            
+            if (collision.gameObject.CompareTag("Tykw"))
+            {
+                Handheld.Vibrate();
+                rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+                rg.velocity = Vector2.zero;
+                img.color = Color.green;
+                ai.Play();
+                levelController.IsChes();
+                rg.constraints = RigidbodyConstraints2D.None;
+                rg.gravityScale = 0.2f;
+                //isRotate = true;
+                Invoke(nameof(GetFall), 3f);
+            }
+
         }
         if (_tomate)
         {
@@ -196,12 +232,24 @@ public class Knife : MonoBehaviour
                 levelController.IsStone();                
                 Invoke(nameof(GetWin), 3f);
             }
-            if (collision.gameObject.CompareTag("Iron") || collision.gameObject.CompareTag("Ches"))
+            if (collision.gameObject.CompareTag("Iron") || collision.gameObject.CompareTag("Ches") || collision.gameObject.CompareTag("Shark"))
             {
                 Handheld.Vibrate();
                 rg.constraints = RigidbodyConstraints2D.FreezePositionY;
                 img.enabled = false;
                 levelController.IsTomate();
+                Invoke(nameof(GetFall), 3f);
+            }
+            if (collision.gameObject.CompareTag("Tykw"))
+            {
+                Handheld.Vibrate();
+                rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+                rg.velocity = Vector2.zero;
+                ai.Play();
+                levelController.IsChes();
+                rg.constraints = RigidbodyConstraints2D.None;
+                rg.gravityScale = 1f;
+                isRotate = true;
                 Invoke(nameof(GetFall), 3f);
             }
 
@@ -230,7 +278,8 @@ public class Knife : MonoBehaviour
                 levelController.IsStone();
                 Invoke(nameof(GetWin), 3f);
             }
-            if (collision.gameObject.CompareTag("Iron") || collision.gameObject.CompareTag("Ches"))
+            if (collision.gameObject.CompareTag("Iron") || collision.gameObject.CompareTag("Ches")|| collision.gameObject.CompareTag("Tykw") 
+                || collision.gameObject.CompareTag("Shark"))
             {
                 Handheld.Vibrate();
                 rg.constraints = RigidbodyConstraints2D.FreezePositionY;
@@ -264,7 +313,8 @@ public class Knife : MonoBehaviour
                 levelController.IsStone();
                 Invoke(nameof(GetWin), 3f);
             }
-            if (collision.gameObject.CompareTag("Iron") || collision.gameObject.CompareTag("Ches"))
+            if (collision.gameObject.CompareTag("Iron") || collision.gameObject.CompareTag("Ches")|| collision.gameObject.CompareTag("Tykw")
+                || collision.gameObject.CompareTag("Shark"))
             {
                 Handheld.Vibrate();
                 rg.constraints = RigidbodyConstraints2D.FreezePositionY;
@@ -282,5 +332,90 @@ public class Knife : MonoBehaviour
             levelController.IsPoop();
             Invoke(nameof(GetWin), 3f);
         }
+        if (_tykw)
+        {
+            if (collision.gameObject.CompareTag("Monster") || collision.gameObject.CompareTag("Tykw") || collision.gameObject.CompareTag("Shark"))
+            {
+                win = true;
+                Handheld.Vibrate();
+                if (levelController.bossFight)
+                {
+                    if (levelController.bossFirstFight == false)
+                    {
+                        levelController.bossFirstFight = true;
+                        GetFall();
+                        return;
+                    }
+                    else
+                    {
+                        levelController.ResetYellowLine();
+                    }
+                }
+                levelController.ResetAnim();
+                halfMonster.SetActive(true);
+                Invoke(nameof(GetWin), 1f);
+            }
+            if (collision.gameObject.CompareTag("Iron")|| collision.gameObject.CompareTag("Ches"))
+            {
+                Handheld.Vibrate();
+                int rand = Random.Range(1, 3);
+                tzong.Play();
+                if (rand == 1)
+                {
+                    rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rg.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+                }
+
+                isRotate = true;
+                Invoke(nameof(GetFall), 1f);
+            }
+
+        }
+        if (_shark)
+        {
+            if (collision.gameObject.CompareTag("Monster") || collision.gameObject.CompareTag("Tykw") || collision.gameObject.CompareTag("Shark"))
+            {
+                win = true;
+                Handheld.Vibrate();
+                if (levelController.bossFight)
+                {
+                    if (levelController.bossFirstFight == false)
+                    {
+                        levelController.bossFirstFight = true;
+                        GetFall();
+                        return;
+                    }
+                    else
+                    {
+                        levelController.ResetYellowLine();
+                    }
+                }
+                levelController.ResetAnim();
+                halfMonster.SetActive(true);
+                Invoke(nameof(GetWin), 1f);
+            }
+            if (collision.gameObject.CompareTag("Iron") || collision.gameObject.CompareTag("Ches"))
+            {
+                Handheld.Vibrate();
+                int rand = Random.Range(1, 3);
+                tzong.Play();
+                if (rand == 1)
+                {
+                    rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rg.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+                }
+
+                isRotate = true;
+                Invoke(nameof(GetFall), 1f);
+            }
+
+        }
+
     }
 }

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dcff09e88d59e74b90d39686644b5fc, type: 3}
+  m_Name: Stage_4
+  m_EditorClassIdentifier: 
+  weaponID: 4
+  score: 14
+  stage: 4
+  tryCount: 3
+  ring: {fileID: 0}
+  prizKnife: {fileID: 21300000, guid: 783ba121c6e7e774184061e7146b097d, type: 3}
+  bossSprite: {fileID: 21300000, guid: 19feb417925fa2b49a756f28d5b4daa0, type: 3}
+  monsterSprite: {fileID: 21300000, guid: 19feb417925fa2b49a756f28d5b4daa0, type: 3}
+  monsterHalf1: {fileID: 21300000, guid: 6c9f75652d7d1d04ca5315b8bcf9e661, type: 3}
+  monsterHalf2: {fileID: 21300000, guid: a4601fce451310040af9fa0143348153, type: 3}
+  id: 4
+  changeRotate: 0
+  timeToEnd: 12
+  monsterTag: Tykw

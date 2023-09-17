@@ -20,6 +20,7 @@ public class LevelController : MonoBehaviour
     [SerializeField] private GameObject knifePrefab;
     [SerializeField] private GameObject winWindow;
     [SerializeField] private GameObject loseWindow;
+    [SerializeField] private GameObject gameWindow;
     [SerializeField] private GameObject bonusWindow;
     [SerializeField] private Transform knifeParent;
     [SerializeField] private Transform knifePos;
@@ -231,6 +232,14 @@ public class LevelController : MonoBehaviour
         {
             knife.GetComponent<Knife>()._poop = true;
         }
+        else if (data.currentTag == "Tykw")
+        {
+            knife.GetComponent<Knife>()._tykw = true;
+        }
+        else if (data.currentTag == "Shark")
+        {
+            knife.GetComponent<Knife>()._shark = true;
+        }
     }
     public void IsTime()
     {
@@ -266,6 +275,7 @@ public class LevelController : MonoBehaviour
     private void GameOver()
     {
         loseWindow.SetActive(true);
+        gameWindow.SetActive(false);
     }
     public void Win()
     {
