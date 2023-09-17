@@ -9,6 +9,10 @@ using UniRx.Extensions;
 
 public class LevelController : MonoBehaviour
 {
+    [SerializeField] private GameObject carrot;
+    [SerializeField] private GameObject stone;
+    [SerializeField] private GameObject tomat;
+    [SerializeField] private GameObject poop;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private List<AudioClip> clips;
     [SerializeField] private TimeController timeController;
@@ -126,32 +130,62 @@ public class LevelController : MonoBehaviour
         for (int i = 0; i <= data.level; i++)
         {
             levelIcons[i].color = Color.yellow;
-        }
-        
-        /*for (int i = 0; i < tryCount ; i++)
-        {
-            tryIcons[i].gameObject.SetActive(true);
-        }*/
+        }        
         SetKnife();
+    }
+    public void IsPoop()
+    {
+        PlaySound(6);
+        SetPause();
+        poop.SetActive(true);        
+    }
+    public void IsCarrot()
+    {
+        carrot.SetActive(true );
+        Invoke(nameof(ResetCarrotGO), 1f);
+    }
+
+    private void ResetCarrotGO()
+    {
+        carrot.SetActive(false);
     }
     public void IsTomate()
     {
-        Debug.Log("Tomate");
+        PlaySound(5);
+        SetPause();
+        tomat.SetActive(true);
+        Invoke(nameof(ResetTomatGO), 1f);
+    }
+    private void ResetTomatGO()
+    {
+        tomat.SetActive(false);
     }
     public void IsStone()
     {
-        Debug.Log("Stone");
+        
+    }
+    public void IsStoneOut()
+    {
+        PlaySound(5);
+        SetPause();
+        stone.SetActive(true);
+        Invoke(nameof(ResetStoneGO), 1f);
+    }
+    private void ResetStoneGO()
+    {
+        stone.SetActive(false);
     }
     public void IsChes()
+    {
+        SetPause();
+        PlaySound(5);
+    }
+    private void SetPause()
     {
         timeController.GetPause();
         player.GetPause();
         monster.GetPause();
         monsterAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Stop", true);
-        /*if (stages[currentStage].id == 3)
-        {
-            monsterAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Stop", true);
-        }   */    
     }
     private void ShowFinishWindow()
     {
@@ -165,7 +199,7 @@ public class LevelController : MonoBehaviour
 
     public void PlaySound(int id)
     {
-        audioSource.clip = id ==0 ? clips[0] : id == 1 ? clips[1] : id == 1?clips[3] : clips[2];
+        audioSource.clip = id ==0 ? clips[0] : id == 1 ? clips[1] : id == 5?clips[5] : id == 6 ? clips[6] : clips[2];
         audioSource.Play();
     }
     private void SetKnife()
@@ -185,6 +219,18 @@ public class LevelController : MonoBehaviour
         {
             knife.GetComponent<Knife>()._tomate = true;
         }
+        else if (data.currentTag == "Carrot")
+        {
+            knife.GetComponent<Knife>()._carrot = true;
+        }
+        else if (data.currentTag == "stone")
+        {
+            knife.GetComponent<Knife>()._stone = true;
+        }
+        else if (data.currentTag == "poop")
+        {
+            knife.GetComponent<Knife>()._poop = true;
+        }
     }
     public void IsTime()
     {
@@ -192,6 +238,10 @@ public class LevelController : MonoBehaviour
         audioSource.Play();
         tryCount = 1;
         Fall();
+    }
+    public void ResetYellowLine()
+    {
+        yellowLine.SetActive(false);
     }
     public void Fall()
     {

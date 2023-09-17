@@ -25,6 +25,7 @@ TagManager:
   - lightsaber
   - rocet
   - nuclear
+  - Carrot
   layers:
   - Default
   - TransparentFX

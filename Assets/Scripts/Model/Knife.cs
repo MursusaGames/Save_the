@@ -19,10 +19,12 @@ public class Knife : MonoBehaviour
     private bool win;
     public bool _knife;
     public bool _superKnife;
-    public bool _stown;
+    public bool _stone;
+    public bool _poop;
     public bool _tomate;
     public bool _fire;
     public bool _racet;
+    public bool _carrot;
     private bool isRotate;
     void Awake()
     {
@@ -40,7 +42,7 @@ public class Knife : MonoBehaviour
     {
         rg.AddForce(Vector2.up * speed, ForceMode2D.Impulse);
         if (_knife) levelController.PlaySound(0);
-        else if (_tomate) levelController.PlaySound(1);
+        else if (_tomate||_stone||_poop) levelController.PlaySound(1);
         else levelController.PlaySound(2);
     }
     void FixedUpdate()
@@ -76,11 +78,7 @@ public class Knife : MonoBehaviour
         {
             if (win) 
                 return;
-            Invoke(nameof(GetFall), 1f);
-            //touchScreenSystem.KnifeIn();
-            //gameObject.SetActive(false);
-            //levelController.Fall();
-            //Destroy(gameObject);
+            Invoke(nameof(GetFall), 1f);            
         }
         if (_knife)
         {
@@ -96,12 +94,13 @@ public class Knife : MonoBehaviour
                         GetFall();
                         return;
                     }
+                    else
+                    {
+                        levelController.ResetYellowLine();
+                    }
                 }
                 levelController.ResetAnim();
-                halfMonster.SetActive(true);
-                //isGo = false;
-                //img.enabled = false;
-                //rg.velocity = Vector2.zero;
+                halfMonster.SetActive(true);                
                 Invoke(nameof(GetWin), 1f);
             }
             if (collision.gameObject.CompareTag("Iron"))
@@ -145,12 +144,13 @@ public class Knife : MonoBehaviour
                         GetFall();
                         return;
                     }
+                    else
+                    {
+                        levelController.ResetYellowLine();
+                    }
                 }
                 levelController.ResetAnim();
-                halfMonster.SetActive(true);
-                //isGo = false;
-                //img.enabled = false;
-                //rg.velocity = Vector2.zero;
+                halfMonster.SetActive(true);                
                 Invoke(nameof(GetWin), 1f);
             }
             if (collision.gameObject.CompareTag("Iron"))
@@ -186,6 +186,10 @@ public class Knife : MonoBehaviour
                         GetFall();
                         return;
                     }
+                    else
+                    {
+                        levelController.ResetYellowLine();
+                    }
                 }
                 rg.constraints = RigidbodyConstraints2D.FreezePositionY;
                 levelController.ResetAnim();
@@ -196,12 +200,87 @@ public class Knife : MonoBehaviour
             {
                 Handheld.Vibrate();
                 rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+                img.enabled = false;
                 levelController.IsTomate();
                 Invoke(nameof(GetFall), 3f);
             }
 
         }
+        if (_carrot)
+        {
+            if (collision.gameObject.CompareTag("Monster"))
+            {
+                win = true;
+                Handheld.Vibrate();
+                if (levelController.bossFight)
+                {
+                    if (levelController.bossFirstFight == false)
+                    {
+                        levelController.bossFirstFight = true;
+                        GetFall();
+                        return;
+                    }
+                    else
+                    {
+                        levelController.ResetYellowLine();
+                    }
+                }
+                rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+                levelController.ResetAnim();
+                levelController.IsStone();
+                Invoke(nameof(GetWin), 3f);
+            }
+            if (collision.gameObject.CompareTag("Iron") || collision.gameObject.CompareTag("Ches"))
+            {
+                Handheld.Vibrate();
+                rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+                img.enabled = false;
+                levelController.IsCarrot();
+                Invoke(nameof(GetFall), 3f);
+            }
 
+        }
+        if (_stone)
+        {
+            if (collision.gameObject.CompareTag("Monster"))
+            {
+                win = true;
+                Handheld.Vibrate();
+                if (levelController.bossFight)
+                {
+                    if (levelController.bossFirstFight == false)
+                    {
+                        levelController.bossFirstFight = true;
+                        GetFall();
+                        return;
+                    }
+                    else
+                    {
+                        levelController.ResetYellowLine();
+                    }
+                }
+                rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+                levelController.ResetAnim();
+                levelController.IsStone();
+                Invoke(nameof(GetWin), 3f);
+            }
+            if (collision.gameObject.CompareTag("Iron") || collision.gameObject.CompareTag("Ches"))
+            {
+                Handheld.Vibrate();
+                rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+                img.enabled = false;
+                levelController.IsStoneOut();
+                Invoke(nameof(GetFall), 3f);
+            }
+
+        }
+        if (_poop)
+        {
+            rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+            img.enabled = false;
+            levelController.ResetAnim();
+            levelController.IsPoop();
+            Invoke(nameof(GetWin), 3f);
+        }
     }
-
 }
