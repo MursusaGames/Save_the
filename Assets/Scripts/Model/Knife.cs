@@ -28,6 +28,7 @@ public class Knife : MonoBehaviour
     public bool _racet;
     public bool _tykw;
     public bool _shark;
+    public bool _meduza;
     public bool _carrot;
     private bool isRotate;
     void Awake()
@@ -330,7 +331,7 @@ public class Knife : MonoBehaviour
             img.enabled = false;
             levelController.ResetAnim();
             levelController.IsPoop();
-            Invoke(nameof(GetWin), 3f);
+            Invoke(nameof(GetFall), 3f);
         }
         if (_tykw)
         {

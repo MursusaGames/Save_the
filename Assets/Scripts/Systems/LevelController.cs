@@ -240,6 +240,10 @@ public class LevelController : MonoBehaviour
         {
             knife.GetComponent<Knife>()._shark = true;
         }
+        else if (data.currentTag == "Meduza")
+        {
+            knife.GetComponent<Knife>()._meduza = true;
+        }
     }
     public void IsTime()
     {

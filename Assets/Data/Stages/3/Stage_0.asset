@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dcff09e88d59e74b90d39686644b5fc, type: 3}
   m_Name: Stage_0
   m_EditorClassIdentifier: 
-  appleSpawnChance: 100
+  weaponID: 0
   score: 10
   stage: 0
   tryCount: 3
@@ -22,7 +22,7 @@ MonoBehaviour:
   monsterSprite: {fileID: 21300000, guid: 4f04a8049fcf45d44bc5d05f658d726b, type: 3}
   monsterHalf1: {fileID: 21300000, guid: ed2d1df9ef994074988de671d328de72, type: 3}
   monsterHalf2: {fileID: 21300000, guid: 30ef54e66224594488fc809d45dba56b, type: 3}
-  id: 3
+  id: 0
   changeRotate: 0
   timeToEnd: 20
   monsterTag: Monster

@@ -112,6 +112,7 @@ MonoBehaviour:
   _racet: 0
   _tykw: 0
   _shark: 0
+  _meduza: 0
   _carrot: 0
 --- !u!61 &6360233212712816155
 BoxCollider2D:
@@ -505,6 +506,7 @@ GameObject:
   - component: {fileID: 5725856020554981345}
   - component: {fileID: 1422959331475433168}
   - component: {fileID: 8610231340353744849}
+  - component: {fileID: 8323800487753607165}
   m_Layer: 7
   m_Name: Smoke
   m_TagString: Untagged
@@ -5327,6 +5329,18 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &8323800487753607165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4863214068488107258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b4ada0b6fed9b94d9176e96d651e87b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6258543109643726386
 GameObject:
   m_ObjectHideFlags: 0
