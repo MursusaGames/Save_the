@@ -25,4 +25,4 @@ MonoBehaviour:
   id: 0
   changeRotate: 0
   timeToEnd: 20
-  monsterTag: Shark
+  monsterTag: Monster

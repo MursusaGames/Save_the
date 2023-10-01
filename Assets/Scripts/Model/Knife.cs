@@ -246,11 +246,12 @@ public class Knife : MonoBehaviour
                 Handheld.Vibrate();
                 rg.constraints = RigidbodyConstraints2D.FreezePositionY;
                 rg.velocity = Vector2.zero;
+                img.color = Color.green;
                 ai.Play();
                 levelController.IsChes();
                 rg.constraints = RigidbodyConstraints2D.None;
-                rg.gravityScale = 1f;
-                isRotate = true;
+                rg.gravityScale = 0.3f;
+                //isRotate = true;
                 Invoke(nameof(GetFall), 3f);
             }
 

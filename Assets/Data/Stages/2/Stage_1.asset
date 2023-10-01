@@ -25,4 +25,4 @@ MonoBehaviour:
   id: 1
   changeRotate: 0
   timeToEnd: 17
-  monsterTag: Meduza
+  monsterTag: Monster

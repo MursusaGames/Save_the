@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dcff09e88d59e74b90d39686644b5fc, type: 3}
   m_Name: Stage_1
   m_EditorClassIdentifier: 
-  weaponID: 0
+  weaponID: 12
   score: 10
   stage: 1
   tryCount: 3
@@ -25,4 +25,4 @@ MonoBehaviour:
   id: 1
   changeRotate: 0
   timeToEnd: 15
-  monsterTag: Monster
+  monsterTag: Fire
