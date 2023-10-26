@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dcff09e88d59e74b90d39686644b5fc, type: 3}
+  m_Name: St_1_Chost
+  m_EditorClassIdentifier: 
+  weaponID: 23
+  score: 10
+  stage: 1
+  tryCount: 3
+  ring: {fileID: 0}
+  prizKnife: {fileID: 21300000, guid: 007f5d8a325833041a33194e5d17f48d, type: 3}
+  bossSprite: {fileID: 21300000, guid: 51ab72edf4030ef47b0d4502d85448a7, type: 3}
+  monsterSprite: {fileID: 21300000, guid: 7494aa42769a48940968f1c51239726f, type: 3}
+  monsterHalf1: {fileID: 21300000, guid: d61750846ed15b5448d39f9d09d8705a, type: 3}
+  monsterHalf2: {fileID: 21300000, guid: 91b83fd1e95b18842a18f8bc52d9a599, type: 3}
+  id: 1
+  changeRotate: 0
+  timeToEnd: 15
+  monsterTag: Monster

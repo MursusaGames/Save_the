@@ -23,6 +23,8 @@ public class GiftBtn : MonoBehaviour
         date = DateTime.Now.DayOfYear;
         int firstDay = data.firstDay;
         int sub = date - firstDay;
+        if (sub > 15) 
+            sub = 15;
         for (int i = 0; i <= sub; i++)
         {
             if(!PlayerPrefs.HasKey(Constants.PRIZE_BAG + i))

@@ -16,28 +16,21 @@ public class BGPrefabScript : MonoBehaviour
                 img.color = Color.green;
             }
         }
-        else if(id > 0 && id < 2)
-        {
-            foreach (var img in buttonsImg)
-            {
-                img.color = Color.blue;
-            }
-        }
-        else if (id > 1 && id < 4)
+        else if(id > 0 && id < 3)
         {
             foreach (var img in buttonsImg)
             {
                 img.color = Color.red;
             }
-        }       
-        else if (id > 3)
+        }
+        else if (id > 2)
         {
             foreach (var img in buttonsImg)
             {
                 img.color = Color.gray;
             }
-        }
-
+        }       
+        
         foreach (var img in buttonsImg)
         {
             img.gameObject.GetComponent<BtnScript>().parentId = id;

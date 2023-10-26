@@ -5,6 +5,7 @@ using UnityEngine;
 public class DayliPrizeMenu : MonoBehaviour
 {
     [SerializeField] private List<GameObject> receiveds;
+    [SerializeField] private List<GameObject> btns;
     [SerializeField] private MatchData data;
 
     private void OnEnable()
@@ -14,11 +15,13 @@ public class DayliPrizeMenu : MonoBehaviour
             if(PlayerPrefs.HasKey(Constants.PRIZE_BAG + i))
             {
                 receiveds[i].SetActive(true);
+                btns[i].SetActive(false);
             }            
         }
     }
     public void SetReceived(int id)
     {
-        receiveds[id].SetActive(true);        
+        receiveds[id].SetActive(true);
+        btns[id].SetActive(false);
     }
 }

@@ -8,11 +8,11 @@ public static class Constants
     public const string VIBRO = "Vibro";
 
     public const string GAMESTAGE = "StagE_0";
-    public const string TECHNOSTAGE = "Stage_01001";
-    public const string FORESTSTAGE = "Stage_0002";
-    public const string FERMSTAGE = "StagE_3";
-    public const string HELLSTAGE = "Stage_0004";
-    public const string OCEANSTAGE = "Stage_0005";
+    public const string TECHNOSTAGE = "Stage_11";
+    public const string FORESTSTAGE = "Stage_22";
+    public const string FERMSTAGE = "StagE_33";
+    public const string HELLSTAGE = "Stage_44";
+    public const string OCEANSTAGE = "Stage_55";
     public const string LEVEL = "Level";
     public const string SCORE = "Score";
     public const string BOSS_BAG = "Boses_Bags";

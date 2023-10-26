@@ -36,6 +36,32 @@ TagManager:
   - Godzy
   - Water
   - Fire
+  - Stone
+  - Air
+  - Light
+  - Dark
+  - Mandragora
+  - Nag
+  - Vasilisk
+  - Chucha
+  - Mor
+  - Bes
+  - Host
+  - Vampir
+  - Demon
+  - Death
+  - Avto
+  - Tank
+  - Helik
+  - Ufo
+  - Papir
+  - Molotov
+  - Dron
+  - Molot
+  - Arrow
+  - Ball
+  - Spear
+  - Acid
   layers:
   - Default
   - TransparentFX

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dcff09e88d59e74b90d39686644b5fc, type: 3}
+  m_Name: St_4_Ufo
+  m_EditorClassIdentifier: 
+  weaponID: 31
+  score: 15
+  stage: 4
+  tryCount: 3
+  ring: {fileID: 0}
+  prizKnife: {fileID: 21300000, guid: 007f5d8a325833041a33194e5d17f48d, type: 3}
+  bossSprite: {fileID: 21300000, guid: 9a0519ce4aed3b44b95b5f6e09916af4, type: 3}
+  monsterSprite: {fileID: 21300000, guid: eeaecc5d51f845443b317a00c568f479, type: 3}
+  monsterHalf1: {fileID: 21300000, guid: 26650590f3e11f141bb63fc3bac5216d, type: 3}
+  monsterHalf2: {fileID: 21300000, guid: 26650590f3e11f141bb63fc3bac5216d, type: 3}
+  id: 4
+  changeRotate: 0
+  timeToEnd: 9
+  monsterTag: Iron

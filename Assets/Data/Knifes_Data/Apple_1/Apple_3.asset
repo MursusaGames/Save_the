@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _customSprites: {fileID: 21300000, guid: f341e95514e7f86498ec093b8f796a18, type: 3}
   _customSubscribe: 
-  _customNames: Knife
+  _customNames: Acid
   _customSubscribeEN: 
   _customNamesEN: 
   _customPrices: 0

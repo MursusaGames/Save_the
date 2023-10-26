@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92f772eddfc7c1d4288042cc7fed04d0, type: 3}
   m_Name: Apple_1
   m_EditorClassIdentifier: 
-  _customSprites: {fileID: 21300000, guid: d3abfda68c3a88749b402f0626c6972d, type: 3}
+  _customSprites: {fileID: 21300000, guid: 8dc3ead302bb72c4cb3ff99b26ea3883, type: 3}
   _customSubscribe: 
-  _customNames: Knife
+  _customNames: Molot
   _customSubscribeEN: 
   _customNamesEN: 
   _customPrices: 0

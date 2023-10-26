@@ -25,6 +25,9 @@ public class MatchData : ScriptableObject
     public CustomsDataContainer CustomDataContainer;
     public Sprite currentKnife;
     public string currentTag;
+    public bool sound;
+    public bool music;
+    public bool vibro;
     public enum State
     {
         MainMenu,

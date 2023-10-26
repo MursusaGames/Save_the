@@ -12,6 +12,7 @@ public class ToggleSystem : MonoBehaviour
     [SerializeField] GameObject vibrationCheckmark;
     [SerializeField] private Slider _soundSlider;
     [SerializeField] private Slider _musicSlider;
+    [SerializeField] private MatchData data;
     public bool isVibro;
 
     private void Awake()
@@ -53,24 +54,26 @@ public class ToggleSystem : MonoBehaviour
         {
             sound.color = Color.green;
             soundCheckmark.Show();
-            
+            data.sound = true;
         }
         else
         {
             sound.color = Color.red;
             soundCheckmark.Hide();
+            data.sound = false;
         }
 
         if (PlayerPrefs.GetFloat(Constants.MUSIC) > 0)
         {
             music.color = Color.green;
             musicCheckmark.Show();
-            
+            data.music = true;
         }
         else
         {
             music.color = Color.red;
             musicCheckmark.Hide();
+            data.music = false;
         }
 
         if (PlayerPrefs.GetFloat(Constants.VIBRO) == 1)
@@ -78,12 +81,14 @@ public class ToggleSystem : MonoBehaviour
             vibration.color = Color.green;
             vibrationCheckmark.Show();
             isVibro = true;
+            data.vibro = true;
         }
         else
         {
             vibration.color = Color.red;
             vibrationCheckmark.Hide();
             isVibro = false;
+            data.vibro = false;
         }
         _soundSlider.value = PlayerPrefs.GetFloat(Constants.SOUND);
         _musicSlider.value = PlayerPrefs.GetFloat(Constants.MUSIC);
@@ -97,11 +102,13 @@ public class ToggleSystem : MonoBehaviour
         {
             sound.color = Color.red;
             soundCheckmark.Hide();
+            data.sound = false;
         }
         else
         {
             sound.color = Color.green;
             soundCheckmark.Show();
+            data.sound = true;
         }
     }
 
@@ -114,11 +121,13 @@ public class ToggleSystem : MonoBehaviour
         {
             music.color = Color.red;
             musicCheckmark.Hide();
+            data.music = false;
         }
         else
         {
             music.color = Color.green;
             musicCheckmark.Show();
+            data.music = true;
         }
     }
     public void ChangeSound()
@@ -128,6 +137,7 @@ public class ToggleSystem : MonoBehaviour
             PlayerPrefs.SetFloat(Constants.SOUND, 1);
             sound.color = Color.green;
             soundCheckmark.Show();
+            data.sound = true;
             _soundSlider.value = 1;
             return;
         }
@@ -136,6 +146,7 @@ public class ToggleSystem : MonoBehaviour
             PlayerPrefs.SetFloat(Constants.SOUND, 0);
             sound.color = Color.red;
             soundCheckmark.Hide();
+            data.sound = false;
             _soundSlider.value = 0;
         }        
     }
@@ -146,6 +157,7 @@ public class ToggleSystem : MonoBehaviour
             PlayerPrefs.SetFloat(Constants.MUSIC, 1);
             music.color = Color.green;
             musicCheckmark.Show();
+            data.music = true;
             _musicSlider.value = 1;
             return;
         }
@@ -154,6 +166,7 @@ public class ToggleSystem : MonoBehaviour
             PlayerPrefs.SetFloat(Constants.MUSIC, 0);
             music.color = Color.red;
             musicCheckmark.Hide();
+            data.music = false;
             _musicSlider.value = 0;
         }
     }
@@ -164,6 +177,7 @@ public class ToggleSystem : MonoBehaviour
             PlayerPrefs.SetFloat(Constants.VIBRO, 1);
             vibration.color = Color.green;
             vibrationCheckmark.Show();
+            data.vibro = true;
             isVibro = true;
             return;
         }
@@ -172,6 +186,7 @@ public class ToggleSystem : MonoBehaviour
             PlayerPrefs.SetFloat(Constants.VIBRO, 0);
             vibration.color = Color.red;
             vibrationCheckmark.Hide();
+            data.vibro = false;
             isVibro = false;
         }
     }

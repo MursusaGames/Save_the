@@ -26,6 +26,10 @@ public class GiftSystem : MonoBehaviour
         {
             data.firstDay = PlayerPrefs.GetInt("FirstDay");
             index = date - data.firstDay;
+            if (index > 15)
+            {
+                index = 15;
+            }
         }
         for (int i = 0; i <= index; i++)
         {

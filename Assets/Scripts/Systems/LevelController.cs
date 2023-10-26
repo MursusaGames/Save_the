@@ -29,7 +29,7 @@ public class LevelController : MonoBehaviour
     public List<StageInfo> stages;
     [SerializeField] private TextMeshProUGUI stageNumber;
     [SerializeField] private TMP_Text score;
-    [SerializeField] private MatchData data;
+    public MatchData data;
     [SerializeField] private string thisStageName;
     [SerializeField] private Monster monster;
     [SerializeField] private Image monsterLeft;
@@ -40,6 +40,7 @@ public class LevelController : MonoBehaviour
     [SerializeField] private UserData userData;
     [SerializeField] private List<GameObject> bossAnim;
     [SerializeField] private List<GameObject> monsterAnim;
+    [SerializeField] private List<GameObject> deathAnim;
     [SerializeField] private GameObject finishWindow;
     [SerializeField] private Herous player;
 
@@ -136,6 +137,7 @@ public class LevelController : MonoBehaviour
     }
     public void IsPoop()
     {
+
         PlaySound(6);
         SetPause();
         poop.SetActive(true);        
@@ -200,8 +202,12 @@ public class LevelController : MonoBehaviour
 
     public void PlaySound(int id)
     {
-        audioSource.clip = id ==0 ? clips[0] : id == 1 ? clips[1] : id == 5?clips[5] : id == 6 ? clips[6] : clips[2];
-        audioSource.Play();
+        if (data.sound)
+        {
+            audioSource.volume = PlayerPrefs.GetFloat(Constants.SOUND);
+            audioSource.clip = id == 0 ? clips[0] : id == 1 ? clips[1] : id == 5 ? clips[5] : id == 6 ? clips[6] : clips[2];
+            audioSource.Play();
+        }        
     }
     private void SetKnife()
     {
@@ -234,7 +240,7 @@ public class LevelController : MonoBehaviour
         }
         else if (data.currentTag == "Tykw")
         {
-            knife.GetComponent<Knife>()._tykw = true;
+            knife.GetComponent<Knife>().SetTykw();
         }
         else if (data.currentTag == "Shark")
         {
@@ -247,8 +253,8 @@ public class LevelController : MonoBehaviour
     }
     public void IsTime()
     {
-        audioSource.clip = clips[4];
-        audioSource.Play();
+        //audioSource.clip = clips[4];
+        //audioSource.Play();
         tryCount = 1;
         Fall();
     }
@@ -258,6 +264,7 @@ public class LevelController : MonoBehaviour
     }
     public void Fall()
     {
+        poop.SetActive(false);
         player.LetsPlay();
         monster.LetsPlay();
         timeController.LetsPlay();
@@ -267,7 +274,10 @@ public class LevelController : MonoBehaviour
             greenLine.SetActive(false);
             yellowLine.SetActive(true);
         }
-        tryCount--;
+        if (tryCount > 0)
+        {
+            tryCount--;
+        }        
         tryIcons[tryCount].color = Color.gray;
         if (tryCount == 0)
         {
@@ -277,6 +287,13 @@ public class LevelController : MonoBehaviour
         SetKnife();
     }
     private void GameOver()
+    {
+        player.gameObject.SetActive(false);
+        monster.gameObject.SetActive(false);
+        deathAnim[currentStage].SetActive(true);
+        Invoke(nameof(OpenLooseWindow), 3f);
+    }
+    private void OpenLooseWindow()
     {
         loseWindow.SetActive(true);
         gameWindow.SetActive(false);

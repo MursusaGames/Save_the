@@ -22,7 +22,7 @@ public class BrainScrolling : MonoBehaviour
     [SerializeField]  List<Image> rings;
     [SerializeField] Image bgTopText;
     [SerializeField] GameObject aplesBag;
-    [SerializeField] GameObject videosBag;
+    
     [SerializeField] GameObject bossesBag;
     [SerializeField] GameObject challengeBag;
     [SerializeField] GameObject packsBag;
@@ -30,6 +30,8 @@ public class BrainScrolling : MonoBehaviour
     Vector2[] panPos;
     Vector2[] panScale;
     Vector2 contentVector;
+    private int bossKnifes;
+    private int prizeKnifes;
 
     RectTransform contentRect;
     int selectedPanID;
@@ -38,7 +40,7 @@ public class BrainScrolling : MonoBehaviour
 
     public ScrollRect scrollRect;    
     [SerializeField] private TextMeshProUGUI bossBagKnifeNumber;    
-    [SerializeField] private TextMeshProUGUI videoBagKnifeNumber;
+    
     [SerializeField] private TextMeshProUGUI prizeBagKnifeNumber;
     [SerializeField] private CustomsDataContainer bossKnife_1_Container;
     [SerializeField] private CustomsDataContainer bossKnife_2_Container;
@@ -57,11 +59,13 @@ public class BrainScrolling : MonoBehaviour
     }
     private void OnEnable()
     {
+        bossKnifes = 0;
+        prizeKnifes = 0;
         /*if(!PlayerPrefs.HasKey(Constants.PRIZE_BAG + 0))
         {
             PlayerPrefs.SetString(Constants.PRIZE_BAG + 0, "yes");
         }*/
-        panCount = 5; //System.Enum.GetValues(typeof(SkinType)).Length;       
+        panCount = 4; //System.Enum.GetValues(typeof(SkinType)).Length;       
         panScale = new Vector2[panCount];
         contentRect = GetComponent<RectTransform>();
         panPos = new Vector2[panCount];
@@ -86,10 +90,6 @@ public class BrainScrolling : MonoBehaviour
                     }
                     break;                
                 case 1:
-                    bgTopText.color = Color.blue;
-                    videoBagKnifeNumber.text = PlayerPrefs.GetInt(Constants.VIDEO_BAG).ToString();
-                    break;                
-                case 2:
                     bgTopText.color = Color.red;
                     bossBagKnifeNumber.text = PlayerPrefs.GetInt(Constants.BOSS_BAG).ToString();
                     for(int j = 0; j < bossKnife_1_Container.CustomsItems.Count; j++)
@@ -100,6 +100,7 @@ public class BrainScrolling : MonoBehaviour
                         {
                             panelScript.buttonsImg[j].gameObject.GetComponent<BtnScript>().knifeImg.color = Color.white;
                             panelScript.buttonsImg[j].gameObject.GetComponent<Button>().interactable = true;
+                            bossKnifes++;
                         }
                         else
                         {
@@ -107,7 +108,7 @@ public class BrainScrolling : MonoBehaviour
                         }
                     }
                     break;
-                case 3:
+                case 2:
                     bgTopText.color = Color.red;
                     bossBagKnifeNumber.text = PlayerPrefs.GetInt(Constants.BOSS_BAG1).ToString();
                     for (int j = 0; j < bossKnife_2_Container.CustomsItems.Count; j++)
@@ -118,6 +119,7 @@ public class BrainScrolling : MonoBehaviour
                         {
                             panelScript.buttonsImg[j].gameObject.GetComponent<BtnScript>().knifeImg.color = Color.white;
                             panelScript.buttonsImg[j].gameObject.GetComponent<Button>().interactable = true;
+                            bossKnifes++;
                         }
                         else
                         {
@@ -125,7 +127,7 @@ public class BrainScrolling : MonoBehaviour
                         }
                     }
                     break;                
-                case 4:
+                case 3:
                     bgTopText.color = Color.gray;
                     prizeBagKnifeNumber.text = PlayerPrefs.GetInt(Constants.PRIZE_BAG).ToString();
                     for (int j = 0; j < prizeKnife_1_Container.CustomsItems.Count; j++)
@@ -136,6 +138,7 @@ public class BrainScrolling : MonoBehaviour
                         {
                             panelScript.buttonsImg[j].gameObject.GetComponent<BtnScript>().knifeImg.color = Color.white;
                             panelScript.buttonsImg[j].gameObject.GetComponent<Button>().interactable = true;
+                            prizeKnifes++;
                         }
                         else
                         {
@@ -150,6 +153,8 @@ public class BrainScrolling : MonoBehaviour
             instPans[i].transform.localPosition = new Vector2(tmpX, instPans[i].transform.localPosition.y);
             panPos[i] = -instPans[i].transform.localPosition;
         }
+        bossBagKnifeNumber.text = bossKnifes.ToString();
+        prizeBagKnifeNumber.text = prizeKnifes.ToString();
     }
 
     private void FixedUpdate()
@@ -206,27 +211,22 @@ public class BrainScrolling : MonoBehaviour
             }
             rings[selectedPanID].color = Color.green;
             aplesBag.SetActive(selectedPanID < 1);
-            videosBag.SetActive(selectedPanID > 0 && selectedPanID < 2);
-            bossesBag.SetActive(selectedPanID > 1 && selectedPanID < 4);
+            bossesBag.SetActive(selectedPanID > 0 && selectedPanID < 3);
             //challengeBag.SetActive(selectedPanID > 6 && selectedPanID < 9);
-            packsBag.SetActive(selectedPanID > 3);
+            packsBag.SetActive(selectedPanID > 2);
             switch (selectedPanID){
                 case 0:
                     bgTopText.color = Color.green;                    
                     break;                
                 case 1:
-                    bgTopText.color = Color.blue;
-                    videoBagKnifeNumber.text = PlayerPrefs.GetInt(Constants.VIDEO_BAG).ToString();
-                    break;                
+                    bgTopText.color = Color.red;
+                    //bossBagKnifeNumber.text = PlayerPrefs.GetInt(Constants.BOSS_BAG).ToString();
+                    break;
                 case 2:
                     bgTopText.color = Color.red;
-                    bossBagKnifeNumber.text = PlayerPrefs.GetInt(Constants.BOSS_BAG).ToString();
-                    break;
-                case 3:
-                    bgTopText.color = Color.red;
-                    bossBagKnifeNumber.text = PlayerPrefs.GetInt(Constants.BOSS_BAG).ToString();
+                    //bossBagKnifeNumber.text = PlayerPrefs.GetInt(Constants.BOSS_BAG).ToString();
                     break;               
-                case 4:
+                case 3:
                     bgTopText.color = Color.gray;
                     break;
             }

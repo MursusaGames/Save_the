@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dcff09e88d59e74b90d39686644b5fc, type: 3}
+  m_Name: St_3_Chucha
+  m_EditorClassIdentifier: 
+  weaponID: 20
+  score: 10
+  stage: 3
+  tryCount: 3
+  ring: {fileID: 0}
+  prizKnife: {fileID: 21300000, guid: 7ce6c3ba1eb7dd0469e935b3369b8fe1, type: 3}
+  bossSprite: {fileID: 0}
+  monsterSprite: {fileID: 0}
+  monsterHalf1: {fileID: 21300000, guid: 2c56dacc0bb017c4ab639696900beff1, type: 3}
+  monsterHalf2: {fileID: 21300000, guid: 2c56dacc0bb017c4ab639696900beff1, type: 3}
+  id: 3
+  changeRotate: 0
+  timeToEnd: 12
+  monsterTag: Monster

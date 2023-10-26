@@ -11,8 +11,7 @@ public class BtnScript : MonoBehaviour
     public Image knifeImg;
     private void Awake()
     {
-        getForAppleSystem = FindObjectOfType<GetForAppleSystem>();
-        getForVideoSystem = FindObjectOfType<GetForVideoSystem>();
+        getForAppleSystem = FindObjectOfType<GetForAppleSystem>();        
         data = getForAppleSystem._data;
     }
 
@@ -32,15 +31,8 @@ public class BtnScript : MonoBehaviour
                 
         }
             
-        if (parentId > 0 && parentId < 2)
-        {
-            if(knifeImg.color != Color.white) getForVideoSystem.SetKnife(this);
-            else
-            {
-                getForAppleSystem.data.currentKnife = knifeImg.sprite;
-            }                
-        }
-        if (parentId > 1 && parentId < 4)
+        
+        if (parentId > 0 && parentId < 3)
         {
             data.currentKnife = knifeImg.sprite;
             data.currentTag = knifeImg.gameObject.tag;
@@ -48,7 +40,7 @@ public class BtnScript : MonoBehaviour
             getForAppleSystem.knifesMenu.UpgradeKnifeImage();
             getForAppleSystem.mainMenu.knifeImg.sprite = knifeImg.sprite;
         }
-        if (parentId >  3)
+        if (parentId >  2)
         {
             data.currentKnife = knifeImg.sprite;
             data.currentTag = knifeImg.gameObject.tag;

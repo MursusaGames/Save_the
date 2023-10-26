@@ -6,4 +6,13 @@ using TMPro;
 public class UnluckNowBtnScript : MonoBehaviour
 {
     public TextMeshProUGUI knifeCost;
+    private void OnEnable()
+    {
+        Invoke(nameof(ResetGO), 3f);
+    }
+
+    private void ResetGO()
+    {
+        gameObject.SetActive(false);
+    }
 }

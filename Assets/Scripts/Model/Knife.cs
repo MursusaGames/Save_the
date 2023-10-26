@@ -11,7 +11,7 @@ public class Knife : MonoBehaviour
     private TouchScreenSystem touchScreenSystem;
     private LevelController levelController;
     private Animator anim;
-    public bool isGo;
+    //public bool isGo;
     bool stopLine;
     private Rigidbody2D rg;
     private Image img;
@@ -31,6 +31,12 @@ public class Knife : MonoBehaviour
     public bool _meduza;
     public bool _carrot;
     private bool isRotate;
+    public bool inDrive;
+    private bool scale1;
+    private bool scale2;
+    private bool scale3;
+    private bool scale4;
+    private bool scale5;
     void Awake()
     {
         anim = GetComponent<Animator>();
@@ -42,15 +48,14 @@ public class Knife : MonoBehaviour
         soundKnifeInTree = GetComponent<AudioSource>();
         halfMonster = touchScreenSystem._halfMonster;
     }
-    private void OnEnable()
+    public void SetTykw()
     {
-        if (_tykw)
-        {
-            smoke.SetActive(true);
-        }
+        _tykw = true;
+        smoke.SetActive(true);
     }
     public void KnifeGo()
     {
+        inDrive = true;
         rg.AddForce(Vector2.up * speed, ForceMode2D.Impulse);
         if (_knife) levelController.PlaySound(0);
         else if (_tomate||_stone||_poop) levelController.PlaySound(1);
@@ -62,9 +67,50 @@ public class Knife : MonoBehaviour
         {
             rg.gameObject.transform.Rotate(Vector3.forward, 30f);
         }
-        if (isGo)
+        /*if (isGo)
         {
-            rg.AddForce(Vector2.up * speed, ForceMode2D.Impulse);            
+            rg.AddForce(Vector2.up * speed, ForceMode2D.Impulse);
+            inDrive = true;
+        }*/
+        if (inDrive)
+        {
+            var scaleGO = transform.localScale;
+            var pos = transform.localPosition;
+            if(pos.y > -500 && pos.y < -250 && !scale1)
+            {
+                scale1 = true;
+                scaleGO.x = 0.9f;
+                scaleGO.y = 0.9f;
+                transform.localScale = scaleGO;
+            }
+            if (pos.y > -250 && pos.y < 0 && !scale2)
+            {
+                scale2 = true;
+                scaleGO.x = 0.8f;
+                scaleGO.y = 0.8f;
+                transform.localScale = scaleGO;
+            }
+            if (pos.y > 0 && pos.y < 250 && !scale3)
+            {
+                scale3 = true;
+                scaleGO.x = 0.7f;
+                scaleGO.y = 0.7f;
+                transform.localScale = scaleGO;
+            }
+            if (pos.y >250 && pos.y < 500 && !scale4)
+            {
+                scale4 = true;
+                scaleGO.x = 0.6f;
+                scaleGO.y = 0.6f;
+                transform.localScale = scaleGO;
+            }
+            if (pos.y > 500 && !scale5)
+            {
+                scale5 = true;
+                scaleGO.x = 0.5f;
+                scaleGO.y = 0.5f;
+                transform.localScale = scaleGO;
+            }
         }
     }
 
@@ -89,14 +135,16 @@ public class Knife : MonoBehaviour
         {
             if (win) 
                 return;
-            Invoke(nameof(GetFall), 1f);            
+            Invoke(nameof(GetFall), 1f);
+            return;
         }
         if (_knife)
         {
             if (collision.gameObject.CompareTag("Monster")|| collision.gameObject.CompareTag("Shark"))
             {
                 win = true;
-                Handheld.Vibrate();
+                if(levelController.data.vibro) 
+                    Handheld.Vibrate();
                 if (levelController.bossFight)
                 {
                     if (levelController.bossFirstFight == false)
@@ -116,9 +164,11 @@ public class Knife : MonoBehaviour
             }
             if (collision.gameObject.CompareTag("Iron"))
             {
-                Handheld.Vibrate();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
                 int rand = Random.Range(1, 3);
-                tzong.Play();
+                if (levelController.data.sound)
+                    tzong.Play();
                 if (rand == 1)
                 {
                     rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
@@ -133,20 +183,24 @@ public class Knife : MonoBehaviour
             }
             if (collision.gameObject.CompareTag("Ches"))
             {
-                Handheld.Vibrate();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
                 rg.constraints = RigidbodyConstraints2D.FreezePositionY;
                 anim.enabled = true;
-                tsssss.Play();
+                if (levelController.data.sound)
+                    tsssss.Play();
                 levelController.IsChes();                
                 Invoke(nameof(GetFall), 3f);
             }
             if (collision.gameObject.CompareTag("Tykw"))
             {
-                Handheld.Vibrate();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
                 rg.constraints = RigidbodyConstraints2D.FreezePositionY;
                 rg.velocity = Vector2.zero;
                 img.color = Color.green;
-                ai.Play();
+                if (levelController.data.sound)
+                    ai.Play();
                 levelController.IsChes();
                 rg.constraints = RigidbodyConstraints2D.None;
                 rg.gravityScale = 0.2f;
@@ -159,7 +213,8 @@ public class Knife : MonoBehaviour
             if (collision.gameObject.CompareTag("Monster") || collision.gameObject.CompareTag("Ches") || collision.gameObject.CompareTag("Shark"))
             {
                 win = true;
-                Handheld.Vibrate();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
                 if (levelController.bossFight)
                 {
                     if (levelController.bossFirstFight == false)
@@ -179,9 +234,11 @@ public class Knife : MonoBehaviour
             }
             if (collision.gameObject.CompareTag("Iron"))
             {
-                Handheld.Vibrate();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
                 int rand = Random.Range(1, 3);
-                tzong.Play();
+                if (levelController.data.sound)
+                    tzong.Play();
                 if (rand == 1)
                 {
                     rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
@@ -196,11 +253,13 @@ public class Knife : MonoBehaviour
             }
             if (collision.gameObject.CompareTag("Tykw"))
             {
-                Handheld.Vibrate();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
                 rg.constraints = RigidbodyConstraints2D.FreezePositionY;
                 rg.velocity = Vector2.zero;
                 img.color = Color.green;
-                ai.Play();
+                if (levelController.data.sound)
+                    ai.Play();
                 levelController.IsChes();
                 rg.constraints = RigidbodyConstraints2D.None;
                 rg.gravityScale = 0.2f;
@@ -214,7 +273,8 @@ public class Knife : MonoBehaviour
             if (collision.gameObject.CompareTag("Monster"))
             {
                 win = true;
-                Handheld.Vibrate();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
                 if (levelController.bossFight)
                 {
                     if (levelController.bossFirstFight == false)
@@ -235,7 +295,8 @@ public class Knife : MonoBehaviour
             }
             if (collision.gameObject.CompareTag("Iron") || collision.gameObject.CompareTag("Ches") || collision.gameObject.CompareTag("Shark"))
             {
-                Handheld.Vibrate();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
                 rg.constraints = RigidbodyConstraints2D.FreezePositionY;
                 img.enabled = false;
                 levelController.IsTomate();
@@ -243,11 +304,13 @@ public class Knife : MonoBehaviour
             }
             if (collision.gameObject.CompareTag("Tykw"))
             {
-                Handheld.Vibrate();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
                 rg.constraints = RigidbodyConstraints2D.FreezePositionY;
                 rg.velocity = Vector2.zero;
                 img.color = Color.green;
-                ai.Play();
+                if (levelController.data.sound) 
+                    ai.Play();
                 levelController.IsChes();
                 rg.constraints = RigidbodyConstraints2D.None;
                 rg.gravityScale = 0.3f;
@@ -261,7 +324,8 @@ public class Knife : MonoBehaviour
             if (collision.gameObject.CompareTag("Monster"))
             {
                 win = true;
-                Handheld.Vibrate();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
                 if (levelController.bossFight)
                 {
                     if (levelController.bossFirstFight == false)
@@ -283,7 +347,8 @@ public class Knife : MonoBehaviour
             if (collision.gameObject.CompareTag("Iron") || collision.gameObject.CompareTag("Ches")|| collision.gameObject.CompareTag("Tykw") 
                 || collision.gameObject.CompareTag("Shark"))
             {
-                Handheld.Vibrate();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
                 rg.constraints = RigidbodyConstraints2D.FreezePositionY;
                 img.enabled = false;
                 levelController.IsCarrot();
@@ -296,7 +361,8 @@ public class Knife : MonoBehaviour
             if (collision.gameObject.CompareTag("Monster"))
             {
                 win = true;
-                Handheld.Vibrate();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
                 if (levelController.bossFight)
                 {
                     if (levelController.bossFirstFight == false)
@@ -318,7 +384,8 @@ public class Knife : MonoBehaviour
             if (collision.gameObject.CompareTag("Iron") || collision.gameObject.CompareTag("Ches")|| collision.gameObject.CompareTag("Tykw")
                 || collision.gameObject.CompareTag("Shark"))
             {
-                Handheld.Vibrate();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
                 rg.constraints = RigidbodyConstraints2D.FreezePositionY;
                 img.enabled = false;
                 levelController.IsStoneOut();
@@ -330,7 +397,7 @@ public class Knife : MonoBehaviour
         {
             rg.constraints = RigidbodyConstraints2D.FreezePositionY;
             img.enabled = false;
-            levelController.ResetAnim();
+            //levelController.ResetAnim();
             levelController.IsPoop();
             Invoke(nameof(GetFall), 3f);
         }
@@ -339,7 +406,8 @@ public class Knife : MonoBehaviour
             if (collision.gameObject.CompareTag("Monster") || collision.gameObject.CompareTag("Tykw") || collision.gameObject.CompareTag("Shark"))
             {
                 win = true;
-                Handheld.Vibrate();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
                 if (levelController.bossFight)
                 {
                     if (levelController.bossFirstFight == false)
@@ -359,9 +427,11 @@ public class Knife : MonoBehaviour
             }
             if (collision.gameObject.CompareTag("Iron")|| collision.gameObject.CompareTag("Ches"))
             {
-                Handheld.Vibrate();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
                 int rand = Random.Range(1, 3);
-                tzong.Play();
+                if (levelController.data.sound) 
+                    tzong.Play();
                 if (rand == 1)
                 {
                     rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
@@ -381,7 +451,8 @@ public class Knife : MonoBehaviour
             if (collision.gameObject.CompareTag("Monster") || collision.gameObject.CompareTag("Tykw") || collision.gameObject.CompareTag("Shark"))
             {
                 win = true;
-                Handheld.Vibrate();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
                 if (levelController.bossFight)
                 {
                     if (levelController.bossFirstFight == false)
@@ -401,9 +472,11 @@ public class Knife : MonoBehaviour
             }
             if (collision.gameObject.CompareTag("Iron") || collision.gameObject.CompareTag("Ches"))
             {
-                Handheld.Vibrate();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
                 int rand = Random.Range(1, 3);
-                tzong.Play();
+                if (levelController.data.sound)
+                    tzong.Play();
                 if (rand == 1)
                 {
                     rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
