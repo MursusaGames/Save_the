@@ -9,6 +9,7 @@ public class GiftBtn : MonoBehaviour
     Image btnImg;
     bool startTimer;
     bool colorCh;
+    private bool blue;
     [SerializeField] float delay = 0.5f;
     float temp;
     private int date;
@@ -46,6 +47,11 @@ public class GiftBtn : MonoBehaviour
             ChangeColor();
             startTimer = true;
             temp = delay;
+        }
+        if(!data.isGift && !blue)
+        {
+            btnImg.color = Color.cyan;
+            blue = true;
         }
         if (startTimer)
         {
