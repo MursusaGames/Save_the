@@ -1,5 +1,6 @@
 using UnityEngine;
 using UniRx;
+using Unity.VisualScripting;
 
 public class SaveDataSystem : MonoBehaviour
 {
@@ -10,6 +11,18 @@ public class SaveDataSystem : MonoBehaviour
 
     private void Start()
     {
+        if (!PlayerPrefs.HasKey(Constants.SOUND))
+        {
+            PlayerPrefs.SetFloat(Constants.SOUND, 0.5f);            
+        }
+        if (!PlayerPrefs.HasKey(Constants.MUSIC))
+        {
+            PlayerPrefs.SetFloat(Constants.MUSIC, 0.5f);            
+        }
+        if (!PlayerPrefs.HasKey(Constants.VIBRO))
+        {
+            PlayerPrefs.SetFloat(Constants.VIBRO, 1);            
+        }
         LoadPlayerData();
     }
 
@@ -51,11 +64,32 @@ public class SaveDataSystem : MonoBehaviour
             data.firstDay = PlayerPrefs.GetInt("FirstDay");
         }
         data.currentTag = PlayerPrefs.GetString("CurentTag", "Knife");
-        /*data.currentKnife = defoultSprite;
-        data.currentTag = "Knife";
-        getForAppleSystem.data.currentKnife = defoultSprite;
-        getForAppleSystem.knifesMenu.UpgradeKnifeImage();
-        getForAppleSystem.mainMenu.knifeImg.sprite = defoultSprite;*/
+        if (PlayerPrefs.GetFloat(Constants.SOUND) > 0)
+        {
+            data.sound = true;
+        }
+        else
+        {
+            data.sound = false;
+        }
+
+        if (PlayerPrefs.GetFloat(Constants.MUSIC) > 0)
+        {
+            data.music = true;
+        }
+        else
+        {
+            data.music = false;
+        }
+
+        if (PlayerPrefs.GetFloat(Constants.VIBRO) == 1)
+        {
+            data.vibro = true;
+        }
+        else
+        {
+            data.vibro = false;
+        }
     }
    
     #endregion

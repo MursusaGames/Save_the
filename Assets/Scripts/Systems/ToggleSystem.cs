@@ -19,13 +19,13 @@ public class ToggleSystem : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey(Constants.SOUND))
         {
-            PlayerPrefs.SetFloat(Constants.SOUND, 1);
+            PlayerPrefs.SetFloat(Constants.SOUND, 0.5f);
             sound.color = Color.green;
             soundCheckmark.Show();
         }
         if (!PlayerPrefs.HasKey(Constants.MUSIC))
         {
-            PlayerPrefs.SetFloat(Constants.MUSIC, 1);
+            PlayerPrefs.SetFloat(Constants.MUSIC, 0.5f);
             music.color = Color.green;
             musicCheckmark.Show();
         }

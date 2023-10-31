@@ -5,7 +5,7 @@ public class HalfMonster : MonoBehaviour
 {
     [SerializeField] private GameObject leftHalf;
     [SerializeField] private GameObject rightHalf;
-    [SerializeField] private Image img;
+    //[SerializeField] private Image img;
     private Vector3 leftPos;
     private Vector3 rightPos;
     private void Awake()
@@ -22,7 +22,7 @@ public class HalfMonster : MonoBehaviour
     {
         leftHalf.transform.localPosition = leftPos;        
         rightHalf.transform.localPosition = rightPos;       
-        img.enabled = true;
+        //img.enabled = true;
         gameObject.SetActive(false);
     }
 }
