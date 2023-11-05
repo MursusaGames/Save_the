@@ -33,6 +33,7 @@ public class GiftSystem : MonoBehaviour
         }
         for (int i = 0; i <= index; i++)
         {
+            giftBtns[i].gameObject.SetActive(true);
             giftBtns[i].interactable = true;
         } 
     }

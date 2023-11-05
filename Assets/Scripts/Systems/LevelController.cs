@@ -9,6 +9,10 @@ using UniRx.Extensions;
 
 public class LevelController : MonoBehaviour
 {
+    [SerializeField] private GameObject bulletParticles;
+    [SerializeField] private GameObject pistol;
+    [SerializeField] private Sprite bullet;
+    [SerializeField] private Sprite silverBullet;
     [SerializeField] private GameObject carrot;
     [SerializeField] private GameObject stone;
     [SerializeField] private GameObject tomat;
@@ -167,6 +171,16 @@ public class LevelController : MonoBehaviour
     {
         
     }
+    public void IsBullet()
+    {
+        monsterAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Bullet", true);
+        bossAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Bullet", true);
+    }
+    public void IsSilverBullet()
+    {
+        monsterAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Bullet", true);
+        bossAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Bullet", true);
+    }
     public void IsStoneOut()
     {
         PlaySound(5);
@@ -250,6 +264,24 @@ public class LevelController : MonoBehaviour
         {
             knife.GetComponent<Knife>()._meduza = true;
         }
+        else if (data.currentTag == "bullet")
+        {
+            bulletParticles.SetActive(false);
+            knife.GetComponent<Knife>()._bullet = true;
+            pistol.SetActive(true);
+            knife.GetComponent<Image>().sprite = bullet;
+        }
+        else if (data.currentTag == "silverBullet")
+        {
+            bulletParticles.SetActive(false);
+            knife.GetComponent<Knife>()._silverBullet = true;
+            pistol.SetActive(true);
+            knife.GetComponent<Image>().sprite = silverBullet;
+        }
+    }
+    public void Bullet()
+    {
+        bulletParticles.SetActive(true);
     }
     public void IsTime()
     {

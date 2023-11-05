@@ -30,6 +30,8 @@ public class Knife : MonoBehaviour
     public bool _shark;
     public bool _meduza;
     public bool _carrot;
+    public bool _bullet;
+    public bool _silverBullet;
     private bool isRotate;
     public bool inDrive;
     private bool scale1;
@@ -59,7 +61,12 @@ public class Knife : MonoBehaviour
         rg.AddForce(Vector2.up * speed, ForceMode2D.Impulse);
         if (_knife) levelController.PlaySound(0);
         else if (_tomate||_stone||_poop) levelController.PlaySound(1);
-        else levelController.PlaySound(2);
+        else if (_bullet || _silverBullet)
+        {
+            levelController.Bullet();
+            levelController.PlaySound(2);
+        }
+            
     }
     void FixedUpdate()
     {
@@ -490,6 +497,122 @@ public class Knife : MonoBehaviour
                 Invoke(nameof(GetFall), 1f);
             }
 
+        }
+        if (_bullet)
+        {
+            if (collision.gameObject.CompareTag("Monster") || collision.gameObject.CompareTag("Shark"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                if (levelController.bossFight)
+                {
+                    if (levelController.bossFirstFight == false)
+                    {
+                        levelController.bossFirstFight = true;
+                        GetFall();
+                        return;
+                    }
+                    else
+                    {
+                        levelController.ResetYellowLine();
+                    }
+                }
+                //levelController.ResetAnim();
+                levelController.IsBullet();
+                Invoke(nameof(GetWin), 1f);
+            }
+            if (collision.gameObject.CompareTag("Iron"))
+            {
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                int rand = Random.Range(1, 3);
+                if (levelController.data.sound)
+                    tzong.Play();
+                if (rand == 1)
+                {
+                    rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rg.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+                }
+
+                isRotate = true;
+                Invoke(nameof(GetFall), 1f);
+            }
+            if (collision.gameObject.CompareTag("Ches"))
+            {
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+                anim.enabled = true;
+                if (levelController.data.sound)
+                    tsssss.Play();
+                levelController.IsChes();
+                Invoke(nameof(GetFall), 3f);
+            }
+            if (collision.gameObject.CompareTag("Tykw"))
+            {
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+                rg.velocity = Vector2.zero;
+                img.color = Color.green;
+                if (levelController.data.sound)
+                    ai.Play();
+                levelController.IsChes();
+                rg.constraints = RigidbodyConstraints2D.None;
+                rg.gravityScale = 0.2f;
+                //isRotate = true;
+                Invoke(nameof(GetFall), 3f);
+            }
+        }
+        if (_silverBullet)
+        {
+            if (collision.gameObject.CompareTag("Monster") || collision.gameObject.CompareTag("Shark") || collision.gameObject.CompareTag("Ches")
+                || collision.gameObject.CompareTag("Tykw"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                if (levelController.bossFight)
+                {
+                    if (levelController.bossFirstFight == false)
+                    {
+                        levelController.bossFirstFight = true;
+                        GetFall();
+                        return;
+                    }
+                    else
+                    {
+                        levelController.ResetYellowLine();
+                    }
+                }
+                //levelController.ResetAnim();
+                levelController.IsSilverBullet();
+                Invoke(nameof(GetWin), 1f);
+            }
+            if (collision.gameObject.CompareTag("Iron"))
+            {
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                int rand = Random.Range(1, 3);
+                if (levelController.data.sound)
+                    tzong.Play();
+                if (rand == 1)
+                {
+                    rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rg.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+                }
+
+                isRotate = true;
+                Invoke(nameof(GetFall), 1f);
+            }
+            
         }
 
     }

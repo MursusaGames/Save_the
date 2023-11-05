@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92f772eddfc7c1d4288042cc7fed04d0, type: 3}
   m_Name: 5_prize
   m_EditorClassIdentifier: 
-  _customSprites: {fileID: 21300000, guid: 03ee528096dacb14d8006113bc0e6f82, type: 3}
+  _customSprites: {fileID: 21300000, guid: c41f7b1e22215044aa964dbd7619fd20, type: 3}
   _customSubscribe: 
   _customNames: silverBullet
   _customSubscribeEN: 
