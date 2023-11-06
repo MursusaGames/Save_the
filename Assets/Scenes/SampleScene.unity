@@ -48074,6 +48074,7 @@ MonoBehaviour:
   stageText: {fileID: 1540597262}
   numberOfKnifesText: {fileID: 1081800291}
   matchData: {fileID: 11400000, guid: 74b1b7c04ef314840842cefd98d4efc8, type: 2}
+  audioSource: {fileID: 0}
 --- !u!1 &2110909761
 GameObject:
   m_ObjectHideFlags: 0

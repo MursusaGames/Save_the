@@ -23,6 +23,7 @@ public class Knife : MonoBehaviour
     public bool _superKnife;
     public bool _stone;
     public bool _poop;
+    public bool _egg;
     public bool _tomate;
     public bool _fire;
     public bool _racet;
@@ -613,6 +614,14 @@ public class Knife : MonoBehaviour
                 Invoke(nameof(GetFall), 1f);
             }
             
+        }
+        if (_egg)
+        {
+            rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+            img.enabled = false;
+            //levelController.ResetAnim();
+            levelController.IsEgg();
+            Invoke(nameof(GetFall), 3f);
         }
 
     }

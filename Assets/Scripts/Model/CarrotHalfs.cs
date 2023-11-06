@@ -9,9 +9,11 @@ public class CarrotHalfs : MonoBehaviour
     private bool isRotate;
     public bool left;
     public Vector3 startPos;
+    public bool egg;
     
     private void OnEnable()
     {
+        rg.isKinematic = false;
         startPos = transform.localPosition;
         if (left)
         {
@@ -21,7 +23,17 @@ public class CarrotHalfs : MonoBehaviour
         {
             rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
         }
-        isRotate = true;        
+        isRotate = true;
+        if (egg)
+        {
+            Invoke(nameof(StopRotate), 0.5f);
+        }
+    }
+    private void StopRotate()
+    {
+        isRotate = false;
+        rg.velocity = Vector2.zero;
+        rg.isKinematic = true;
     }
     private void OnDisable()
     {
@@ -31,7 +43,7 @@ public class CarrotHalfs : MonoBehaviour
     {
         if (isRotate)
         {
-            rg.gameObject.transform.Rotate(Vector3.forward, 30f);
+            rg.gameObject.transform.Rotate(Vector3.forward, 90f);
         }        
     }
     

@@ -17,6 +17,7 @@ public class LevelController : MonoBehaviour
     [SerializeField] private GameObject stone;
     [SerializeField] private GameObject tomat;
     [SerializeField] private GameObject poop;
+    [SerializeField] private GameObject egg;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioSource boomSource;
     [SerializeField] private List<AudioClip> clips;
@@ -146,6 +147,12 @@ public class LevelController : MonoBehaviour
         PlaySound(6);
         SetPause();
         poop.SetActive(true);        
+    }
+    public void IsEgg()
+    {
+        PlaySound(7);
+        SetPause();
+        egg.SetActive(true);
     }
     public void IsCarrot()
     {
@@ -285,6 +292,10 @@ public class LevelController : MonoBehaviour
             pistol.SetActive(true);
             knife.GetComponent<Image>().sprite = silverBullet;
         }
+        else if (data.currentTag == "egg")
+        {
+            knife.GetComponent<Knife>()._egg = true;
+        }
     }
     public void Bullet()
     {
@@ -308,6 +319,7 @@ public class LevelController : MonoBehaviour
     public void Fall()
     {
         poop.SetActive(false);
+        egg.SetActive(false);
         player.LetsPlay();
         monster.LetsPlay();
         timeController.LetsPlay();
