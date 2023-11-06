@@ -64,7 +64,7 @@ public class Knife : MonoBehaviour
         else if (_bullet || _silverBullet)
         {
             levelController.Bullet();
-            levelController.PlaySound(2);
+            levelController.PlayBoom();
         }
             
     }
@@ -520,7 +520,7 @@ public class Knife : MonoBehaviour
                 }
                 //levelController.ResetAnim();
                 levelController.IsBullet();
-                Invoke(nameof(GetWin), 1f);
+                Invoke(nameof(GetWin), 3f);
             }
             if (collision.gameObject.CompareTag("Iron"))
             {
@@ -591,7 +591,7 @@ public class Knife : MonoBehaviour
                 }
                 //levelController.ResetAnim();
                 levelController.IsSilverBullet();
-                Invoke(nameof(GetWin), 1f);
+                Invoke(nameof(GetWin), 3f);
             }
             if (collision.gameObject.CompareTag("Iron"))
             {

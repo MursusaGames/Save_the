@@ -18,6 +18,7 @@ public class LevelController : MonoBehaviour
     [SerializeField] private GameObject tomat;
     [SerializeField] private GameObject poop;
     [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioSource boomSource;
     [SerializeField] private List<AudioClip> clips;
     [SerializeField] private TimeController timeController;
     public int timeToEnd;
@@ -173,11 +174,17 @@ public class LevelController : MonoBehaviour
     }
     public void IsBullet()
     {
+        timeController.GetPause();
+        player.GetPause();
+        monster.GetPause();
         monsterAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Bullet", true);
         bossAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Bullet", true);
     }
     public void IsSilverBullet()
     {
+        timeController.GetPause();
+        player.GetPause();
+        monster.GetPause();
         monsterAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Bullet", true);
         bossAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Bullet", true);
     }
@@ -289,6 +296,10 @@ public class LevelController : MonoBehaviour
         //audioSource.Play();
         tryCount = 1;
         Fall();
+    }
+    public void PlayBoom()
+    {
+        boomSource.Play();
     }
     public void ResetYellowLine()
     {

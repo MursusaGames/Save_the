@@ -7,6 +7,7 @@ public class GetSound : MonoBehaviour
     void Start()
     {
         audioSource = gameObject.GetComponent<AudioSource>();
+        audioSource.volume = PlayerPrefs.GetFloat(Constants.SOUND);
     }
 
     public void PlaySound()
