@@ -50,5 +50,7 @@ public class BtnScript : MonoBehaviour
         }
         getForAppleSystem.SetSubscribe(parentId, id);
         PlayerPrefs.SetString("CurentTag", data.currentTag);
+        PlayerPrefs.SetInt("row", parentId);
+        PlayerPrefs.SetInt("column", id);
     }
 }

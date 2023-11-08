@@ -7150,7 +7150,6 @@ GameObject:
   - component: {fileID: 301312825}
   - component: {fileID: 301312824}
   - component: {fileID: 301312827}
-  - component: {fileID: 301312826}
   m_Layer: 5
   m_Name: KNIFE
   m_TagString: Untagged
@@ -7216,19 +7215,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 301312822}
   m_CullTransparentMesh: 1
---- !u!114 &301312826
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 301312822}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61ceb88679d25ca4c84a50d14c0b8454, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  userData: {fileID: 11400000, guid: 36f36916b18d0d340a1476a37b3b0f57, type: 2}
 --- !u!95 &301312827
 Animator:
   serializedVersion: 5
@@ -9469,12 +9455,12 @@ GameObject:
   - component: {fileID: 382186702}
   - component: {fileID: 382186701}
   m_Layer: 0
-  m_Name: TimerSystem
+  m_Name: WeaponInitSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &382186701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9488,6 +9474,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 74b1b7c04ef314840842cefd98d4efc8, type: 2}
+  containers:
+  - {fileID: 11400000, guid: 98dec5bd8dccd0b4fa4eafc3a8c2652c, type: 2}
+  - {fileID: 11400000, guid: 00b42e9e1b8f93a48835864716cc112e, type: 2}
+  - {fileID: 11400000, guid: 028c12721b7fcd74ca3c98747e9e8952, type: 2}
+  - {fileID: 11400000, guid: 3414183541a2d884db9e626be85c9af6, type: 2}
+  knifeImg: {fileID: 301312824}
 --- !u!4 &382186702
 Transform:
   m_ObjectHideFlags: 0

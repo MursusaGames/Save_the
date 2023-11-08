@@ -1,61 +1,25 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TimerSystem : MonoBehaviour
 {
-    DateTime expiryTime;
     [SerializeField] MatchData data;
+    [SerializeField] private List<CustomsDataContainer> containers;
+    [SerializeField] private Image knifeImg;
+    private int row;
+    private int column;
     
-    private void OnEnable()
-    {
-        ReadTimestamp("timer");
-    }
     private void Start()
     {
-        if(!PlayerPrefs.HasKey("timer")) data.isGift = true;
+        row = PlayerPrefs.GetInt("row", 0);
+        column = PlayerPrefs.GetInt("column", 0);
+        LoadCurrentImage();
     }
-    public void StartTimer()
+    private void LoadCurrentImage()
     {
-        this.ScheduleTimer();
-    }
-    void Update()
-    {
-        if(data.isGift != true)
-        {
-            if (DateTime.Now > expiryTime)
-            {
-                Debug.Log(expiryTime.ToString());
-                data.isGift = true;
-                this.ScheduleTimer();
-            }
-        } 
-        
-    }
-    void ScheduleTimer()
-    {
-        expiryTime = DateTime.Now.AddHours(24.0);
-        this.WriteTimestamp("timer");
-    }
-    private bool ReadTimestamp(string key)
-    {
-        long tmp = Convert.ToInt64(PlayerPrefs.GetString(key, "0"));
-        if (tmp == 0)
-        {
-            return false;
-        }
-        expiryTime = DateTime.FromBinary(tmp);
-        return true;
-    }
-
-    private void WriteTimestamp(string key)
-    {
-        PlayerPrefs.SetString(key, expiryTime.ToBinary().ToString());
-    }
-    public string GetTime()
-    {
-        TimeSpan countdown = expiryTime - DateTime.Now;
-        return countdown.Hours.ToString() + ":" + countdown.Minutes.ToString()
-                            + ":" + countdown.Seconds.ToString();
-    }
+        data.currentKnife = containers[row].CustomsItems[column].CustomSprites;
+        knifeImg.sprite = data.currentKnife;
+    }    
 }

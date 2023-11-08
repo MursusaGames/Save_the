@@ -7,10 +7,10 @@ public static class Constants
     public const string MUSIC = "Music";
     public const string VIBRO = "Vibro";
 
-    public const string GAMESTAGE = "StagE_0";
+    public const string GAMESTAGE = "StagE_01";
     public const string TECHNOSTAGE = "Stage_11";
     public const string FORESTSTAGE = "Stage_22";
-    public const string FERMSTAGE = "StagE_33";
+    public const string FERMSTAGE = "StagE_331";
     public const string HELLSTAGE = "Stage_44";
     public const string OCEANSTAGE = "Stage_55";
     public const string LEVEL = "Level";

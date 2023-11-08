@@ -18,6 +18,7 @@ public class LevelController : MonoBehaviour
     [SerializeField] private GameObject tomat;
     [SerializeField] private GameObject poop;
     [SerializeField] private GameObject egg;
+    [SerializeField] private GameObject bomb;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioSource boomSource;
     [SerializeField] private List<AudioClip> clips;
@@ -150,9 +151,17 @@ public class LevelController : MonoBehaviour
     }
     public void IsEgg()
     {
-        PlaySound(7);
+        //PlaySound(7);
         SetPause();
         egg.SetActive(true);
+    }
+    public void IsBomb()
+    {
+        //PlaySound(2);
+        SetPause();
+        //bomb.SetActive(true);
+        monsterAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Bomb", true);
+        bossAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Bomb", true);
     }
     public void IsCarrot()
     {
@@ -295,6 +304,10 @@ public class LevelController : MonoBehaviour
         else if (data.currentTag == "egg")
         {
             knife.GetComponent<Knife>()._egg = true;
+        }
+        else if (data.currentTag == "bomb")
+        {
+            knife.GetComponent<Knife>()._bomb = true;
         }
     }
     public void Bullet()

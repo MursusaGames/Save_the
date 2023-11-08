@@ -33,6 +33,7 @@ public class Knife : MonoBehaviour
     public bool _carrot;
     public bool _bullet;
     public bool _silverBullet;
+    public bool _bomb;
     private bool isRotate;
     public bool inDrive;
     private bool scale1;
@@ -622,6 +623,14 @@ public class Knife : MonoBehaviour
             //levelController.ResetAnim();
             levelController.IsEgg();
             Invoke(nameof(GetFall), 3f);
+        }
+        if (_bomb)
+        {
+            rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+            img.enabled = false;
+            //levelController.ResetAnim();
+            levelController.IsBomb();
+            Invoke(nameof(GetWin), 3f);
         }
 
     }
