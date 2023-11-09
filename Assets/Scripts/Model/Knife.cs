@@ -171,7 +171,7 @@ public class Knife : MonoBehaviour
                 halfMonster.SetActive(true);                
                 Invoke(nameof(GetWin), 1f);
             }
-            if (collision.gameObject.CompareTag("Iron"))
+            if (collision.gameObject.CompareTag("Iron")|| collision.gameObject.CompareTag("Forest"))
             {
                 if (levelController.data.vibro)
                     Handheld.Vibrate();
@@ -241,7 +241,7 @@ public class Knife : MonoBehaviour
                 halfMonster.SetActive(true);                
                 Invoke(nameof(GetWin), 1f);
             }
-            if (collision.gameObject.CompareTag("Iron"))
+            if (collision.gameObject.CompareTag("Iron")|| collision.gameObject.CompareTag("Forest"))
             {
                 if (levelController.data.vibro)
                     Handheld.Vibrate();
@@ -302,7 +302,8 @@ public class Knife : MonoBehaviour
                 levelController.IsStone();                
                 Invoke(nameof(GetWin), 3f);
             }
-            if (collision.gameObject.CompareTag("Iron") || collision.gameObject.CompareTag("Ches") || collision.gameObject.CompareTag("Shark"))
+            if (collision.gameObject.CompareTag("Iron") || collision.gameObject.CompareTag("Ches") || collision.gameObject.CompareTag("Shark")
+                || collision.gameObject.CompareTag("Forest"))
             {
                 if (levelController.data.vibro)
                     Handheld.Vibrate();
@@ -354,7 +355,7 @@ public class Knife : MonoBehaviour
                 Invoke(nameof(GetWin), 3f);
             }
             if (collision.gameObject.CompareTag("Iron") || collision.gameObject.CompareTag("Ches")|| collision.gameObject.CompareTag("Tykw") 
-                || collision.gameObject.CompareTag("Shark"))
+                || collision.gameObject.CompareTag("Shark")|| collision.gameObject.CompareTag("Forest"))
             {
                 if (levelController.data.vibro)
                     Handheld.Vibrate();
@@ -391,7 +392,7 @@ public class Knife : MonoBehaviour
                 Invoke(nameof(GetWin), 3f);
             }
             if (collision.gameObject.CompareTag("Iron") || collision.gameObject.CompareTag("Ches")|| collision.gameObject.CompareTag("Tykw")
-                || collision.gameObject.CompareTag("Shark"))
+                || collision.gameObject.CompareTag("Shark")|| collision.gameObject.CompareTag("Forest"))
             {
                 if (levelController.data.vibro)
                     Handheld.Vibrate();
@@ -434,7 +435,7 @@ public class Knife : MonoBehaviour
                 halfMonster.SetActive(true);
                 Invoke(nameof(GetWin), 1f);
             }
-            if (collision.gameObject.CompareTag("Iron")|| collision.gameObject.CompareTag("Ches"))
+            if (collision.gameObject.CompareTag("Iron")|| collision.gameObject.CompareTag("Ches")|| collision.gameObject.CompareTag("Forest"))
             {
                 if (levelController.data.vibro)
                     Handheld.Vibrate();
@@ -479,7 +480,7 @@ public class Knife : MonoBehaviour
                 halfMonster.SetActive(true);
                 Invoke(nameof(GetWin), 1f);
             }
-            if (collision.gameObject.CompareTag("Iron") || collision.gameObject.CompareTag("Ches"))
+            if (collision.gameObject.CompareTag("Iron") || collision.gameObject.CompareTag("Ches")|| collision.gameObject.CompareTag("Forest"))
             {
                 if (levelController.data.vibro)
                     Handheld.Vibrate();
@@ -524,7 +525,7 @@ public class Knife : MonoBehaviour
                 levelController.IsBullet();
                 Invoke(nameof(GetWin), 3f);
             }
-            if (collision.gameObject.CompareTag("Iron"))
+            if (collision.gameObject.CompareTag("Iron")|| collision.gameObject.CompareTag("Forest"))
             {
                 if (levelController.data.vibro)
                     Handheld.Vibrate();
@@ -541,7 +542,7 @@ public class Knife : MonoBehaviour
                 }
 
                 isRotate = true;
-                Invoke(nameof(GetFall), 1f);
+                Invoke(nameof(GetFall), 2f);
             }
             if (collision.gameObject.CompareTag("Ches"))
             {
@@ -595,7 +596,7 @@ public class Knife : MonoBehaviour
                 levelController.IsSilverBullet();
                 Invoke(nameof(GetWin), 3f);
             }
-            if (collision.gameObject.CompareTag("Iron"))
+            if (collision.gameObject.CompareTag("Iron")|| collision.gameObject.CompareTag("Forest"))
             {
                 if (levelController.data.vibro)
                     Handheld.Vibrate();
@@ -626,11 +627,22 @@ public class Knife : MonoBehaviour
         }
         if (_bomb)
         {
-            rg.constraints = RigidbodyConstraints2D.FreezePositionY;
-            img.enabled = false;
-            //levelController.ResetAnim();
-            levelController.IsBomb();
-            Invoke(nameof(GetWin), 3f);
+            if (collision.gameObject.CompareTag("Forest"))
+            {
+                rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+                img.enabled = false;
+                //levelController.ResetAnim();
+                levelController.IsForest();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else
+            {
+                rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+                img.enabled = false;
+                //levelController.ResetAnim();
+                levelController.IsBomb();
+                Invoke(nameof(GetWin), 3f);
+            }            
         }
 
     }

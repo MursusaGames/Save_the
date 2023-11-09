@@ -155,6 +155,14 @@ public class LevelController : MonoBehaviour
         SetPause();
         egg.SetActive(true);
     }
+    public void IsForest()
+    {
+        PlaySound(2);
+        SetPause();
+        bomb.SetActive(true);
+        //monsterAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Bomb", true);
+        //bossAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Bomb", true);
+    }
     public void IsBomb()
     {
         //PlaySound(2);
