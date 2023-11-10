@@ -13144,6 +13144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 349698581}
   - component: {fileID: 349698582}
+  - component: {fileID: 349698583}
   m_Layer: 5
   m_Name: ChesAnim
   m_TagString: Untagged
@@ -13195,6 +13196,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &349698583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349698580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4506aca29649ea4584897cbee2b7f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  partikle: {fileID: 76124528}
 --- !u!1 &350318588
 GameObject:
   m_ObjectHideFlags: 0
@@ -45962,7 +45976,7 @@ RectTransform:
   m_GameObject: {fileID: 1190217738}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 400571267}
@@ -45974,7 +45988,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1190217740
 Animator:
@@ -87412,7 +87426,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1993056309
 RectTransform:
   m_ObjectHideFlags: 0
@@ -94011,6 +94025,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2144748735}
   - component: {fileID: 2144748736}
+  - component: {fileID: 2144748737}
   m_Layer: 5
   m_Name: TykwAnim
   m_TagString: Untagged
@@ -94061,6 +94076,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2144748737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144748734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4506aca29649ea4584897cbee2b7f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  partikle: {fileID: 76124528}
 --- !u!114 &52976515366664746
 MonoBehaviour:
   m_ObjectHideFlags: 0
