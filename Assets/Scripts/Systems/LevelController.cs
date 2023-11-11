@@ -19,6 +19,8 @@ public class LevelController : MonoBehaviour
     [SerializeField] private GameObject poop;
     [SerializeField] private GameObject egg;
     [SerializeField] private GameObject bomb;
+    [SerializeField] private GameObject gas;
+    [SerializeField] private GameObject blessed;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioSource boomSource;
     [SerializeField] private List<AudioClip> clips;
@@ -171,6 +173,14 @@ public class LevelController : MonoBehaviour
         monsterAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Bomb", true);
         bossAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Bomb", true);
     }
+    public void IsGas()
+    {
+        //PlaySound(2);
+        SetPause();
+        //bomb.SetActive(true);
+        monsterAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Gas", true);
+        bossAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Gas", true);
+    }
     public void IsCarrot()
     {
         carrot.SetActive(true );
@@ -317,6 +327,23 @@ public class LevelController : MonoBehaviour
         {
             knife.GetComponent<Knife>()._bomb = true;
         }
+        else if (data.currentTag == "churiken")
+        {
+            knife.GetComponent<Knife>()._churik = true;
+        }
+        else if (data.currentTag == "gas")
+        {
+            knife.GetComponent<Knife>()._gas = true;
+        }
+        else if (data.currentTag == "blessedSword")
+        {
+            knife.GetComponent<Knife>()._blessedSword = true;
+            blessed.SetActive(true);
+        }
+    }
+    public void ResetBlessedPartikl()
+    {
+        blessed.SetActive(false);
     }
     public void Bullet()
     {

@@ -75,7 +75,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 783ba121c6e7e774184061e7146b097d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a8710f4b25d9afd448f2ce5f09af3e1e, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -101,12 +101,12 @@ MonoBehaviour:
   tzong: {fileID: 7355822448845828768}
   tsssss: {fileID: 3045420612044134764}
   smoke: {fileID: 4863214068488107258}
-  isGo: 0
   speed: 15
   _knife: 0
   _superKnife: 0
   _stone: 0
   _poop: 0
+  _egg: 0
   _tomate: 0
   _fire: 0
   _racet: 0
@@ -114,6 +114,13 @@ MonoBehaviour:
   _shark: 0
   _meduza: 0
   _carrot: 0
+  _bullet: 0
+  _silverBullet: 0
+  _bomb: 0
+  _churik: 0
+  _blessedSword: 0
+  _gas: 0
+  inDrive: 0
 --- !u!61 &6360233212712816155
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -575,7 +582,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 40
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -10199,9 +10206,9 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1432263269
+  m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 162
+  m_SortingOrder: 64
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
