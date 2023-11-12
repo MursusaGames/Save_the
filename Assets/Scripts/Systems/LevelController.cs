@@ -20,6 +20,7 @@ public class LevelController : MonoBehaviour
     [SerializeField] private GameObject egg;
     [SerializeField] private GameObject bomb;
     [SerializeField] private GameObject gas;
+    [SerializeField] private List<GameObject> cactuses;
     [SerializeField] private GameObject blessed;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioSource boomSource;
@@ -187,6 +188,15 @@ public class LevelController : MonoBehaviour
         Invoke(nameof(ResetCarrotGO), 1f);
     }
 
+    public void IsCactus()
+    {
+        //PlaySound(2);
+        SetPause();
+        cactuses[currentStage].SetActive(true);
+        monsterAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Cactus", true);
+        bossAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Cactus", true);
+    }
+
     private void ResetCarrotGO()
     {
         carrot.SetActive(false);
@@ -204,7 +214,10 @@ public class LevelController : MonoBehaviour
     }
     public void IsStone()
     {
-        
+        PlaySound(7);
+        SetPause();        
+        monsterAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Stone", true);
+        bossAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Stone", true);
     }
     public void IsBullet()
     {
@@ -260,7 +273,7 @@ public class LevelController : MonoBehaviour
         if (data.sound)
         {
             audioSource.volume = PlayerPrefs.GetFloat(Constants.SOUND);
-            audioSource.clip = id == 0 ? clips[0] : id == 1 ? clips[1] : id == 5 ? clips[5] : id == 6 ? clips[6] : clips[2];
+            audioSource.clip = clips[id];
             audioSource.Play();
         }        
     }
@@ -340,6 +353,14 @@ public class LevelController : MonoBehaviour
             knife.GetComponent<Knife>()._blessedSword = true;
             blessed.SetActive(true);
         }
+        else if (data.currentTag == "Cactus")
+        {
+            knife.GetComponent<Knife>()._cactus = true;
+        }
+        else if (data.currentTag == "stone")
+        {
+            knife.GetComponent<Knife>()._stone = true;
+        }
     }
     public void ResetBlessedPartikl()
     {
@@ -366,6 +387,7 @@ public class LevelController : MonoBehaviour
     }
     public void Fall()
     {
+        //cactusTom.SetActive(false);
         poop.SetActive(false);
         egg.SetActive(false);
         player.LetsPlay();

@@ -37,6 +37,7 @@ public class Knife : MonoBehaviour
     public bool _churik;
     public bool _blessedSword;
     public bool _gas;
+    public bool _cactus;
     private bool isRotate;
     public bool inDrive;
     private bool scale1;
@@ -352,8 +353,8 @@ public class Knife : MonoBehaviour
                         levelController.ResetYellowLine();
                     }
                 }
-                rg.constraints = RigidbodyConstraints2D.FreezePositionY;
-                levelController.ResetAnim();
+                //rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+                //levelController.ResetAnim();
                 levelController.IsStone();
                 Invoke(nameof(GetWin), 3f);
             }
@@ -389,8 +390,8 @@ public class Knife : MonoBehaviour
                         levelController.ResetYellowLine();
                     }
                 }
-                rg.constraints = RigidbodyConstraints2D.FreezePositionY;
-                levelController.ResetAnim();
+                rg.velocity = Vector2.zero;
+                rg.gravityScale = 1.5f;
                 levelController.IsStone();
                 Invoke(nameof(GetWin), 3f);
             }
@@ -780,6 +781,14 @@ public class Knife : MonoBehaviour
                 isRotate = true;
                 Invoke(nameof(GetFall), 1.5f);
             }            
+        }
+        if (_cactus)
+        {
+            rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+            img.enabled = false;
+            //levelController.ResetAnim();
+            levelController.IsCactus();
+            Invoke(nameof(GetFall), 2f);
         }
     }
 }

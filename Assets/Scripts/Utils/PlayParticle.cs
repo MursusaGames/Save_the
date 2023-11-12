@@ -6,18 +6,21 @@ public class PlayParticle : MonoBehaviour
     [SerializeField] private GameObject gasPart;
     [SerializeField] private GameObject greenLine;
     [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioSource cactusSound;
     [SerializeField] private MatchData data;
+    private Animator animator;
     public bool bomb;
     private float vol;
 
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
        vol = PlayerPrefs.GetFloat(Constants.SOUND);
     }
     public void PlayPart()
     {
-        partikle.SetActive(true);
+        partikle.SetActive(true); 
         if (bomb)
         {
             greenLine.SetActive(false);
@@ -34,5 +37,20 @@ public class PlayParticle : MonoBehaviour
         {
             audioSource.Play();
         }        
+    }
+    public void CactusSound()
+    {
+        if (data.sound)
+        {
+            cactusSound.Play();            
+        }        
+    }
+    public void CactusEnd()
+    {
+        animator.SetBool("Cactus", false);
+    }
+    public void StoneEnd()
+    {
+        //animator.SetBool("Stone", false);
     }
 }
