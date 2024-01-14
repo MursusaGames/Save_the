@@ -5,12 +5,18 @@ using UnityEngine.UI;
 using TMPro;
 using UniRx;
 using UniRx.Extensions;
-
+using UnityEngine.Experimental.Rendering;
 
 public class LevelController : MonoBehaviour
 {
+    [SerializeField] private GameObject firePartikl;
+    [SerializeField] private GameObject waterPartikl;
+    [SerializeField] private GameObject yellowPartikl;
+    [SerializeField] private Sprite water;
+    [SerializeField] private GameObject acid;
     [SerializeField] private GameObject bulletParticles;
     [SerializeField] private GameObject pistol;
+    [SerializeField] private GameObject waterPistol;
     [SerializeField] private Sprite bullet;
     [SerializeField] private Sprite silverBullet;
     [SerializeField] private GameObject carrot;
@@ -21,6 +27,8 @@ public class LevelController : MonoBehaviour
     [SerializeField] private GameObject bomb;
     [SerializeField] private GameObject gas;
     [SerializeField] private List<GameObject> cactuses;
+    [SerializeField] private List<GameObject> arrows;
+    [SerializeField] private List<GameObject> spears;    
     [SerializeField] private GameObject blessed;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioSource boomSource;
@@ -47,18 +55,20 @@ public class LevelController : MonoBehaviour
     [SerializeField] private int thisSceneNumber;
     [SerializeField] private GameObject greenLine;
     [SerializeField] private GameObject yellowLine;
+    [SerializeField] private GameObject ballGO;
     [SerializeField] private UserData userData;
     [SerializeField] private List<GameObject> bossAnim;
     [SerializeField] private List<GameObject> monsterAnim;
     [SerializeField] private List<GameObject> deathAnim;
     [SerializeField] private GameObject finishWindow;
     [SerializeField] private Herous player;
-
+    public Animator currentAnim;
     public int currentStage;
     private int tryCount;
     public bool bossFight;
     public bool bossFirstFight;
     private bool lastStage;
+    public int ballPower;
 
     private void Start()
     {
@@ -66,6 +76,7 @@ public class LevelController : MonoBehaviour
     }
     void OnEnable()
     {
+        ballPower = 2;
         switch (thisStageName)
         {
             case "Game":
@@ -125,12 +136,14 @@ public class LevelController : MonoBehaviour
         
         if (data.level == 4)
         {
+            currentAnim = bossAnim[stages[currentStage].id].GetComponent<Animator>();
             bossAnim[stages[currentStage].id].SetActive(true);
             bossFight = true;
             greenLine.SetActive(true);
         }
         else
         {
+            currentAnim = monsterAnim[stages[currentStage].id].GetComponent<Animator>();
             monsterAnim[stages[currentStage].id].SetActive(true);
         }
         monster.gameObject.tag = stages[currentStage].monsterTag;
@@ -138,6 +151,7 @@ public class LevelController : MonoBehaviour
         timeController.SetTime();
         monsterLeft.sprite = stages[currentStage].monsterHalf1;
         monsterRight.sprite = stages[currentStage].monsterHalf2;
+        data.currentMonster = stages[currentStage].bossSprite;
         tryCount = stages[currentStage].tryCount;
         for (int i = 0; i <= data.level; i++)
         {
@@ -145,6 +159,7 @@ public class LevelController : MonoBehaviour
         }        
         SetKnife();
     }
+    #region Weapons
     public void IsPoop()
     {
 
@@ -171,32 +186,46 @@ public class LevelController : MonoBehaviour
         //PlaySound(2);
         SetPause();
         //bomb.SetActive(true);
-        monsterAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Bomb", true);
-        bossAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Bomb", true);
+        currentAnim.SetBool("Bomb", true);
+        //bossAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Bomb", true);
     }
     public void IsGas()
     {
         //PlaySound(2);
         SetPause();
         //bomb.SetActive(true);
-        monsterAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Gas", true);
-        bossAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Gas", true);
+        currentAnim.SetBool("Gas", true);
+        //bossAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Gas", true);
     }
     public void IsCarrot()
     {
         carrot.SetActive(true );
         Invoke(nameof(ResetCarrotGO), 1f);
     }
-
     public void IsCactus()
     {
-        //PlaySound(2);
         SetPause();
         cactuses[currentStage].SetActive(true);
-        monsterAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Cactus", true);
-        bossAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Cactus", true);
+        currentAnim.SetBool("Cactus", true);
+        //bossAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Cactus", true);
     }
-
+    public void IsBall()
+    {
+        ballPower--;
+        if(ballPower <= 0)
+        {
+            SetPause();
+            currentAnim.SetBool("Stone", true);            
+        }
+    }
+    public void IsPapir()
+    {
+        PlaySound(1);
+        SetPause();
+        //cactuses[currentStage].SetActive(true);
+        currentAnim.SetBool("Papir", true);
+        //bossAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Cactus", true);
+    }    
     private void ResetCarrotGO()
     {
         carrot.SetActive(false);
@@ -214,18 +243,75 @@ public class LevelController : MonoBehaviour
     }
     public void IsStone()
     {
+        currentAnim.SetBool("Stone", true);
+        //bossAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Stone", true);
         PlaySound(7);
         SetPause();        
-        monsterAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Stone", true);
-        bossAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Stone", true);
+        //monsterAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Stone", true);
+        //bossAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Stone", true);
+        stone.SetActive(true);
     }
     public void IsBullet()
     {
         timeController.GetPause();
         player.GetPause();
         monster.GetPause();
-        monsterAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Bullet", true);
-        bossAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Bullet", true);
+        currentAnim.SetBool("Bullet", true);        
+    }
+    public void IsArrow(int id)
+    {
+        arrows[currentStage].SetActive(true);
+        timeController.GetPause();
+        player.GetPause();
+        monster.GetPause();
+        if(id == 0)
+        {
+            currentAnim.SetBool("Bullet", true);
+        }
+        else
+        {
+            currentAnim.SetBool("Poison", true);
+        }
+               
+    }
+    public void IsSpear()
+    {
+        spears[currentStage].SetActive(true);
+        timeController.GetPause();
+        player.GetPause();
+        monster.GetPause();
+        currentAnim.SetBool("Stone", true);
+    }
+    public void IsMolot()
+    {
+        timeController.GetPause();
+        player.GetPause();
+        monster.GetPause();        
+    }
+    public void IsAcid()
+    {
+        acid.SetActive(true);
+        timeController.GetPause();
+        player.GetPause();
+        monster.GetPause();
+        currentAnim.SetBool("Acid", true);
+    }
+    public void IsWater()
+    {
+        waterPartikl.SetActive(true);
+        SetPause();   
+    }
+    public void IsGlue()
+    {
+        yellowPartikl.SetActive(true);
+        SetPause();
+        currentAnim.SetBool("Glue", true);
+    }
+    public void IsMolotov()
+    {
+        firePartikl.SetActive(true);
+        SetPause();
+        currentAnim.SetBool("Molotov", true);
     }
     public void IsSilverBullet()
     {
@@ -241,7 +327,7 @@ public class LevelController : MonoBehaviour
         SetPause();
         stone.SetActive(true);
         Invoke(nameof(ResetStoneGO), 1f);
-    }
+    }    
     private void ResetStoneGO()
     {
         stone.SetActive(false);
@@ -251,6 +337,9 @@ public class LevelController : MonoBehaviour
         SetPause();
         PlaySound(5);
     }
+    #endregion
+
+    #region Utilits
     private void SetPause()
     {
         timeController.GetPause();
@@ -267,7 +356,6 @@ public class LevelController : MonoBehaviour
         monsterAnim[stages[currentStage].id].SetActive(false);
         bossAnim[stages[currentStage].id].SetActive(false);
     }
-
     public void PlaySound(int id)
     {
         if (data.sound)
@@ -361,6 +449,54 @@ public class LevelController : MonoBehaviour
         {
             knife.GetComponent<Knife>()._stone = true;
         }
+        else if (data.currentTag == "Papir")
+        {
+            knife.GetComponent<Knife>()._papir = true;
+        }
+        else if (data.currentTag == "lightsaber")
+        {
+            knife.GetComponent<Knife>()._lightsaber = true;
+        }
+        else if (data.currentTag == "Ball")
+        {
+            knife.GetComponent<Knife>().SetBall();
+            ballGO.SetActive(true);
+        }
+        else if (data.currentTag == "Arrow")
+        {
+            knife.GetComponent<Knife>()._arrow = true;
+        }
+        else if (data.currentTag == "Spear")
+        {
+            knife.GetComponent<Knife>()._spear = true;
+        }
+        else if (data.currentTag == "PoisonArrow")
+        {
+            knife.GetComponent<Knife>()._pArrow = true;
+        }
+        else if (data.currentTag == "Molot")
+        {
+            knife.GetComponent<Knife>()._molot = true;
+        }
+        else if (data.currentTag == "Acid")
+        {
+            knife.GetComponent<Knife>()._acid = true;
+        }
+        else if (data.currentTag == "WaterGun")
+        {
+            knife.GetComponent<Knife>()._waterGun = true;
+            waterPistol.SetActive(true);
+            knife.GetComponent<Image>().sprite = water;
+            knife.gameObject.transform.localScale = Vector3.zero;
+        }
+        else if (data.currentTag == "Glue")
+        {
+            knife.GetComponent<Knife>()._glue = true;
+        }
+        else if (data.currentTag == "Molotov")
+        {
+            knife.GetComponent<Knife>()._molotov = true;
+        }
     }
     public void ResetBlessedPartikl()
     {
@@ -387,9 +523,13 @@ public class LevelController : MonoBehaviour
     }
     public void Fall()
     {
-        //cactusTom.SetActive(false);
+        ballPower = 2;
+        waterPartikl.SetActive(false);
+        acid.SetActive(false);
+        ballGO.SetActive(false);
         poop.SetActive(false);
         egg.SetActive(false);
+        //arrows[currentStage].SetActive(true);
         player.LetsPlay();
         monster.LetsPlay();
         timeController.LetsPlay();
@@ -425,6 +565,7 @@ public class LevelController : MonoBehaviour
     }
     public void Win()
     {
+        ballPower = 2;
         if (bossFight)
         {
             bonusWindow.SetActive(true);
@@ -469,4 +610,6 @@ public class LevelController : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+
+    #endregion
 }

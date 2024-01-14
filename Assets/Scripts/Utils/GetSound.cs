@@ -5,7 +5,7 @@ public class GetSound : MonoBehaviour
     private AudioSource audioSource;
     [SerializeField] private MatchData data;
     public bool bomb;
-    void Start()
+    void OnEnable()
     {
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.volume = PlayerPrefs.GetFloat(Constants.SOUND);

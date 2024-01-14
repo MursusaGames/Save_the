@@ -174,7 +174,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e84199b479a2e15479a0152941a6fd18, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.617
   m_Pitch: 1
   Loop: 0
@@ -271,6 +271,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1992d5dfed4323418162722844fded6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 74b1b7c04ef314840842cefd98d4efc8, type: 2}
+  audioSource: {fileID: 38165066}
   radius: 500
   speed: 20
 --- !u!114 &38165068
@@ -7104,6 +7106,7 @@ MonoBehaviour:
   stageText: {fileID: 1957840219}
   numberOfKnifesText: {fileID: 216733664}
   matchData: {fileID: 11400000, guid: 74b1b7c04ef314840842cefd98d4efc8, type: 2}
+  audioSource: {fileID: 0}
 --- !u!82 &373423946
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8782,7 +8785,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e84199b479a2e15479a0152941a6fd18, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.311
   m_Pitch: 1
   Loop: 0
@@ -8879,6 +8882,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1992d5dfed4323418162722844fded6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 74b1b7c04ef314840842cefd98d4efc8, type: 2}
+  audioSource: {fileID: 565713438}
   radius: 200
   speed: 30
 --- !u!114 &565713440
@@ -20832,6 +20837,7 @@ MonoBehaviour:
   speed: 7
   left: 0
   startPos: {x: 0, y: 0, z: 0}
+  egg: 0
 --- !u!50 &910793610
 Rigidbody2D:
   serializedVersion: 4
@@ -22011,6 +22017,7 @@ MonoBehaviour:
   speed: 5
   left: 1
   startPos: {x: 0, y: 0, z: 0}
+  egg: 0
 --- !u!50 &1092182677
 Rigidbody2D:
   serializedVersion: 4
@@ -22645,6 +22652,7 @@ MonoBehaviour:
   speed: 30
   left: 0
   startPos: {x: 0, y: 0, z: 0}
+  egg: 0
 --- !u!50 &1172327120
 Rigidbody2D:
   serializedVersion: 4
@@ -27728,7 +27736,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e84199b479a2e15479a0152941a6fd18, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.851
   m_Pitch: 1
   Loop: 0
@@ -27825,6 +27833,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1992d5dfed4323418162722844fded6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 74b1b7c04ef314840842cefd98d4efc8, type: 2}
+  audioSource: {fileID: 1230014689}
   radius: 200
   speed: 15
 --- !u!114 &1230014691
@@ -30248,7 +30258,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e84199b479a2e15479a0152941a6fd18, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.162
   m_Pitch: 1
   Loop: 0
@@ -30345,6 +30355,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1992d5dfed4323418162722844fded6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 74b1b7c04ef314840842cefd98d4efc8, type: 2}
+  audioSource: {fileID: 1569378505}
   radius: 700
   speed: 100
 --- !u!114 &1569378507
@@ -30423,7 +30435,13 @@ MonoBehaviour:
   stone: {fileID: 125581183}
   tomat: {fileID: 1275228716}
   poop: {fileID: 1472205721}
+  egg: {fileID: 0}
+  bomb: {fileID: 0}
+  gas: {fileID: 0}
+  cactuses: []
+  blessed: {fileID: 0}
   audioSource: {fileID: 1574454139}
+  boomSource: {fileID: 0}
   clips:
   - {fileID: 8300000, guid: eb90d6b738296284588e90b36be2e4a4, type: 3}
   - {fileID: 8300000, guid: aae7196793bec814ea54f7b6778f573a, type: 3}
@@ -30467,6 +30485,7 @@ MonoBehaviour:
   thisSceneNumber: 6
   greenLine: {fileID: 653168693}
   yellowLine: {fileID: 895979449}
+  ballGO: {fileID: 0}
   userData: {fileID: 11400000, guid: 36f36916b18d0d340a1476a37b3b0f57, type: 2}
   bossAnim:
   - {fileID: 1045228917}
@@ -30488,9 +30507,11 @@ MonoBehaviour:
   - {fileID: 1727009651}
   finishWindow: {fileID: 1717692280}
   player: {fileID: 278950427}
+  currentAnim: {fileID: 0}
   currentStage: 0
   bossFight: 0
   bossFirstFight: 0
+  ballPower: 0
 --- !u!4 &1574454138
 Transform:
   m_ObjectHideFlags: 0
@@ -32317,7 +32338,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e84199b479a2e15479a0152941a6fd18, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.48
   m_Pitch: 1
   Loop: 0
@@ -32414,6 +32435,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1992d5dfed4323418162722844fded6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 74b1b7c04ef314840842cefd98d4efc8, type: 2}
+  audioSource: {fileID: 1818458246}
   radius: 100
   speed: 10
 --- !u!114 &1818458248
@@ -33279,6 +33302,7 @@ MonoBehaviour:
   speed: 30
   left: 1
   startPos: {x: 0, y: 0, z: 0}
+  egg: 0
 --- !u!50 &1956832854
 Rigidbody2D:
   serializedVersion: 4

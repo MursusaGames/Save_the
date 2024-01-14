@@ -13,5 +13,5 @@ public class KnifesMenu : MonoBehaviour
     public void UpgradeKnifeImage()
     {
         knifeImg.sprite = data.currentKnife;
-    }
+    }    
 }

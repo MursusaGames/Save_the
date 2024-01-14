@@ -49,6 +49,10 @@ public class PlayParticle : MonoBehaviour
     {
         animator.SetBool("Cactus", false);
     }
+    public void PapirEnd()
+    {
+        animator.SetBool("Papir", false);
+    }
     public void StoneEnd()
     {
         //animator.SetBool("Stone", false);

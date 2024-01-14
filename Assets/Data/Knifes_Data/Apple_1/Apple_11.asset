@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92f772eddfc7c1d4288042cc7fed04d0, type: 3}
   m_Name: Apple_11
   m_EditorClassIdentifier: 
-  _customSprites: {fileID: 21300000, guid: d3abfda68c3a88749b402f0626c6972d, type: 3}
+  _customSprites: {fileID: 21300000, guid: e6b1df659e9bd8741a8238d1a8fe7736, type: 3}
   _customSubscribe: 
-  _customNames: Knife
+  _customNames: Firework
   _customSubscribeEN: 
   _customNamesEN: 
   _customPrices: 0

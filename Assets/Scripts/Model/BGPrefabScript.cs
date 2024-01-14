@@ -27,7 +27,7 @@ public class BGPrefabScript : MonoBehaviour
         {
             foreach (var img in buttonsImg)
             {
-                img.color = Color.gray;
+                img.color = Color.cyan;
             }
         }       
         

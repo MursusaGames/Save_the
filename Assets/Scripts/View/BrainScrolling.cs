@@ -128,7 +128,7 @@ public class BrainScrolling : MonoBehaviour
                     }
                     break;                
                 case 3:
-                    bgTopText.color = Color.gray;
+                    bgTopText.color = Color.cyan;
                     prizeBagKnifeNumber.text = PlayerPrefs.GetInt(Constants.PRIZE_BAG).ToString();
                     for (int j = 0; j < prizeKnife_1_Container.CustomsItems.Count; j++)
                     {
@@ -227,7 +227,7 @@ public class BrainScrolling : MonoBehaviour
                     //bossBagKnifeNumber.text = PlayerPrefs.GetInt(Constants.BOSS_BAG).ToString();
                     break;               
                 case 3:
-                    bgTopText.color = Color.gray;
+                    bgTopText.color = Color.cyan;
                     break;
             }
             

@@ -17,6 +17,7 @@ public class GetForAppleSystem : MonoBehaviour
     private int lowPrice = 500;
     private int mediumPrice = 1000;
     private int hiPrice = 1500;
+    private int appleForAD = 50;
    
 
     public void SetKnife(BtnScript script)
@@ -43,6 +44,7 @@ public class GetForAppleSystem : MonoBehaviour
         else
         {
             data.apple.Value -= price;
+            PlayerPrefs.SetInt(Constants.SCORE, data.apple.Value);
             switch (price)
             {
                 case 500:
@@ -66,5 +68,10 @@ public class GetForAppleSystem : MonoBehaviour
     private void ResetPopUp()
     {
         GetBtn.Hide();
+    }
+    public void GetAppleForADS()
+    {
+        data.apple.Value += appleForAD;
+        PlayerPrefs.SetInt(Constants.SCORE, data.apple.Value);
     }
 }

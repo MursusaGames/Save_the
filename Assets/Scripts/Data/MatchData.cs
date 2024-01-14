@@ -24,6 +24,7 @@ public class MatchData : ScriptableObject
     public MoneyData moneyData;
     public CustomsDataContainer CustomDataContainer;
     public Sprite currentKnife;
+    public Sprite currentMonster;
     public string currentTag;
     public bool sound;
     public bool music;
