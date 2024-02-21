@@ -16,7 +16,7 @@ public static class Constants
     public const string LEVEL = "Level";
     public const string SCORE = "Score";
     public const string BOSS_BAG = "Boses_Bags";
-    public const string BOSS_BAG1 = "Boses_Bags1";
+    public const string BOSS_BAG1 = "Bosees__Bags1";
     public const string APPLE_BAG = "AppleBags";
     public const string APPLE_1_DATA = "Apple_1";
     public const string APPLE_2_DATA = "Apple_2";

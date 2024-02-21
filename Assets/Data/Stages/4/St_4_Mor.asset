@@ -25,4 +25,4 @@ MonoBehaviour:
   id: 4
   changeRotate: 0
   timeToEnd: 10
-  monsterTag: Iron
+  monsterTag: Mor

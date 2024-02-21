@@ -17,7 +17,7 @@ MonoBehaviour:
   stage: 0
   tryCount: 3
   ring: {fileID: 0}
-  prizKnife: {fileID: 21300000, guid: f6a9f4ae3bb8620409cc678933b9d878, type: 3}
+  prizKnife: {fileID: 21300000, guid: 92dc36286456e884f8d39d535d4dc9f9, type: 3}
   bossSprite: {fileID: 21300000, guid: 19feb417925fa2b49a756f28d5b4daa0, type: 3}
   monsterSprite: {fileID: 21300000, guid: 4f04a8049fcf45d44bc5d05f658d726b, type: 3}
   monsterHalf1: {fileID: 21300000, guid: ed2d1df9ef994074988de671d328de72, type: 3}
@@ -25,4 +25,4 @@ MonoBehaviour:
   id: 0
   changeRotate: 0
   timeToEnd: 20
-  monsterTag: Monster
+  monsterTag: Water

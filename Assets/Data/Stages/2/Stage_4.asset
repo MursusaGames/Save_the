@@ -17,12 +17,12 @@ MonoBehaviour:
   stage: 4
   tryCount: 3
   ring: {fileID: 0}
-  prizKnife: {fileID: 0}
+  prizKnife: {fileID: 21300000, guid: ce99f86b628e1904da66981c9b9133cf, type: 3}
   bossSprite: {fileID: 21300000, guid: f341e95514e7f86498ec093b8f796a18, type: 3}
   monsterSprite: {fileID: 0}
-  monsterHalf1: {fileID: 21300000, guid: d61750846ed15b5448d39f9d09d8705a, type: 3}
-  monsterHalf2: {fileID: 21300000, guid: 91b83fd1e95b18842a18f8bc52d9a599, type: 3}
+  monsterHalf1: {fileID: 21300000, guid: e7ea08ad3a0e06142a28e2408202dc2d, type: 3}
+  monsterHalf2: {fileID: 21300000, guid: d689c8562ab260b419fda10cbb6f4bbd, type: 3}
   id: 4
   changeRotate: 0
   timeToEnd: 10
-  monsterTag: Iron
+  monsterTag: Godzy

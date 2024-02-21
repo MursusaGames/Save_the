@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92f772eddfc7c1d4288042cc7fed04d0, type: 3}
   m_Name: Bosss_13
   m_EditorClassIdentifier: 
-  _customSprites: {fileID: 21300000, guid: 65dd06acab4f3aa47b5ce0576e429eae, type: 3}
+  _customSprites: {fileID: 21300000, guid: 91edd9ba39074bf4f92acf58f8bb3391, type: 3}
   _customSubscribe: 
   _customNames: Fire
   _customSubscribeEN: 

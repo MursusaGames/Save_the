@@ -12,4 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf517164fb3a9b64da6e3756265f2c63, type: 3}
   m_Name: 4_sub
   m_EditorClassIdentifier: 
-  _subscribe: []
+  _subscribe:
+  - Power of dark!
+  - Mandragora!
+  - Snake power!
+  - Stone Destroyer!
+  - Devouring souls!
+  - Avada kedabra!
+  - Bes weapon!
+  - The Ghost Sword!
+  - Vampirs Sword!
+  - The Demon's Sword!
+  - The Sword of Death!
+  - Power of dark!
+  - Power of dark!
+  - Power of dark!
+  - Power of dark!
+  - Power of dark!

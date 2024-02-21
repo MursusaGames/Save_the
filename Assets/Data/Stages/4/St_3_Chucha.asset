@@ -25,4 +25,4 @@ MonoBehaviour:
   id: 3
   changeRotate: 0
   timeToEnd: 12
-  monsterTag: Monster
+  monsterTag: Chucha

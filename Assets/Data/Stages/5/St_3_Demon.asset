@@ -25,4 +25,4 @@ MonoBehaviour:
   id: 3
   changeRotate: 0
   timeToEnd: 10
-  monsterTag: Monster
+  monsterTag: Demon

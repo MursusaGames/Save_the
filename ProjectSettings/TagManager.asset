@@ -72,6 +72,8 @@ TagManager:
   - PoisonArrow
   - WaterGun
   - Wall
+  - Word
+  - Chost
   layers:
   - Default
   - TransparentFX

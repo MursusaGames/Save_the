@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92f772eddfc7c1d4288042cc7fed04d0, type: 3}
   m_Name: Bosss_7
   m_EditorClassIdentifier: 
-  _customSprites: {fileID: 21300000, guid: 007f5d8a325833041a33194e5d17f48d, type: 3}
+  _customSprites: {fileID: 21300000, guid: b80468ba7a9226c4cbf49c5a63d7b2a1, type: 3}
   _customSubscribe: 
   _customNames: Vampir
   _customSubscribeEN: 

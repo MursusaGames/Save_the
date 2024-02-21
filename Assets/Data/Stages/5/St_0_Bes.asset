@@ -18,10 +18,10 @@ MonoBehaviour:
   tryCount: 3
   ring: {fileID: 0}
   prizKnife: {fileID: 21300000, guid: 973a59d666f312f41b416fd242498d23, type: 3}
-  bossSprite: {fileID: 21300000, guid: 19feb417925fa2b49a756f28d5b4daa0, type: 3}
-  monsterSprite: {fileID: 21300000, guid: e3fd2717fe984fe45bd36a65b4b4d482, type: 3}
-  monsterHalf1: {fileID: 21300000, guid: 9edfb2e2b4b900f4a99dff5c7065737f, type: 3}
-  monsterHalf2: {fileID: 21300000, guid: 5dc5848624ab5e3468106c341005d371, type: 3}
+  bossSprite: {fileID: 21300000, guid: 96049cb73d7fa9046b7763b7da29da4f, type: 3}
+  monsterSprite: {fileID: 21300000, guid: 8c2e3e08a7639f34ea294bdee899d7cc, type: 3}
+  monsterHalf1: {fileID: 21300000, guid: 797fb1db01f1108468d0afbfb9a48bb7, type: 3}
+  monsterHalf2: {fileID: 21300000, guid: 797fb1db01f1108468d0afbfb9a48bb7, type: 3}
   id: 0
   changeRotate: 0
   timeToEnd: 20
