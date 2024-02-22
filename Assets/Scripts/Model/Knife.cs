@@ -303,7 +303,7 @@ public class Knife : MonoBehaviour
                 levelController.IsChost();
                 Invoke(nameof(GetFall), 3f);
             }
-            else if (collision.gameObject.CompareTag("Vampir"))
+            else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
             {
                 win = true;
                 if (levelController.data.vibro)
@@ -432,7 +432,7 @@ public class Knife : MonoBehaviour
                 halfMonster.SetActive(true);                
                 Invoke(nameof(GetWin), 1f);
             }
-            else if (collision.gameObject.CompareTag("Vampir"))
+            else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
             {
                 win = true;
                 if (levelController.data.vibro)
@@ -1043,7 +1043,7 @@ public class Knife : MonoBehaviour
                 halfMonster.SetActive(true);
                 Invoke(nameof(GetWin), 1f);
             }
-            else if (collision.gameObject.CompareTag("Vampir"))
+            else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
             {
                 win = true;
                 if (levelController.data.vibro)
@@ -1170,7 +1170,7 @@ public class Knife : MonoBehaviour
                 halfMonster.SetActive(true);
                 Invoke(nameof(GetWin), 1f);
             }
-            else if (collision.gameObject.CompareTag("Vampir"))
+            else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
             {
                 win = true;
                 if (levelController.data.vibro)
@@ -1294,7 +1294,7 @@ public class Knife : MonoBehaviour
                 levelController.IsBullet();
                 Invoke(nameof(GetWin), 3f);
             }
-            else if (collision.gameObject.CompareTag("Vampir"))
+            else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
             {
                 win = true;
                 if (levelController.data.vibro)
@@ -1445,6 +1445,14 @@ public class Knife : MonoBehaviour
                 //levelController.ResetAnim();
                 levelController.IsSilverBullet();
                 Invoke(nameof(GetWin), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Demon"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
             }
             else if (collision.gameObject.CompareTag("Vampir"))
             {
@@ -1616,7 +1624,7 @@ public class Knife : MonoBehaviour
         {
             if (collision.gameObject.CompareTag("Forest") || collision.gameObject.CompareTag("Godzy")
                 || collision.gameObject.CompareTag("Stone")|| collision.gameObject.CompareTag("Chucha")
-                ||collision.gameObject.CompareTag("Mor") )
+                ||collision.gameObject.CompareTag("Mor") || collision.gameObject.CompareTag("Demon"))                
             {
                 rg.constraints = RigidbodyConstraints2D.FreezePositionY;
                 img.enabled = false;
@@ -1730,7 +1738,7 @@ public class Knife : MonoBehaviour
                 halfMonster.SetActive(true);
                 Invoke(nameof(GetWin), 1f);
             }
-            else if (collision.gameObject.CompareTag("Vampir"))
+            else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
             {
                 win = true;
                 if (levelController.data.vibro)
@@ -2104,7 +2112,7 @@ public class Knife : MonoBehaviour
                 levelController.IsScat();
                 Invoke(nameof(GetFall), 3f);
             }
-            else if (collision.gameObject.CompareTag("Vampir"))
+            else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
             {
                 win = true;
                 if (levelController.data.vibro)
@@ -2213,7 +2221,7 @@ public class Knife : MonoBehaviour
                 levelController.IsPapir();
                 Invoke(nameof(GetWin), 3f);
             }
-            else if (collision.gameObject.CompareTag("Vampir"))
+            else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
             {
                 win = true;
                 if (levelController.data.vibro)
@@ -2369,7 +2377,7 @@ public class Knife : MonoBehaviour
                 //isRotate = true;
                 Invoke(nameof(GetFall), 3f);
             }
-            else if (collision.gameObject.CompareTag("Vampir"))
+            else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
             {
                 win = true;
                 if (levelController.data.vibro)
@@ -2632,7 +2640,7 @@ public class Knife : MonoBehaviour
                 }                
                 Invoke(nameof(GetWin), 3f);
             }
-            else if (collision.gameObject.CompareTag("Vampir"))
+            else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
             {
                 win = true;
                 if (levelController.data.vibro)
@@ -2788,7 +2796,7 @@ public class Knife : MonoBehaviour
                 levelController.IsSpear();
                 Invoke(nameof(GetWin), 3f);
             }
-            else if (collision.gameObject.CompareTag("Vampir"))
+            else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
             {
                 win = true;
                 if (levelController.data.vibro)
@@ -2948,7 +2956,7 @@ public class Knife : MonoBehaviour
                 //levelController.IsMolot();
                 Invoke(nameof(GetWin), 3f);
             }
-            else if (collision.gameObject.CompareTag("Vampir"))
+            else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
             {
                 win = true;
                 if (levelController.data.vibro)
@@ -3091,6 +3099,14 @@ public class Knife : MonoBehaviour
                 levelController.ResetGreenLine();
                 levelController.IsAcid();
                 Invoke(nameof(GetWin), 3f);
+            }
+            else if ( collision.gameObject.CompareTag("Demon"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
             }
             else if (collision.gameObject.CompareTag("Chucha"))
             {
@@ -3302,7 +3318,7 @@ public class Knife : MonoBehaviour
                 levelController.IsGlue();
                 Invoke(nameof(GetWin), 3f);
             }
-            else if (collision.gameObject.CompareTag("Vampir"))
+            else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
             {
                 win = true;
                 if (levelController.data.vibro)
@@ -3527,7 +3543,8 @@ public class Knife : MonoBehaviour
                 || collision.gameObject.CompareTag("Sprut") || collision.gameObject.CompareTag("Godzy")
                 || collision.gameObject.CompareTag("Nag") || collision.gameObject.CompareTag("Chucha")
                 || collision.gameObject.CompareTag("Vasilisk") || collision.gameObject.CompareTag("Mor")
-                || collision.gameObject.CompareTag("Chost") || collision.gameObject.CompareTag("Vampir"))
+                || collision.gameObject.CompareTag("Chost") || collision.gameObject.CompareTag("Vampir")
+                || collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Death"))
             {
                 rg.constraints = RigidbodyConstraints2D.FreezePositionY;
                 img.enabled = false;
@@ -3630,6 +3647,15 @@ public class Knife : MonoBehaviour
                 levelController.IsRocet();
                 Invoke(nameof(GetWin), 4f);
             }
+            else if (collision.gameObject.CompareTag("Demon"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                levelController.IsMor();
+                levelController.IsRocet(1);
+                Invoke(nameof(GetFall), 3f);
+            }
             else if (collision.gameObject.CompareTag("Fire"))
             {
                 rg.constraints = RigidbodyConstraints2D.FreezePositionY;
@@ -3693,7 +3719,7 @@ public class Knife : MonoBehaviour
                 //isRotate = true;
                 Invoke(nameof(GetFall), 3f);
             }
-            else if (collision.gameObject.CompareTag("Vampir"))
+            else if (collision.gameObject.CompareTag("Vampir")|| collision.gameObject.CompareTag("Demon"))
             {
                 win = true;
                 if (levelController.data.vibro)
@@ -3814,7 +3840,8 @@ public class Knife : MonoBehaviour
                 || collision.gameObject.CompareTag("Stone") || collision.gameObject.CompareTag("Fire")
                 || collision.gameObject.CompareTag("Air") || collision.gameObject.CompareTag("Light") 
                 || collision.gameObject.CompareTag("Dark") || collision.gameObject.CompareTag("Vampir")
-                || collision.gameObject.CompareTag("Vasilisk") || collision.gameObject.CompareTag("Mor"))
+                || collision.gameObject.CompareTag("Vasilisk") || collision.gameObject.CompareTag("Mor")
+                || collision.gameObject.CompareTag("Death"))
             {
                 if (levelController.data.vibro)
                     Handheld.Vibrate();
@@ -3833,7 +3860,28 @@ public class Knife : MonoBehaviour
                 isRotate = true;
                 Invoke(nameof(GetFall), 1.5f);
                 
-            }            
+            }
+            else if(collision.gameObject.CompareTag("Demon"))
+            {
+                int rand = Random.Range(1, 3);
+                if (rand == 1)
+                {
+                    rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                    if (levelController.data.sound)
+                        tzong.Play();
+                    isRotate = true;
+                    Invoke(nameof(GetFall), 3f);
+                }
+                else
+                {
+                    rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+                    img.enabled = false;
+                    levelController.ResetGreenLine();
+                    levelController.IsMagic();
+                    Invoke(nameof(GetWin), 2f);
+                }
+                
+            }
             else
             {
                 rg.constraints = RigidbodyConstraints2D.FreezePositionY;
@@ -3851,7 +3899,8 @@ public class Knife : MonoBehaviour
                 || collision.gameObject.CompareTag("Fire") || collision.gameObject.CompareTag("Air")
                 || collision.gameObject.CompareTag("Light") || collision.gameObject.CompareTag("Dark")
                 || collision.gameObject.CompareTag("Nag") || collision.gameObject.CompareTag("Mor")
-                || collision.gameObject.CompareTag("Chost") || collision.gameObject.CompareTag("Vampir"))
+                || collision.gameObject.CompareTag("Chost") || collision.gameObject.CompareTag("Vampir")
+                || collision.gameObject.CompareTag("Demon") || collision.gameObject.CompareTag("Death"))
             {
                 if (levelController.data.vibro)
                     Handheld.Vibrate();
@@ -3912,7 +3961,7 @@ public class Knife : MonoBehaviour
                 || collision.gameObject.CompareTag("Light") || collision.gameObject.CompareTag("Dark")
                 || collision.gameObject.CompareTag("Nag") || collision.gameObject.CompareTag("Chucha")
                 || collision.gameObject.CompareTag("Vasilisk") || collision.gameObject.CompareTag("Mor")
-                || collision.gameObject.CompareTag("Chost") || collision.gameObject.CompareTag("Vampir"))
+                || collision.gameObject.CompareTag("Chost") )
             {
                 rg.constraints = RigidbodyConstraints2D.FreezePositionY;
                 img.enabled = false;
@@ -3920,7 +3969,7 @@ public class Knife : MonoBehaviour
                 levelController.IsFirework(1);
                 Invoke(nameof(GetFall), 3f);
             }
-            else if (collision.gameObject.CompareTag("Vampir"))
+            else if (collision.gameObject.CompareTag("Vampir")|| collision.gameObject.CompareTag("Demon"))
             {
                 rg.constraints = RigidbodyConstraints2D.FreezePositionY;
                 img.enabled = false;
@@ -4007,7 +4056,7 @@ public class Knife : MonoBehaviour
                 halfMonster.SetActive(true);
                 Invoke(nameof(GetWin), 1f);
             }
-            else if (collision.gameObject.CompareTag("Vampir"))
+            else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
             {
                 win = true;
                 if (levelController.data.vibro)
@@ -4147,7 +4196,7 @@ public class Knife : MonoBehaviour
                 halfMonster.SetActive(true);
                 Invoke(nameof(GetWin), 1f);
             }
-            else if (collision.gameObject.CompareTag("Vampir"))
+            else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
             {
                 win = true;
                 if (levelController.data.vibro)
@@ -4271,7 +4320,7 @@ public class Knife : MonoBehaviour
                 airMonster.SetActive(true);
                 Invoke(nameof(GetWin), 3f);
             }
-            else if (collision.gameObject.CompareTag("Vampir"))
+            else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
             {
                 win = true;
                 if (levelController.data.vibro)
@@ -4350,7 +4399,7 @@ public class Knife : MonoBehaviour
                 levelController.WaterElement();
                 Invoke(nameof(GetFall), 3f);
             }
-            else if (collision.gameObject.CompareTag("Vampir"))
+            else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
             {
                 win = true;
                 if (levelController.data.vibro)
@@ -4469,7 +4518,7 @@ public class Knife : MonoBehaviour
                 airMonster.SetActive(true);
                 Invoke(nameof(GetWin), 3f);
             }
-            else if (collision.gameObject.CompareTag("Vampir"))
+            else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
             {
                 win = true;
                 if (levelController.data.vibro)
