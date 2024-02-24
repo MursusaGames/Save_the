@@ -1,6 +1,6 @@
-using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+
 
 public class Knife : MonoBehaviour
 {
@@ -139,10 +139,17 @@ public class Knife : MonoBehaviour
             Invoke(nameof(ResetFire), 0.5f);
         }
 
-        if (  levelController.thisStageName =="Game" && levelController.data.stage == 4 && (_acid || _air || _arrow || _blessedSword || _bullet || _cactus || _churik || _dark || _ches || _fire || _forest || _glue || _godzy
+        if (  levelController.thisStageName =="Game" && levelController.data.gameStage == 4 && (_acid || _air || _arrow || _blessedSword || _bullet || _cactus || _churik || _dark || _ches || _fire || _forest || _glue || _godzy
             || _knife || _light || _lightsaber || _magic || _meduza || _molot || _papir || _pArrow || _peel || _shark || _silverBullet
             || _smellySock || _spear || _stone || _superKnife || _tykw || _water || _word || _bomb || _gas || _pepperGas))
         {
+            levelController.IsMor();
+        }
+        if (levelController.thisStageName == "Technopolis" && levelController.data.technoStage == 1 && !_bullet && !_silverBullet
+            && !_rocet && !_nuclear && levelController.monster.gameObject.transform.localPosition.x < 120
+            && levelController.monster.gameObject.transform.localPosition.x > -120)
+        {
+            Debug.Log("Attac");
             levelController.IsMor();
         }
 
@@ -233,13 +240,13 @@ public class Knife : MonoBehaviour
         Destroy(gameObject);        
     }
 
-    
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+
         if (collision.gameObject.CompareTag("Ring"))
         {
-            if (win) 
+            if (win)
                 return;
             Invoke(nameof(GetFall), 1f);
             return;
@@ -254,8 +261,8 @@ public class Knife : MonoBehaviour
         }
         if (_knife)
         {
-            if (collision.gameObject.CompareTag("Iron")|| collision.gameObject.CompareTag("Forest")
-                || collision.gameObject.CompareTag("Sprut") || collision.gameObject.CompareTag("Godzy") 
+            if (collision.gameObject.CompareTag("Iron") || collision.gameObject.CompareTag("Forest")
+                || collision.gameObject.CompareTag("Sprut") || collision.gameObject.CompareTag("Godzy")
                 || collision.gameObject.CompareTag("Stone") || collision.gameObject.CompareTag("Nag")
                 || collision.gameObject.CompareTag("Vasilisk") || collision.gameObject.CompareTag("Mor"))
             {
@@ -284,14 +291,14 @@ public class Knife : MonoBehaviour
                 anim.enabled = true;
                 if (levelController.data.sound)
                     tsssss.Play();
-                levelController.IsChes();                
+                levelController.IsChes();
                 Invoke(nameof(GetFall), 3f);
             }
             else if (collision.gameObject.CompareTag("Chucha"))
             {
                 win = true;
                 if (levelController.data.vibro)
-                    Handheld.Vibrate();                
+                    Handheld.Vibrate();
                 levelController.IsChucha();
                 Invoke(nameof(GetFall), 3f);
             }
@@ -301,6 +308,25 @@ public class Knife : MonoBehaviour
                 if (levelController.data.vibro)
                     Handheld.Vibrate();
                 levelController.IsChost();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Death"))
+            {
+                levelController.IsMor();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                int rand = Random.Range(1, 3);
+                if (levelController.data.sound)
+                    tzong.Play();
+                if (rand == 1)
+                {
+                    rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rg.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+                }
+                isRotate = true;
                 Invoke(nameof(GetFall), 3f);
             }
             else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
@@ -315,7 +341,7 @@ public class Knife : MonoBehaviour
             {
                 win = true;
                 if (levelController.data.vibro)
-                    Handheld.Vibrate();               
+                    Handheld.Vibrate();
                 levelController.WaterElement();
                 Invoke(nameof(GetFall), 3f);
             }
@@ -336,12 +362,12 @@ public class Knife : MonoBehaviour
                 rg.velocity = Vector2.zero;
                 img.enabled = false;
                 if (levelController.data.vibro)
-                    Handheld.Vibrate();                
+                    Handheld.Vibrate();
                 Invoke(nameof(GetFall), 3f);
             }
             else if (collision.gameObject.CompareTag("Light"))
             {
-                win = true;                
+                win = true;
                 if (levelController.data.vibro)
                     Handheld.Vibrate();
                 levelController.Light();
@@ -379,11 +405,11 @@ public class Knife : MonoBehaviour
                     Handheld.Vibrate();
                 rg.constraints = RigidbodyConstraints2D.FreezePositionY;
                 rg.velocity = Vector2.zero;
-                img.enabled = false;                
-                levelController.IsScat();               
+                img.enabled = false;
+                levelController.IsScat();
                 Invoke(nameof(GetFall), 3f);
             }
-            else 
+            else
             {
                 win = true;
                 levelController.JustTomate();
@@ -429,10 +455,29 @@ public class Knife : MonoBehaviour
                     }
                 }
                 levelController.ResetAnim();
-                halfMonster.SetActive(true);                
+                halfMonster.SetActive(true);
                 Invoke(nameof(GetWin), 1f);
             }
-            else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
+            else if (collision.gameObject.CompareTag("Death"))
+            {
+                levelController.IsMor();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                int rand = Random.Range(1, 3);
+                if (levelController.data.sound)
+                    tzong.Play();
+                if (rand == 1)
+                {
+                    rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rg.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+                }
+                isRotate = true;
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon") )
             {
                 win = true;
                 if (levelController.data.vibro)
@@ -444,7 +489,7 @@ public class Knife : MonoBehaviour
             {
                 win = true;
                 if (levelController.data.vibro)
-                    Handheld.Vibrate();              
+                    Handheld.Vibrate();
                 levelController.IsChucha();
                 Invoke(nameof(GetFall), 3f);
             }
@@ -572,8 +617,16 @@ public class Knife : MonoBehaviour
                 //levelController.ResetAnim();
                 levelController.currentAnim.SetBool("Stone", true);
                 img.enabled = false;
-                levelController.IsTomate();                
+                levelController.IsTomate();
                 Invoke(nameof(GetWin), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Dron"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                //levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
             }
             else if (collision.gameObject.CompareTag("Tykw"))
             {
@@ -582,7 +635,7 @@ public class Knife : MonoBehaviour
                 rg.constraints = RigidbodyConstraints2D.FreezePositionY;
                 rg.velocity = Vector2.zero;
                 img.color = Color.green;
-                if (levelController.data.sound) 
+                if (levelController.data.sound)
                     ai.Play();
                 levelController.IsChes();
                 rg.constraints = RigidbodyConstraints2D.None;
@@ -684,6 +737,14 @@ public class Knife : MonoBehaviour
                 levelController.IsStone();
                 Invoke(nameof(GetWin), 3f);
             }
+            else if (collision.gameObject.CompareTag("Dron"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                //levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
+            }
             else if (collision.gameObject.CompareTag("Vampir"))
             {
                 win = true;
@@ -696,7 +757,7 @@ public class Knife : MonoBehaviour
             {
                 win = true;
                 if (levelController.data.vibro)
-                    Handheld.Vibrate();                
+                    Handheld.Vibrate();
                 levelController.IsChucha();
                 Invoke(nameof(GetFall), 3f);
             }
@@ -803,6 +864,14 @@ public class Knife : MonoBehaviour
                 levelController.IsStone();
                 Invoke(nameof(GetWin), 3f);
             }
+            else if (collision.gameObject.CompareTag("Dron"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                //levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
+            }
             else if (collision.gameObject.CompareTag("Vampir"))
             {
                 win = true;
@@ -823,7 +892,7 @@ public class Knife : MonoBehaviour
             {
                 win = true;
                 if (levelController.data.vibro)
-                    Handheld.Vibrate();                
+                    Handheld.Vibrate();
                 levelController.IsChucha();
                 Invoke(nameof(GetFall), 3f);
             }
@@ -905,6 +974,14 @@ public class Knife : MonoBehaviour
                 levelController.IsScat();
                 Invoke(nameof(GetFall), 3f);
             }
+            else if (collision.gameObject.CompareTag("Dron"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                //levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
+            }
             else if (collision.gameObject.CompareTag("Fire"))
             {
                 win = true;
@@ -929,11 +1006,11 @@ public class Knife : MonoBehaviour
                 else
                 {
                     rg.constraints = RigidbodyConstraints2D.FreezePositionY;
-                    img.enabled = false;                    
+                    img.enabled = false;
                     levelController.IsPoop();
                     Invoke(nameof(GetFall), 3f);
                 }
-                
+
             }
             else if (collision.gameObject.CompareTag("Chucha"))
             {
@@ -1015,12 +1092,12 @@ public class Knife : MonoBehaviour
                 }
                 levelController.IsPoop();
                 Invoke(nameof(GetFall), 3f);
-            }                   
-            
+            }
+
         }
         if (_tykw)
         {
-            if (collision.gameObject.CompareTag("Monster") || collision.gameObject.CompareTag("Tykw") 
+            if (collision.gameObject.CompareTag("Monster") || collision.gameObject.CompareTag("Tykw")
                 || collision.gameObject.CompareTag("Shark"))
             {
                 win = true;
@@ -1043,6 +1120,33 @@ public class Knife : MonoBehaviour
                 halfMonster.SetActive(true);
                 Invoke(nameof(GetWin), 1f);
             }
+            else if (collision.gameObject.CompareTag("Dron"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                //levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Death"))
+            {
+                levelController.IsMor();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                int rand = Random.Range(1, 3);
+                if (levelController.data.sound)
+                    tzong.Play();
+                if (rand == 1)
+                {
+                    rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rg.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+                }
+                isRotate = true;
+                Invoke(nameof(GetFall), 3f);
+            }
             else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
             {
                 win = true;
@@ -1063,7 +1167,7 @@ public class Knife : MonoBehaviour
             {
                 win = true;
                 if (levelController.data.vibro)
-                    Handheld.Vibrate();               
+                    Handheld.Vibrate();
                 levelController.IsChucha();
                 Invoke(nameof(GetFall), 3f);
             }
@@ -1146,7 +1250,7 @@ public class Knife : MonoBehaviour
         }
         if (_shark)
         {
-            if (collision.gameObject.CompareTag("Monster") || collision.gameObject.CompareTag("Tykw") 
+            if (collision.gameObject.CompareTag("Monster") || collision.gameObject.CompareTag("Tykw")
                 || collision.gameObject.CompareTag("Shark"))
             {
                 win = true;
@@ -1170,6 +1274,33 @@ public class Knife : MonoBehaviour
                 halfMonster.SetActive(true);
                 Invoke(nameof(GetWin), 1f);
             }
+            else if (collision.gameObject.CompareTag("Dron"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                //levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Death"))
+            {
+                levelController.IsMor();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                int rand = Random.Range(1, 3);
+                if (levelController.data.sound)
+                    tzong.Play();
+                if (rand == 1)
+                {
+                    rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rg.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+                }
+                isRotate = true;
+                Invoke(nameof(GetFall), 3f);
+            }
             else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
             {
                 win = true;
@@ -1190,7 +1321,7 @@ public class Knife : MonoBehaviour
             {
                 win = true;
                 if (levelController.data.vibro)
-                    Handheld.Vibrate();                
+                    Handheld.Vibrate();
                 levelController.IsChucha();
                 Invoke(nameof(GetFall), 3f);
             }
@@ -1294,6 +1425,35 @@ public class Knife : MonoBehaviour
                 levelController.IsBullet();
                 Invoke(nameof(GetWin), 3f);
             }
+            else if (collision.gameObject.CompareTag("Dron"))
+            {
+                rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+                rg.velocity = Vector2.zero;
+                img.enabled = false;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                levelController.DronDy();
+                Invoke(nameof(GetWin), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Death"))
+            {
+                levelController.IsMor();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                int rand = Random.Range(1, 3);
+                if (levelController.data.sound)
+                    tzong.Play();
+                if (rand == 1)
+                {
+                    rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rg.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+                }
+                isRotate = true;
+                Invoke(nameof(GetFall), 3f);
+            }
             else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
             {
                 win = true;
@@ -1314,7 +1474,7 @@ public class Knife : MonoBehaviour
             {
                 win = true;
                 if (levelController.data.vibro)
-                    Handheld.Vibrate();                
+                    Handheld.Vibrate();
                 levelController.IsChucha();
                 Invoke(nameof(GetFall), 3f);
             }
@@ -1446,6 +1606,35 @@ public class Knife : MonoBehaviour
                 levelController.IsSilverBullet();
                 Invoke(nameof(GetWin), 3f);
             }
+            else if (collision.gameObject.CompareTag("Dron"))
+            {
+                rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+                rg.velocity = Vector2.zero;
+                img.enabled = false;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                levelController.DronDy();
+                Invoke(nameof(GetWin), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Death"))
+            {
+                levelController.IsMor();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                int rand = Random.Range(1, 3);
+                if (levelController.data.sound)
+                    tzong.Play();
+                if (rand == 1)
+                {
+                    rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rg.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+                }
+                isRotate = true;
+                Invoke(nameof(GetFall), 3f);
+            }
             else if (collision.gameObject.CompareTag("Demon"))
             {
                 win = true;
@@ -1476,7 +1665,7 @@ public class Knife : MonoBehaviour
             {
                 win = true;
                 if (levelController.data.vibro)
-                    Handheld.Vibrate();              
+                    Handheld.Vibrate();
                 levelController.IsChucha();
                 Invoke(nameof(GetFall), 3f);
             }
@@ -1574,6 +1763,14 @@ public class Knife : MonoBehaviour
                 levelController.IsMor();
                 Invoke(nameof(GetFall), 3f);
             }
+            else if (collision.gameObject.CompareTag("Dron"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                //levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
+            }
             else if (collision.gameObject.CompareTag("Chost"))
             {
                 win = true;
@@ -1595,7 +1792,7 @@ public class Knife : MonoBehaviour
             {
                 win = true;
                 if (levelController.data.vibro)
-                    Handheld.Vibrate();                
+                    Handheld.Vibrate();
                 levelController.IsChucha();
                 Invoke(nameof(GetFall), 3f);
             }
@@ -1618,21 +1815,29 @@ public class Knife : MonoBehaviour
                 levelController.IsEgg();
                 Invoke(nameof(GetFall), 3f);
             }
-            
+
         }
         if (_bomb)
         {
             if (collision.gameObject.CompareTag("Forest") || collision.gameObject.CompareTag("Godzy")
-                || collision.gameObject.CompareTag("Stone")|| collision.gameObject.CompareTag("Chucha")
-                ||collision.gameObject.CompareTag("Mor") || collision.gameObject.CompareTag("Demon"))                
+                || collision.gameObject.CompareTag("Stone") || collision.gameObject.CompareTag("Chucha")
+                || collision.gameObject.CompareTag("Mor") || collision.gameObject.CompareTag("Demon"))
             {
                 rg.constraints = RigidbodyConstraints2D.FreezePositionY;
                 img.enabled = false;
-                
+
                 levelController.IsForest();
                 Invoke(nameof(GetFall), 3f);
             }
-            else if (collision.gameObject.CompareTag("Vampir"))
+            else if (collision.gameObject.CompareTag("Dron"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                //levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Vampir")|| collision.gameObject.CompareTag("Death"))
             {
                 rg.constraints = RigidbodyConstraints2D.FreezePositionY;
                 img.enabled = false;
@@ -1737,6 +1942,33 @@ public class Knife : MonoBehaviour
                 levelController.ResetAnim();
                 halfMonster.SetActive(true);
                 Invoke(nameof(GetWin), 1f);
+            }
+            else if (collision.gameObject.CompareTag("Dron"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                //levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Death"))
+            {
+                levelController.IsMor();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                int rand = Random.Range(1, 3);
+                if (levelController.data.sound)
+                    tzong.Play();
+                if (rand == 1)
+                {
+                    rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rg.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+                }
+                isRotate = true;
+                Invoke(nameof(GetFall), 3f);
             }
             else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
             {
@@ -1872,13 +2104,21 @@ public class Knife : MonoBehaviour
                 || collision.gameObject.CompareTag("Stone") || collision.gameObject.CompareTag("Nag")
                 || collision.gameObject.CompareTag("Vasilisk") || collision.gameObject.CompareTag("Mor")
                 || collision.gameObject.CompareTag("Chucha") || collision.gameObject.CompareTag("Chost")
-                || collision.gameObject.CompareTag("Vampir"))
+                || collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Death"))
             {
                 rg.constraints = RigidbodyConstraints2D.FreezePositionY;
                 img.enabled = false;
                 //levelController.ResetAnim();
                 levelController.IsGas();
                 Invoke(nameof(GetFall), 4f);
+            }
+            else if (collision.gameObject.CompareTag("Dron"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                //levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
             }
             else if (collision.gameObject.CompareTag("Scat"))
             {
@@ -1972,6 +2212,33 @@ public class Knife : MonoBehaviour
                 levelController.ResetAnim();
                 halfMonster.SetActive(true);
                 Invoke(nameof(GetWin), 2f);
+            }
+            else if (collision.gameObject.CompareTag("Dron"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                //levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Death"))
+            {
+                levelController.IsMor();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                int rand = Random.Range(1, 3);
+                if (levelController.data.sound)
+                    tzong.Play();
+                if (rand == 1)
+                {
+                    rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rg.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+                }
+                isRotate = true;
+                Invoke(nameof(GetFall), 3f);
             }
             else if (collision.gameObject.CompareTag("Vampir"))
             {
@@ -2112,6 +2379,33 @@ public class Knife : MonoBehaviour
                 levelController.IsScat();
                 Invoke(nameof(GetFall), 3f);
             }
+            else if (collision.gameObject.CompareTag("Dron"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                //levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Death"))
+            {
+                levelController.IsMor();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                int rand = Random.Range(1, 3);
+                if (levelController.data.sound)
+                    tzong.Play();
+                if (rand == 1)
+                {
+                    rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rg.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+                }
+                isRotate = true;
+                Invoke(nameof(GetFall), 3f);
+            }
             else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
             {
                 win = true;
@@ -2120,6 +2414,7 @@ public class Knife : MonoBehaviour
                 levelController.IsMor();
                 Invoke(nameof(GetFall), 3f);
             }
+            
             else if (collision.gameObject.CompareTag("Chost"))
             {
                 win = true;
@@ -2189,7 +2484,7 @@ public class Knife : MonoBehaviour
             {
                 rg.constraints = RigidbodyConstraints2D.FreezePositionY;
                 img.enabled = false;
-                //levelController.ResetAnim();
+                levelController.IsTomate();
                 levelController.IsCactus();
                 Invoke(nameof(GetFall), 2f);
             }
@@ -2220,6 +2515,33 @@ public class Knife : MonoBehaviour
                 //rg.gravityScale = 1.5f;
                 levelController.IsPapir();
                 Invoke(nameof(GetWin), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Dron"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                //levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Death")|| collision.gameObject.CompareTag("Iron"))
+            {
+                levelController.IsMor();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                int rand = Random.Range(1, 3);
+                if (levelController.data.sound)
+                    blyak.Play();
+                if (rand == 1)
+                {
+                    rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rg.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+                }
+                isRotate = true;
+                Invoke(nameof(GetFall), 3f);
             }
             else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
             {
@@ -2377,6 +2699,33 @@ public class Knife : MonoBehaviour
                 //isRotate = true;
                 Invoke(nameof(GetFall), 3f);
             }
+            else if (collision.gameObject.CompareTag("Dron"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                //levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Death"))
+            {
+                levelController.IsMor();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                int rand = Random.Range(1, 3);
+                if (levelController.data.sound)
+                    tzong.Play();
+                if (rand == 1)
+                {
+                    rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rg.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+                }
+                isRotate = true;
+                Invoke(nameof(GetFall), 3f);
+            }
             else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
             {
                 win = true;
@@ -2520,12 +2869,39 @@ public class Knife : MonoBehaviour
                 }
                 levelController.IsBall();
             }
+            else if (collision.gameObject.CompareTag("Dron"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                //levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
+            }
             else if (collision.gameObject.CompareTag("Vampir"))
             {
                 win = true;
                 if (levelController.data.vibro)
                     Handheld.Vibrate();
                 levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Death"))
+            {
+                levelController.IsMor();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                int rand = Random.Range(1, 3);
+                if (levelController.data.sound)
+                    tzong.Play();
+                if (rand == 1)
+                {
+                    rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rg.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+                }
+                isRotate = true;
                 Invoke(nameof(GetFall), 3f);
             }
             else if (collision.gameObject.CompareTag("Chost"))
@@ -2639,6 +3015,33 @@ public class Knife : MonoBehaviour
                     levelController.IsArrow(0);
                 }                
                 Invoke(nameof(GetWin), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Dron"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                //levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Death"))
+            {
+                levelController.IsMor();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                int rand = Random.Range(1, 3);
+                if (levelController.data.sound)
+                    tzong.Play();
+                if (rand == 1)
+                {
+                    rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rg.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+                }
+                isRotate = true;
+                Invoke(nameof(GetFall), 3f);
             }
             else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
             {
@@ -2795,6 +3198,33 @@ public class Knife : MonoBehaviour
                 //levelController.ResetAnim();
                 levelController.IsSpear();
                 Invoke(nameof(GetWin), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Dron"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                //levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Death"))
+            {
+                levelController.IsMor();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                int rand = Random.Range(1, 3);
+                if (levelController.data.sound)
+                    tzong.Play();
+                if (rand == 1)
+                {
+                    rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rg.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+                }
+                isRotate = true;
+                Invoke(nameof(GetFall), 3f);
             }
             else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
             {
@@ -2956,6 +3386,33 @@ public class Knife : MonoBehaviour
                 //levelController.IsMolot();
                 Invoke(nameof(GetWin), 3f);
             }
+            else if (collision.gameObject.CompareTag("Dron"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                //levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Death"))
+            {
+                levelController.IsMor();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                int rand = Random.Range(1, 3);
+                if (levelController.data.sound)
+                    tzong.Play();
+                if (rand == 1)
+                {
+                    rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rg.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+                }
+                isRotate = true;
+                Invoke(nameof(GetFall), 3f);
+            }
             else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
             {
                 win = true;
@@ -3099,6 +3556,33 @@ public class Knife : MonoBehaviour
                 levelController.ResetGreenLine();
                 levelController.IsAcid();
                 Invoke(nameof(GetWin), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Dron"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                //levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Death"))
+            {
+                levelController.IsMor();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                int rand = Random.Range(1, 3);
+                if (levelController.data.sound)
+                    tzong.Play();
+                if (rand == 1)
+                {
+                    rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rg.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+                }
+                isRotate = true;
+                Invoke(nameof(GetFall), 3f);
             }
             else if ( collision.gameObject.CompareTag("Demon"))
             {
@@ -3260,6 +3744,14 @@ public class Knife : MonoBehaviour
                 levelController.IsScat();
                 Invoke(nameof(GetFall), 3f);
             }
+            else if (collision.gameObject.CompareTag("Dron"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                //levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
+            }
             else if (collision.gameObject.CompareTag("Chucha"))
             {
                 win = true;
@@ -3317,6 +3809,33 @@ public class Knife : MonoBehaviour
                 }
                 levelController.IsGlue();
                 Invoke(nameof(GetWin), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Dron"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                //levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Death"))
+            {
+                levelController.IsMor();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                int rand = Random.Range(1, 3);
+                if (levelController.data.sound)
+                    tzong.Play();
+                if (rand == 1)
+                {
+                    rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rg.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+                }
+                isRotate = true;
+                Invoke(nameof(GetFall), 3f);
             }
             else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
             {
@@ -3455,6 +3974,14 @@ public class Knife : MonoBehaviour
                 levelController.IsMolotov();
                 Invoke(nameof(GetWin), 3f);
             }
+            else if (collision.gameObject.CompareTag("Dron"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                //levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
+            }
             else if (collision.gameObject.CompareTag("Tykw"))
             {
                 if (levelController.data.vibro)
@@ -3552,6 +4079,14 @@ public class Knife : MonoBehaviour
                 levelController.IsPepperGas();
                 Invoke(nameof(GetFall), 3f);
             }
+            else if (collision.gameObject.CompareTag("Dron"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                //levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
+            }
             else if (collision.gameObject.CompareTag("Tykw"))
             {
                 if (levelController.data.vibro)
@@ -3647,7 +4182,7 @@ public class Knife : MonoBehaviour
                 levelController.IsRocet();
                 Invoke(nameof(GetWin), 4f);
             }
-            else if (collision.gameObject.CompareTag("Demon"))
+            else if (collision.gameObject.CompareTag("Demon")|| collision.gameObject.CompareTag("Death"))
             {
                 win = true;
                 if (levelController.data.vibro)
@@ -3717,6 +4252,33 @@ public class Knife : MonoBehaviour
                 rg.constraints = RigidbodyConstraints2D.None;
                 rg.gravityScale = 0.2f;
                 //isRotate = true;
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Dron"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                //levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Death"))
+            {
+                levelController.IsMor();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                int rand = Random.Range(1, 3);
+                if (levelController.data.sound)
+                    tzong.Play();
+                if (rand == 1)
+                {
+                    rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rg.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+                }
+                isRotate = true;
                 Invoke(nameof(GetFall), 3f);
             }
             else if (collision.gameObject.CompareTag("Vampir")|| collision.gameObject.CompareTag("Demon"))
@@ -3861,6 +4423,14 @@ public class Knife : MonoBehaviour
                 Invoke(nameof(GetFall), 1.5f);
                 
             }
+            else if (collision.gameObject.CompareTag("Dron"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                //levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
+            }
             else if(collision.gameObject.CompareTag("Demon"))
             {
                 int rand = Random.Range(1, 3);
@@ -3900,7 +4470,8 @@ public class Knife : MonoBehaviour
                 || collision.gameObject.CompareTag("Light") || collision.gameObject.CompareTag("Dark")
                 || collision.gameObject.CompareTag("Nag") || collision.gameObject.CompareTag("Mor")
                 || collision.gameObject.CompareTag("Chost") || collision.gameObject.CompareTag("Vampir")
-                || collision.gameObject.CompareTag("Demon") || collision.gameObject.CompareTag("Death"))
+                || collision.gameObject.CompareTag("Demon") || collision.gameObject.CompareTag("Death")
+                || collision.gameObject.CompareTag("Dron"))
             {
                 if (levelController.data.vibro)
                     Handheld.Vibrate();
@@ -3969,7 +4540,17 @@ public class Knife : MonoBehaviour
                 levelController.IsFirework(1);
                 Invoke(nameof(GetFall), 3f);
             }
-            else if (collision.gameObject.CompareTag("Vampir")|| collision.gameObject.CompareTag("Demon"))
+            else if (collision.gameObject.CompareTag("Dron"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                levelController.IsMor();
+                levelController.IsFirework(1);
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Vampir")|| collision.gameObject.CompareTag("Demon")
+                || collision.gameObject.CompareTag("Death" ))
             {
                 rg.constraints = RigidbodyConstraints2D.FreezePositionY;
                 img.enabled = false;
@@ -4055,6 +4636,33 @@ public class Knife : MonoBehaviour
                 levelController.ResetAnim();
                 halfMonster.SetActive(true);
                 Invoke(nameof(GetWin), 1f);
+            }
+            else if (collision.gameObject.CompareTag("Dron"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                //levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Death"))
+            {
+                levelController.IsMor();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                int rand = Random.Range(1, 3);
+                if (levelController.data.sound)
+                    tzong.Play();
+                if (rand == 1)
+                {
+                    rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rg.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+                }
+                isRotate = true;
+                Invoke(nameof(GetFall), 3f);
             }
             else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
             {
@@ -4196,6 +4804,33 @@ public class Knife : MonoBehaviour
                 halfMonster.SetActive(true);
                 Invoke(nameof(GetWin), 1f);
             }
+            else if (collision.gameObject.CompareTag("Dron"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                //levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Death"))
+            {
+                levelController.IsMor();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                int rand = Random.Range(1, 3);
+                if (levelController.data.sound)
+                    tzong.Play();
+                if (rand == 1)
+                {
+                    rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rg.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+                }
+                isRotate = true;
+                Invoke(nameof(GetFall), 3f);
+            }
             else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
             {
                 win = true;
@@ -4320,12 +4955,39 @@ public class Knife : MonoBehaviour
                 airMonster.SetActive(true);
                 Invoke(nameof(GetWin), 3f);
             }
+            else if (collision.gameObject.CompareTag("Dron"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                //levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
+            }
             else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
             {
                 win = true;
                 if (levelController.data.vibro)
                     Handheld.Vibrate();
                 levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Death"))
+            {
+                levelController.IsMor();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                int rand = Random.Range(1, 3);
+                if (levelController.data.sound)
+                    tzong.Play();
+                if (rand == 1)
+                {
+                    rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rg.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+                }
+                isRotate = true;
                 Invoke(nameof(GetFall), 3f);
             }
             else if (collision.gameObject.CompareTag("Chucha"))
@@ -4397,6 +5059,33 @@ public class Knife : MonoBehaviour
                 if (levelController.data.vibro)
                     Handheld.Vibrate();
                 levelController.WaterElement();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Dron"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                //levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Death"))
+            {
+                levelController.IsMor();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                int rand = Random.Range(1, 3);
+                if (levelController.data.sound)
+                    tzong.Play();
+                if (rand == 1)
+                {
+                    rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rg.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+                }
+                isRotate = true;
                 Invoke(nameof(GetFall), 3f);
             }
             else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
@@ -4517,6 +5206,33 @@ public class Knife : MonoBehaviour
                 levelController.ResetAnim();
                 airMonster.SetActive(true);
                 Invoke(nameof(GetWin), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Dron"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                //levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Death"))
+            {
+                levelController.IsMor();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                int rand = Random.Range(1, 3);
+                if (levelController.data.sound)
+                    tzong.Play();
+                if (rand == 1)
+                {
+                    rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rg.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+                }
+                isRotate = true;
+                Invoke(nameof(GetFall), 3f);
             }
             else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
             {

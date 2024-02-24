@@ -57,7 +57,7 @@ public class LevelController : MonoBehaviour
     [SerializeField] private TMP_Text score;
     public MatchData data;
     [SerializeField] public string thisStageName;
-    [SerializeField] private Monster monster;
+    public Monster monster;
     [SerializeField] private Image monsterLeft;
     [SerializeField] private Image monsterRight;
     [SerializeField] public int thisSceneNumber;
@@ -265,6 +265,11 @@ public class LevelController : MonoBehaviour
         cactuses[currentStage].SetActive(true);
         currentAnim.SetBool("Cactus", true);
         Invoke(nameof(ResetCactus), 1f);
+    }
+    public void DronDy()
+    {
+        SetPause();        
+        currentAnim.SetBool("Dy", true);        
     }
     private void ResetCactus()
     {
@@ -491,6 +496,10 @@ public class LevelController : MonoBehaviour
         else if (data.currentTag == "Carrot")
         {
             knife.GetComponent<Knife>()._carrot = true;
+        }
+        else if (data.currentTag == "Dron")
+        {
+            knife.GetComponent<Knife>()._rocet = true;
         }
         else if (data.currentTag == "stone")
         {

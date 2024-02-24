@@ -25,4 +25,4 @@ MonoBehaviour:
   id: 2
   changeRotate: 0
   timeToEnd: 15
-  monsterTag: Monster
+  monsterTag: Tank

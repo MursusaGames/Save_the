@@ -118,6 +118,10 @@ public class PlayParticle : MonoBehaviour
     {
         animator.SetBool("Cactus", false);
     }
+    public void GlueEnd()
+    {
+        animator.SetBool("Glue", false);
+    }
     public void BombEnd()
     {
         animator.SetBool("Bomb", false);
@@ -128,6 +132,7 @@ public class PlayParticle : MonoBehaviour
     }
     public void AttacEnd()
     {
+        animator.SetBool("Stop", false);
         animator.SetBool("Attac", false);
     }
     public void FireworkEnd()
