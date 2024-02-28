@@ -168,6 +168,10 @@ public class PlayParticle : MonoBehaviour
             treeSound.Play();
         }
     }
+    public void StopTreeSound()
+    {
+        treeSound.Stop();
+    }
     public void HahaSound()
     {
         hahaSound.volume = vol;

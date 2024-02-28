@@ -9,6 +9,7 @@ using UnityEngine.Experimental.Rendering;
 
 public class LevelController : MonoBehaviour
 {
+    [SerializeField] private GameObject scat;
     [SerializeField] private GameObject firePartikl;
     [SerializeField] private GameObject fireworkPartikl;
     [SerializeField] private List<GameObject> magicAnimals;
@@ -207,15 +208,31 @@ public class LevelController : MonoBehaviour
     {
         PlaySound(2);
         SetPause();
-        bomb.SetActive(true);
-        //monsterAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Bomb", true);
-        //bossAnim[stages[currentStage].id].GetComponent<Animator>().SetBool("Bomb", true);
+        bomb.SetActive(true);        
     }
     public void IsBomb()
     {
-        //PlaySound(2);
         SetPause();
         currentAnim.SetBool("Bomb", true);
+    }
+    public void IsSprut()
+    {
+        SetPause();
+        currentAnim.SetBool("Sprut", true);
+    }
+    public void IsScatAttac(int id = 0)
+    {
+        SetPause();
+        if (id == 1)
+        {
+            currentAnim.gameObject.SetActive(false);
+        }
+        scat.SetActive(true);
+    }
+    public void StoneDy()
+    {
+        SetPause();
+        currentAnim.SetBool("Dy", true);
     }
     public void IsMor()
     {
@@ -341,6 +358,15 @@ public class LevelController : MonoBehaviour
     }
     public void IsArrow(int id)
     {
+        if (id == 2)
+        {
+            tomat.SetActive(true);
+            timeController.GetPause();
+            player.GetPause();
+            monster.GetPause();
+            currentAnim.SetBool("Poison", true);
+            return;
+        }
         tomat.SetActive(true);
         arrows[currentStage].SetActive(true);
         timeController.GetPause();
@@ -499,7 +525,7 @@ public class LevelController : MonoBehaviour
         }
         else if (data.currentTag == "Dron")
         {
-            knife.GetComponent<Knife>()._rocet = true;
+            knife.GetComponent<Knife>()._bomb = true;
         }
         else if (data.currentTag == "stone")
         {
@@ -674,6 +700,18 @@ public class LevelController : MonoBehaviour
         else if (data.currentTag =="Fire")
         {
             knife.GetComponent<Knife>()._fire = true;
+        }
+        else if (data.currentTag == "Meduza")
+        {
+            knife.GetComponent<Knife>()._meduza = true;
+        }
+        else if (data.currentTag == "Scat")
+        {
+            knife.GetComponent<Knife>()._scat = true;
+        }
+        else if (data.currentTag == "Sprut")
+        {
+            knife.GetComponent<Knife>()._sprut = true;
         }
     }
     public void ResetBlessedPartikl()
