@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Knife : MonoBehaviour
 {
+    [SerializeField] private AudioSource laser;
+    [SerializeField] private GameObject fire;
+    [SerializeField] private AudioSource zzzzz;
     [SerializeField] private GameObject airMonster;
     [SerializeField] private GameObject rocet;
     [SerializeField] private GameObject air;
@@ -41,6 +44,7 @@ public class Knife : MonoBehaviour
     public bool _shark;
     public bool _meduza;
     public bool _scat;
+    public bool _bes;
     public bool _sprut;
     public bool _carrot;
     public bool _bullet;
@@ -74,6 +78,13 @@ public class Knife : MonoBehaviour
     public bool _godzy;
     public bool _light;
     public bool _dark;
+    public bool _mandra;
+    public bool _vasya;
+    public bool _chost;
+    public bool _death;
+    public bool _ufo;
+    public bool _tank;
+    public bool _iron;
     private bool isRotate;
     public bool inDrive;
     private bool scale1;
@@ -102,12 +113,19 @@ public class Knife : MonoBehaviour
             tsssss.volume = PlayerPrefs.GetFloat(Constants.SOUND);
             luser.volume = PlayerPrefs.GetFloat(Constants.SOUND);
             blyak.volume = PlayerPrefs.GetFloat(Constants.SOUND);
+            zzzzz.volume = PlayerPrefs.GetFloat(Constants.SOUND);
+            laser.volume = PlayerPrefs.GetFloat(Constants.SOUND);
         }
     }
     public void SetTykw()
     {
         _tykw = true;
         smoke.SetActive(true);
+    }
+    public void SetFire()
+    {
+        _fire = true;
+        fire.SetActive(true);
     }
     public void SetAir()
     {
@@ -135,10 +153,21 @@ public class Knife : MonoBehaviour
             if (levelController.data.sound)
                luser.Play();
         }
+        if (_mandra)
+        {
+            if (levelController.data.sound)
+                zzzzz.Play();
+        }
         if (_rocet)
         {
             rocet.SetActive(true);
             Invoke(nameof(ResetFire), 0.5f);
+        }
+        if (_iron)
+        {
+            if (levelController.data.sound)
+                laser.Play();
+            levelController.StartLaser();
         }
 
         if (  levelController.thisStageName =="Game" && levelController.data.gameStage == 4 && (_acid || _air || _arrow || _blessedSword || _bullet || _cactus || _churik || _dark || _ches || _fire || _forest || _glue || _godzy
@@ -260,12 +289,11 @@ public class Knife : MonoBehaviour
             }
             return;
         }
-        if (_knife)
+        if (_knife || _vasya)
         {
             if (collision.gameObject.CompareTag("Iron") || collision.gameObject.CompareTag("Forest")
                 || collision.gameObject.CompareTag("Sprut") || collision.gameObject.CompareTag("Godzy")
-                || collision.gameObject.CompareTag("Stone") || collision.gameObject.CompareTag("Nag")
-                || collision.gameObject.CompareTag("Vasilisk") || collision.gameObject.CompareTag("Mor")
+                || collision.gameObject.CompareTag("Nag")|| collision.gameObject.CompareTag("Vasilisk") || collision.gameObject.CompareTag("Mor")
                 || collision.gameObject.CompareTag("Tank") || collision.gameObject.CompareTag("Helik")
                 || collision.gameObject.CompareTag("Ufo") )
             {
@@ -284,7 +312,7 @@ public class Knife : MonoBehaviour
                 }
 
                 isRotate = true;
-                Invoke(nameof(GetFall), 1f);
+                Invoke(nameof(GetFall), 2f);
             }
             else if (collision.gameObject.CompareTag("Ches"))
             {
@@ -296,6 +324,38 @@ public class Knife : MonoBehaviour
                     tsssss.Play();
                 levelController.IsChes();
                 Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Stone"))
+            {
+                if (_knife)
+                {
+                    if (levelController.data.vibro)
+                        Handheld.Vibrate();
+                    int rand = Random.Range(1, 3);
+                    if (levelController.data.sound)
+                        tzong.Play();
+                    if (rand == 1)
+                    {
+                        rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                    }
+                    else
+                    {
+                        rg.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+                    }
+
+                    isRotate = true;
+                    Invoke(nameof(GetFall), 2f);
+                }
+                else if (_vasya)
+                {
+                    rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+                    rg.velocity = Vector2.zero;
+                    img.enabled = false;
+                    levelController.StoneDy();
+                    if (levelController.data.vibro)
+                        Handheld.Vibrate();
+                    Invoke(nameof(GetWin), 3f);
+                }
             }
             else if (collision.gameObject.CompareTag("Chucha"))
             {
@@ -2691,7 +2751,7 @@ public class Knife : MonoBehaviour
                 Invoke(nameof(GetFall), 3f);
             }
         }
-        if (_lightsaber)
+        if (_lightsaber||_iron)
         {
             if (collision.gameObject.CompareTag("Tykw"))
             {
@@ -3198,7 +3258,7 @@ public class Knife : MonoBehaviour
                 Invoke(nameof(GetFall), 2f);
             }
         }
-        if (_meduza)
+        if (_meduza )
         {
             if (collision.gameObject.CompareTag("Monster") || collision.gameObject.CompareTag("Shark"))
             {
@@ -4154,8 +4214,9 @@ public class Knife : MonoBehaviour
                 Invoke(nameof(GetFall), 3f);
             }
         }
-        if (_molotov)
+        if (_molotov||_fire)
         {
+            fire.SetActive(false);
             if (collision.gameObject.CompareTag("Monster") || collision.gameObject.CompareTag("Shark")
                 || collision.gameObject.CompareTag("Ches") || collision.gameObject.CompareTag("Chucha")
                 || collision.gameObject.CompareTag("Mor"))
@@ -4368,7 +4429,7 @@ public class Knife : MonoBehaviour
                 Invoke(nameof(GetWin), 3f);
             }
         }
-        if (_rocet)
+        if (_rocet|| _tank)
         {
             if (collision.gameObject.CompareTag("Scat"))
             {
@@ -5291,7 +5352,7 @@ public class Knife : MonoBehaviour
                 //levelController.IsMor();
                 Invoke(nameof(GetFall), 3f);
             }
-            else if (collision.gameObject.CompareTag("Death"))
+            else if (collision.gameObject.CompareTag("Death")|| collision.gameObject.CompareTag("Mor"))
             {
                 levelController.IsMor();
                 if (levelController.data.vibro)
@@ -5417,137 +5478,7 @@ public class Knife : MonoBehaviour
                 halfMonster.SetActive(true);
                 Invoke(nameof(GetWin), 3f);
             }
-        }
-        if (_fire)
-        {
-            if (collision.gameObject.CompareTag("Scat"))
-            {
-                if (levelController.data.vibro)
-                    Handheld.Vibrate();
-                levelController.IsScat();
-                levelController.ResetAnim();
-                airMonster.SetActive(true);
-                Invoke(nameof(GetWin), 3f);
-            }
-            else if (collision.gameObject.CompareTag("Dron"))
-            {
-                win = true;
-                if (levelController.data.vibro)
-                    Handheld.Vibrate();
-                //levelController.IsMor();
-                Invoke(nameof(GetFall), 3f);
-            }
-            else if (collision.gameObject.CompareTag("Death") || collision.gameObject.CompareTag("Stone")
-                || collision.gameObject.CompareTag("Avto") || collision.gameObject.CompareTag("Tank")
-                || collision.gameObject.CompareTag("Helik") || collision.gameObject.CompareTag("Ufo"))
-            {
-                levelController.IsMor();
-                if (levelController.data.vibro)
-                    Handheld.Vibrate();
-                int rand = Random.Range(1, 3);
-                if (levelController.data.sound)
-                    tzong.Play();
-                if (rand == 1)
-                {
-                    rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
-                }
-                else
-                {
-                    rg.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
-                }
-                isRotate = true;
-                Invoke(nameof(GetFall), 3f);
-            }
-            else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
-            {
-                win = true;
-                if (levelController.data.vibro)
-                    Handheld.Vibrate();
-                levelController.IsMor();
-                Invoke(nameof(GetFall), 3f);
-            }
-            else if (collision.gameObject.CompareTag("Chost"))
-            {
-                win = true;
-                if (levelController.data.vibro)
-                    Handheld.Vibrate();
-                levelController.IsChost();
-                Invoke(nameof(GetFall), 3f);
-            }
-            else if ( collision.gameObject.CompareTag("Chucha"))
-            {
-                win = true;
-                rg.constraints = RigidbodyConstraints2D.FreezePositionY;
-                img.enabled = false;
-                if (levelController.data.vibro)
-                    Handheld.Vibrate();
-                if (levelController.bossFight)
-                {
-                    levelController.ResetGreenLine();
-                }
-                levelController.IsMolotov();
-                Invoke(nameof(GetWin), 3f);
-            }
-            else if (collision.gameObject.CompareTag("Fire"))
-            {
-                win = true;
-                if (levelController.data.vibro)
-                    Handheld.Vibrate();
-                levelController.FireElement();
-                Invoke(nameof(GetFall), 3f);
-            }
-            else if (collision.gameObject.CompareTag("Air"))
-            {
-                win = true;
-                if (levelController.data.vibro)
-                    Handheld.Vibrate();
-                levelController.AirElement();
-                Invoke(nameof(GetFall), 3f);
-
-            }
-            else if (collision.gameObject.CompareTag("Light"))
-            {
-                win = true;
-                if (levelController.data.vibro)
-                    Handheld.Vibrate();
-                levelController.Light();
-                Invoke(nameof(GetFall), 3f);
-            }
-            else if (collision.gameObject.CompareTag("Dark"))
-            {
-                win = true;
-                rg.constraints = RigidbodyConstraints2D.FreezePositionY;
-                rg.velocity = Vector2.zero;
-                img.enabled = false;
-                if (levelController.data.vibro)
-                    Handheld.Vibrate();
-                levelController.Dark();
-                Invoke(nameof(GetFall), 3f);
-            }
-            else
-            {
-                win = true;
-                if (levelController.data.vibro)
-                    Handheld.Vibrate();
-                if (levelController.bossFight)
-                {
-                    if (levelController.bossFirstFight == false)
-                    {
-                        levelController.bossFirstFight = true;
-                        GetFall();
-                        return;
-                    }
-                    else
-                    {
-                        levelController.ResetYellowLine();
-                    }
-                }
-                levelController.ResetAnim();
-                halfMonster.SetActive(true);
-                Invoke(nameof(GetWin), 3f);
-            }
-
-        }
+        }        
         if (_scat)
         {
             if (collision.gameObject.CompareTag("Forest") || collision.gameObject.CompareTag("Godzy")
@@ -5774,6 +5705,641 @@ public class Knife : MonoBehaviour
                 isRotate = true;
                 Invoke(nameof(GetFall), 2f);
             }
+        }
+        if (_mandra)
+        {
+            if (collision.gameObject.CompareTag("Scat"))
+            {
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                levelController.IsScat();
+                rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+                rg.velocity = Vector2.zero;
+                img.enabled = false;               
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Ches"))
+            {
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+                anim.enabled = true;
+                if (levelController.data.sound)
+                    tsssss.Play();
+                levelController.IsChes();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Tykw"))
+            {
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+                rg.velocity = Vector2.zero;
+                img.color = Color.green;
+                if (levelController.data.sound)
+                    ai.Play();
+                levelController.IsChes();
+                rg.constraints = RigidbodyConstraints2D.None;
+                rg.gravityScale = 0.2f;
+                //isRotate = true;
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Dron"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                //levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Iron") || collision.gameObject.CompareTag("Forest")
+                || collision.gameObject.CompareTag("Sprut") || collision.gameObject.CompareTag("Godzy")
+                || collision.gameObject.CompareTag("Stone") || collision.gameObject.CompareTag("Nag")
+                || collision.gameObject.CompareTag("Vasilisk") || collision.gameObject.CompareTag("Mor")
+                || collision.gameObject.CompareTag("Tank") || collision.gameObject.CompareTag("Helik")
+                || collision.gameObject.CompareTag("Ufo") || collision.gameObject.CompareTag("Death"))
+            {
+                levelController.IsMor();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                int rand = Random.Range(1, 3);
+                if (levelController.data.sound)
+                    blyak.Play();
+                if (rand == 1)
+                {
+                    rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rg.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+                }
+                isRotate = true;
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Chucha"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                levelController.IsChucha();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Chost"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                levelController.IsChost();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Fire"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                levelController.FireElement();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Air"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                levelController.AirElement();
+                Invoke(nameof(GetFall), 3f);
+
+            }
+            else if (collision.gameObject.CompareTag("Light"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                levelController.Light();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Dark"))
+            {
+                win = true;
+                rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+                rg.velocity = Vector2.zero;
+                img.enabled = false;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                levelController.Dark();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else
+            {
+                win = true;
+                rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+                rg.velocity = Vector2.zero;
+                img.enabled = false;
+                levelController.ResetAnim();
+                levelController.IsTomate();
+                Invoke(nameof(GetWin), 3f);
+            }
+
+        }
+        if (_bes)
+        {
+            if (collision.gameObject.CompareTag("Monster") || collision.gameObject.CompareTag("Ches") || collision.gameObject.CompareTag("Shark"))
+            {
+                win = true;
+                levelController.JustTomate();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                if (levelController.bossFight)
+                {
+                    if (levelController.bossFirstFight == false)
+                    {
+                        levelController.bossFirstFight = true;
+                        GetFall();
+                        return;
+                    }
+                    else
+                    {
+                        levelController.ResetYellowLine();
+                    }
+                }
+                levelController.ResetAnim();
+                halfMonster.SetActive(true);
+                Invoke(nameof(GetWin), 1f);
+            }
+            else if (collision.gameObject.CompareTag("Death"))
+            {
+                levelController.IsMor();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                int rand = Random.Range(1, 3);
+                if (levelController.data.sound)
+                    tzong.Play();
+                if (rand == 1)
+                {
+                    rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rg.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+                }
+                isRotate = true;
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Chucha"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                levelController.IsChucha();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Chost"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                levelController.IsChost();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Tykw"))
+            {
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+                rg.velocity = Vector2.zero;
+                img.color = Color.green;
+                if (levelController.data.sound)
+                    ai.Play();
+                levelController.IsChes();
+                rg.constraints = RigidbodyConstraints2D.None;
+                rg.gravityScale = 0.2f;
+                //isRotate = true;
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Scat"))
+            {
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+                rg.velocity = Vector2.zero;
+                img.enabled = false;
+                levelController.IsScat();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Water"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                levelController.WaterElement();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Fire"))
+            {
+                win = true;
+                img.color = Color.red;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                levelController.FireElement();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Air"))
+            {
+                win = true;
+                levelController.AirElement();
+                rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+                rg.velocity = Vector2.zero;
+                img.enabled = false;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Light"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                levelController.Light();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Dark"))
+            {
+                win = true;
+                rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+                rg.velocity = Vector2.zero;
+                img.enabled = false;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                levelController.Dark();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else
+            {
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                int rand = Random.Range(1, 3);
+                if (levelController.data.sound)
+                    tzong.Play();
+                if (rand == 1)
+                {
+                    rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rg.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+                }
+
+                isRotate = true;
+                Invoke(nameof(GetFall), 2f);
+            }
+        }
+        if (_chost)
+        {
+            if (collision.gameObject.CompareTag("Monster") || collision.gameObject.CompareTag("Ches") 
+                || collision.gameObject.CompareTag("Shark") || collision.gameObject.CompareTag("Meduza")
+                || collision.gameObject.CompareTag("Sprut") || collision.gameObject.CompareTag("Nag"))
+            {
+                win = true;
+                levelController.JustTomate();
+                rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+                rg.velocity = Vector2.zero;
+                img.enabled = false;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                if (levelController.bossFight)
+                {
+                    if (levelController.bossFirstFight == false)
+                    {
+                        levelController.bossFirstFight = true;
+                        GetFall();
+                        return;
+                    }
+                    else
+                    {
+                        levelController.ResetYellowLine();
+                    }
+                }
+                levelController.IsChostAttac();
+                Invoke(nameof(GetWin), 4f);
+            }
+            else if (collision.gameObject.CompareTag("Death"))
+            {
+                levelController.IsMor();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                int rand = Random.Range(1, 3);
+                if (levelController.data.sound)
+                    tzong.Play();
+                if (rand == 1)
+                {
+                    rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rg.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+                }
+                isRotate = true;
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Chucha"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                levelController.IsChucha();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Chost"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                levelController.IsChost();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Tykw"))
+            {
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+                rg.velocity = Vector2.zero;
+                img.color = Color.green;
+                if (levelController.data.sound)
+                    ai.Play();
+                levelController.IsChes();
+                rg.constraints = RigidbodyConstraints2D.None;
+                rg.gravityScale = 0.2f;
+                //isRotate = true;
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Scat"))
+            {
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+                rg.velocity = Vector2.zero;
+                img.enabled = false;
+                levelController.IsScat();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Water"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                levelController.WaterElement();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Fire"))
+            {
+                win = true;
+                img.color = Color.red;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                levelController.FireElement();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Air"))
+            {
+                win = true;
+                levelController.AirElement();
+                rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+                rg.velocity = Vector2.zero;
+                img.enabled = false;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Light"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                levelController.Light();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Dark"))
+            {
+                win = true;
+                rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+                rg.velocity = Vector2.zero;
+                img.enabled = false;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                levelController.Dark();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else
+            {
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                int rand = Random.Range(1, 3);
+                if (levelController.data.sound)
+                    tzong.Play();
+                if (rand == 1)
+                {
+                    rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rg.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+                }
+
+                isRotate = true;
+                Invoke(nameof(GetFall), 2f);
+            }
+        }
+        if (_death)
+        {
+            if (collision.gameObject.CompareTag("Monster") || collision.gameObject.CompareTag("Ches") || collision.gameObject.CompareTag("Shark"))
+            {
+                win = true;
+                levelController.JustTomate();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                if (levelController.bossFight)
+                {
+                    if (levelController.bossFirstFight == false)
+                    {
+                        levelController.bossFirstFight = true;
+                        GetFall();
+                        return;
+                    }
+                    else
+                    {
+                        levelController.ResetYellowLine();
+                    }
+                }
+                levelController.ResetAnim();
+                halfMonster.SetActive(true);
+                Invoke(nameof(GetWin), 1f);
+            }
+            else if (collision.gameObject.CompareTag("Death"))
+            {
+                levelController.IsMor();
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                int rand = Random.Range(1, 3);
+                if (levelController.data.sound)
+                    tzong.Play();
+                if (rand == 1)
+                {
+                    rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rg.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+                }
+                isRotate = true;
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Vampir") || collision.gameObject.CompareTag("Demon"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                levelController.IsMor();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Chucha"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                levelController.IsChucha();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Chost"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                levelController.IsChost();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Tykw"))
+            {
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+                rg.velocity = Vector2.zero;
+                img.color = Color.green;
+                if (levelController.data.sound)
+                    ai.Play();
+                levelController.IsChes();
+                rg.constraints = RigidbodyConstraints2D.None;
+                rg.gravityScale = 0.2f;
+                //isRotate = true;
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Scat"))
+            {
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+                rg.velocity = Vector2.zero;
+                img.enabled = false;
+                levelController.IsScat();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Water"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                levelController.WaterElement();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Fire"))
+            {
+                win = true;
+                img.color = Color.red;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                levelController.FireElement();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Air"))
+            {
+                win = true;
+                levelController.AirElement();
+                rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+                rg.velocity = Vector2.zero;
+                img.enabled = false;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Light"))
+            {
+                win = true;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                levelController.Light();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else if (collision.gameObject.CompareTag("Dark"))
+            {
+                win = true;
+                rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+                rg.velocity = Vector2.zero;
+                img.enabled = false;
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                levelController.Dark();
+                Invoke(nameof(GetFall), 3f);
+            }
+            else
+            {
+                if (levelController.data.vibro)
+                    Handheld.Vibrate();
+                int rand = Random.Range(1, 3);
+                if (levelController.data.sound)
+                    tzong.Play();
+                if (rand == 1)
+                {
+                    rg.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rg.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+                }
+
+                isRotate = true;
+                Invoke(nameof(GetFall), 2f);
+            }
+        }
+        if (_ufo)
+        {
+            rg.constraints = RigidbodyConstraints2D.FreezePositionY;
+            img.enabled = false;
+            levelController.ResetGreenLine();
+            levelController.IsNuclear();
+            Invoke(nameof(GetWin), 5f);
+
         }
     }
 }

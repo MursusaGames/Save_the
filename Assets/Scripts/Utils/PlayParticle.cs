@@ -1,7 +1,10 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class PlayParticle : MonoBehaviour
 {
+    [SerializeField] private LevelController levelController;
+    [SerializeField] private List<AudioSource> runSounds;
     [SerializeField] private AudioSource veterSound;
     [SerializeField] private AudioSource gromSound;
     [SerializeField] private AudioSource glasSound;
@@ -26,12 +29,24 @@ public class PlayParticle : MonoBehaviour
     private Vector3 peelPos;
     public bool bomb;
     private float vol;
-
+    
 
     private void Start()
     {
         animator = GetComponent<Animator>();
         vol = PlayerPrefs.GetFloat(Constants.SOUND);
+    }
+    public void RunSoundsPlay()
+    {
+        var rand = Random.Range(0, 6);
+        if(rand < 3)
+        {
+            if (data.sound)
+            {
+                runSounds[rand].volume = vol;
+                runSounds[rand].Play();
+            }            
+        }
     }
     public void PlayPart()
     {
@@ -40,6 +55,10 @@ public class PlayParticle : MonoBehaviour
         {
             greenLine.SetActive(false);
         }        
+    }
+    public void StopRunSound()
+    {
+        levelController.StopRunSound();
     }
     public void ShowGas()
     {

@@ -20,4 +20,8 @@ public class GetSound : MonoBehaviour
         if(data.sound)
             audioSource.Play();
     }
+    public void StopSound()
+    {
+        audioSource.Stop();
+    }
 }

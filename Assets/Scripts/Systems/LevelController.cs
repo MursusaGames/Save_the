@@ -5,10 +5,14 @@ using UnityEngine.UI;
 using TMPro;
 using UniRx;
 using UniRx.Extensions;
-using UnityEngine.Experimental.Rendering;
+
 
 public class LevelController : MonoBehaviour
 {
+    [SerializeField] private AudioSource run;
+    [SerializeField] private GameObject laser;
+    [SerializeField] private Animator laserAnim;
+    [SerializeField] private Sprite magikWandMor;
     [SerializeField] private GameObject scat;
     [SerializeField] private GameObject firePartikl;
     [SerializeField] private GameObject fireworkPartikl;
@@ -511,13 +515,17 @@ public class LevelController : MonoBehaviour
         {
             knife.GetComponent<Knife>()._knife = true;
         }
-        else if(data.currentTag == "superKnife")
+        else if(data.currentTag == "superKnife"|| data.currentTag == "Chucha" || data.currentTag == "Vampir")
         {
             knife.GetComponent<Knife>()._superKnife = true;
         }
         else if (data.currentTag == "Tomate")
         {
             knife.GetComponent<Knife>()._tomate = true;
+        }
+        else if (data.currentTag == "Bes")
+        {
+            knife.GetComponent<Knife>()._bes = true;
         }
         else if (data.currentTag == "Carrot")
         {
@@ -527,7 +535,7 @@ public class LevelController : MonoBehaviour
         {
             knife.GetComponent<Knife>()._bomb = true;
         }
-        else if (data.currentTag == "stone")
+        else if (data.currentTag == "stone" || data.currentTag == "Stone")
         {
             knife.GetComponent<Knife>()._stone = true;
         }
@@ -646,7 +654,7 @@ public class LevelController : MonoBehaviour
         {
             knife.GetComponent<Knife>()._smellySock = true;
         }
-        else if (data.currentTag == "rocet")
+        else if (data.currentTag == "rocet" || data.currentTag == "Helik")
         {
             knife.GetComponent<Knife>()._rocet = true;
         }
@@ -654,10 +662,14 @@ public class LevelController : MonoBehaviour
         {
             knife.GetComponent<Knife>()._peel = true;
         }
-        else if (data.currentTag == "MagicWand")
+        else if (data.currentTag == "MagicWand"|| data.currentTag == "Mor")
         {
             knife.GetComponent<Knife>()._magic = true;
             magicWand.SetActive(true);
+            if(data.currentTag == "Mor")
+            {
+                magicWand.GetComponent<Image>().sprite = magikWandMor;
+            }            
             knife.GetComponent<Image>().sprite = star;
             knife.gameObject.transform.localScale = Vector3.zero;            
         }
@@ -697,11 +709,11 @@ public class LevelController : MonoBehaviour
         {
             knife.GetComponent<Knife>().SetLight();
         }
-        else if (data.currentTag =="Fire")
+        else if (data.currentTag =="Fire" || data.currentTag == "Demon")
         {
-            knife.GetComponent<Knife>()._fire = true;
+            knife.GetComponent<Knife>().SetFire();
         }
-        else if (data.currentTag == "Meduza")
+        else if (data.currentTag == "Meduza"|| data.currentTag == "Nag")
         {
             knife.GetComponent<Knife>()._meduza = true;
         }
@@ -713,10 +725,50 @@ public class LevelController : MonoBehaviour
         {
             knife.GetComponent<Knife>()._sprut = true;
         }
+        else if (data.currentTag == "Mandragora")
+        {
+            knife.GetComponent<Knife>()._mandra = true;
+        }
+        else if (data.currentTag == "Vasilisk")
+        {
+            knife.GetComponent<Knife>()._vasya = true;
+        }
+        else if (data.currentTag == "Host")
+        {
+            knife.GetComponent<Knife>()._chost = true;
+        }
+        else if (data.currentTag == "Death")
+        {
+            knife.GetComponent<Knife>()._death = true;
+        }
+        else if (data.currentTag == "Ufo")
+        {
+            knife.GetComponent<Knife>()._ufo = true;
+        }
+        else if (data.currentTag == "Tank")
+        {
+            knife.GetComponent<Knife>()._tank = true;
+        }
+        else if (data.currentTag == "Iron")
+        {
+            knife.GetComponent<Knife>()._iron = true;
+            laser.SetActive(true);
+            knife.GetComponent<Image>().enabled = false;
+            knife.gameObject.transform.localScale = Vector3.zero;
+        }
     }
     public void ResetBlessedPartikl()
     {
         blessed.SetActive(false);
+    }
+    public void StartLaser()
+    {
+        laserAnim.SetBool("Laser", true);
+        Invoke(nameof(StopLaser), 1f);
+    }
+    public void StopLaser()
+    {
+        laserAnim.SetBool("Laser", false);
     }
     public void Bullet()
     {
@@ -759,6 +811,11 @@ public class LevelController : MonoBehaviour
         SetPause();
         currentAnim.SetBool("Air", true);
     }
+    public void IsChostAttac()
+    {
+        SetPause();
+        currentAnim.SetBool("Chost", true);
+    }
     public void Light()
     {
         SetPause();
@@ -799,6 +856,7 @@ public class LevelController : MonoBehaviour
     }
     public void Fall()
     {
+        
         bomb.SetActive(false);
         gas.SetActive(false);
         rocet.SetActive(false);
@@ -832,8 +890,13 @@ public class LevelController : MonoBehaviour
         }
         SetKnife();
     }
+    public void StopRunSound()
+    {
+        run.Stop();
+    }
     private void GameOver()
     {
+        StopRunSound();
         player.gameObject.SetActive(false);
         monster.gameObject.SetActive(false);
         deathAnim[currentStage].SetActive(true);
@@ -846,6 +909,7 @@ public class LevelController : MonoBehaviour
     }
     public void Win()
     {
+        StopRunSound();
         ballPower = 2;
         if (bossFight)
         {
