@@ -163,6 +163,10 @@ public class Knife : MonoBehaviour
             rocet.SetActive(true);
             Invoke(nameof(ResetFire), 0.5f);
         }
+        if (_death)
+        {
+            img.gameObject.transform.Rotate(Vector3.forward, 180f);
+        }
         if (_iron)
         {
             if (levelController.data.sound)
@@ -6174,7 +6178,10 @@ public class Knife : MonoBehaviour
         }
         if (_death)
         {
-            if (collision.gameObject.CompareTag("Monster") || collision.gameObject.CompareTag("Ches") || collision.gameObject.CompareTag("Shark"))
+            if (collision.gameObject.CompareTag("Monster") || collision.gameObject.CompareTag("Ches") 
+                || collision.gameObject.CompareTag("Shark") || collision.gameObject.CompareTag("Meduza")
+                || collision.gameObject.CompareTag("Sprut") || collision.gameObject.CompareTag("Godzy")
+                || collision.gameObject.CompareTag("Nag") || collision.gameObject.CompareTag("Vasilisk"))
             {
                 win = true;
                 levelController.JustTomate();

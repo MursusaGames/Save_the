@@ -52,6 +52,7 @@ public class SaveDataSystem : MonoBehaviour
     #region LOADS
     private void LoadPlayerData()
     {
+        data.levelNumber = PlayerPrefs.GetInt(Constants.LEVEL, 1);
         data.gameStage = PlayerPrefs.GetInt(Constants.GAMESTAGE,0);
         data.technoStage = PlayerPrefs.GetInt(Constants.TECHNOSTAGE, 0);
         data.forestStage = PlayerPrefs.GetInt(Constants.FORESTSTAGE, 0);

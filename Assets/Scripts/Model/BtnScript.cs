@@ -19,8 +19,7 @@ public class BtnScript : MonoBehaviour
     {
         if(parentId < 1)
         {
-            if (knifeImg.color != Color.white) getForAppleSystem.SetKnife(this);
-            else
+            if (knifeImg.color == Color.white)
             {
                 data.currentKnife = knifeImg.sprite;
                 data.currentTag = knifeImg.gameObject.tag;
@@ -28,7 +27,19 @@ public class BtnScript : MonoBehaviour
                 getForAppleSystem.knifesMenu.UpgradeKnifeImage();
                 getForAppleSystem.mainMenu.knifeImg.sprite = knifeImg.sprite;
             }
-                
+            else
+            {
+                getForAppleSystem.SetSubscribe(parentId, id);
+                getForAppleSystem.SetKnife(this);
+                return;
+            }
+            
+            //if (knifeImg.color != Color.white) getForAppleSystem.SetKnife(this);
+            //else
+            //{
+
+            //}
+
         }
             
         

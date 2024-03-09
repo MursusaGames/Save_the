@@ -20,8 +20,8 @@ MonoBehaviour:
   prizKnife: {fileID: 21300000, guid: 9f08af17a591e274cacde438b7a78f0f, type: 3}
   bossSprite: {fileID: 21300000, guid: d0ec1b07953220c40af342916736fbb9, type: 3}
   monsterSprite: {fileID: 21300000, guid: d0ec1b07953220c40af342916736fbb9, type: 3}
-  monsterHalf1: {fileID: 21300000, guid: ed2d1df9ef994074988de671d328de72, type: 3}
-  monsterHalf2: {fileID: 21300000, guid: 30ef54e66224594488fc809d45dba56b, type: 3}
+  monsterHalf1: {fileID: 21300000, guid: 01354928321d20b40b1c3129050363b7, type: 3}
+  monsterHalf2: {fileID: 21300000, guid: 7bd66ead31aa1494d8fbb00849f1c2e2, type: 3}
   id: 2
   changeRotate: 0
   timeToEnd: 13

@@ -20,8 +20,8 @@ MonoBehaviour:
   prizKnife: {fileID: 21300000, guid: 9d2c694fae4a4b942b998d9db3c55548, type: 3}
   bossSprite: {fileID: 0}
   monsterSprite: {fileID: 0}
-  monsterHalf1: {fileID: 0}
-  monsterHalf2: {fileID: 0}
+  monsterHalf1: {fileID: 21300000, guid: e945efe4db47d89478aa6e6c9b0873be, type: 3}
+  monsterHalf2: {fileID: 21300000, guid: b1b051d61d2ef7c4cb6966c9b8985e6d, type: 3}
   id: 4
   changeRotate: 0
   timeToEnd: 9
