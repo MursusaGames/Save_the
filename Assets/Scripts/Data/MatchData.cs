@@ -29,6 +29,8 @@ public class MatchData : ScriptableObject
     public bool sound;
     public bool music;
     public bool vibro;
+    public bool weaponWindow;
+    public int noAds;
     public enum State
     {
         MainMenu,

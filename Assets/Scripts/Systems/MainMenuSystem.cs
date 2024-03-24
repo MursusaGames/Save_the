@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
 
 public class MainMenuSystem : MonoBehaviour
 {
+    [SerializeField] private MatchData data;
     [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject settingsMenu;
     [SerializeField] GameObject challengeMenu;
@@ -15,7 +17,15 @@ public class MainMenuSystem : MonoBehaviour
     List<GameObject> menus;
     public void LoadURL()
     {
-        Application.OpenURL(Constants.DEVELOPER_URL);
+        Application.OpenURL(Constant.DEVELOPER_URL);
+    }
+    private void OnEnable()
+    {
+        if (data.weaponWindow)
+        {
+            data.weaponWindow = false;
+            ShowKnifessMenu();
+        }
     }
     private void Start()
     {

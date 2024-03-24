@@ -8,7 +8,7 @@ public class ChalangeMenu : MonoBehaviour
     public void SetLevel(int id)
     {
         data.levelNumber = id;
-        PlayerPrefs.SetInt(Constants.LEVEL, id);
+        PlayerPrefs.SetInt(Constant.LEVEL, id);
         _id = id;
         Invoke(nameof(LoadScene), 1f);
     }

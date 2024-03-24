@@ -9,12 +9,29 @@ public class BtnScript : MonoBehaviour
     private GetForVideoSystem getForVideoSystem;
     private MatchData data;
     public Image knifeImg;
+    private Image btnImage;
+    private AudioSource source;
     private void Awake()
     {
         getForAppleSystem = FindObjectOfType<GetForAppleSystem>();        
         data = getForAppleSystem._data;
+        btnImage = GetComponent<Image>();
+        source = GetComponent<AudioSource>();        
     }
-
+    public void ShowBtn()
+    {
+        if (data.sound)
+        {
+            source.volume = PlayerPrefs.GetFloat(Constant.SOUND);
+            source.Play();
+        }        
+        btnImage.color = Color.red;
+        Invoke(nameof(BackBtn), 1f);
+    }
+    private void BackBtn()
+    {
+        btnImage.color = Color.green;
+    }
     public void ClickBtn()
     {
         if(parentId < 1)

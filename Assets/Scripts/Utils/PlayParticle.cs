@@ -34,7 +34,7 @@ public class PlayParticle : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
-        vol = PlayerPrefs.GetFloat(Constants.SOUND);
+        vol = PlayerPrefs.GetFloat(Constant.SOUND);
     }
     public void RunSoundsPlay()
     {

@@ -28,7 +28,7 @@ public class GiftBtn : MonoBehaviour
             sub = 15;
         for (int i = 0; i <= sub; i++)
         {
-            if(!PlayerPrefs.HasKey(Constants.PRIZE_BAG + i))
+            if(!PlayerPrefs.HasKey(Constant.PRIZE_BAG + i))
             {
                 data.isGift = true;
             }

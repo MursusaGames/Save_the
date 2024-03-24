@@ -17,21 +17,21 @@ public class ToggleSystem : MonoBehaviour
 
     private void Awake()
     {
-        if (!PlayerPrefs.HasKey(Constants.SOUND))
+        if (!PlayerPrefs.HasKey(Constant.SOUND))
         {
-            PlayerPrefs.SetFloat(Constants.SOUND, 0.5f);
+            PlayerPrefs.SetFloat(Constant.SOUND, 0.5f);
             sound.color = Color.green;
             soundCheckmark.Show();
         }
-        if (!PlayerPrefs.HasKey(Constants.MUSIC))
+        if (!PlayerPrefs.HasKey(Constant.MUSIC))
         {
-            PlayerPrefs.SetFloat(Constants.MUSIC, 0.5f);
+            PlayerPrefs.SetFloat(Constant.MUSIC, 0.5f);
             music.color = Color.green;
             musicCheckmark.Show();
         }
-        if (!PlayerPrefs.HasKey(Constants.VIBRO))
+        if (!PlayerPrefs.HasKey(Constant.VIBRO))
         {
-            PlayerPrefs.SetFloat(Constants.VIBRO, 1);
+            PlayerPrefs.SetFloat(Constant.VIBRO, 1);
             vibration.color = Color.green;
             vibrationCheckmark.Show();
         }
@@ -39,18 +39,18 @@ public class ToggleSystem : MonoBehaviour
     }
     public void LoadAudio(Slider soundSlider, Slider musicSlider)
     {
-        SoundDesigner.SetVolumeAudioSource(SoundBaseType.Sound, PlayerPrefs.GetFloat(Constants.SOUND, 0.5f));
-        SoundDesigner.SetVolumeAudioSource(SoundBaseType.Music, PlayerPrefs.GetFloat(Constants.MUSIC, 0.5f));
+        SoundDesigner.SetVolumeAudioSource(SoundBaseType.Sound, PlayerPrefs.GetFloat(Constant.SOUND, 0.5f));
+        SoundDesigner.SetVolumeAudioSource(SoundBaseType.Music, PlayerPrefs.GetFloat(Constant.MUSIC, 0.5f));
 
-        if (PlayerPrefs.HasKey(Constants.SOUND))
-            soundSlider.value = PlayerPrefs.GetFloat(Constants.SOUND, 0.5f);
+        if (PlayerPrefs.HasKey(Constant.SOUND))
+            soundSlider.value = PlayerPrefs.GetFloat(Constant.SOUND, 0.5f);
 
-        if (PlayerPrefs.HasKey(Constants.MUSIC))
-            musicSlider.value = PlayerPrefs.GetFloat(Constants.MUSIC, 0.5f);
+        if (PlayerPrefs.HasKey(Constant.MUSIC))
+            musicSlider.value = PlayerPrefs.GetFloat(Constant.MUSIC, 0.5f);
     }
     private void OnEnable()
     {
-        if (PlayerPrefs.GetFloat(Constants.SOUND) > 0)
+        if (PlayerPrefs.GetFloat(Constant.SOUND) > 0)
         {
             sound.color = Color.green;
             soundCheckmark.Show();
@@ -63,7 +63,7 @@ public class ToggleSystem : MonoBehaviour
             data.sound = false;
         }
 
-        if (PlayerPrefs.GetFloat(Constants.MUSIC) > 0)
+        if (PlayerPrefs.GetFloat(Constant.MUSIC) > 0)
         {
             music.color = Color.green;
             musicCheckmark.Show();
@@ -76,7 +76,7 @@ public class ToggleSystem : MonoBehaviour
             data.music = false;
         }
 
-        if (PlayerPrefs.GetFloat(Constants.VIBRO) == 1)
+        if (PlayerPrefs.GetFloat(Constant.VIBRO) == 1)
         {
             vibration.color = Color.green;
             vibrationCheckmark.Show();
@@ -90,14 +90,14 @@ public class ToggleSystem : MonoBehaviour
             isVibro = false;
             data.vibro = false;
         }
-        _soundSlider.value = PlayerPrefs.GetFloat(Constants.SOUND);
-        _musicSlider.value = PlayerPrefs.GetFloat(Constants.MUSIC);
+        _soundSlider.value = PlayerPrefs.GetFloat(Constant.SOUND);
+        _musicSlider.value = PlayerPrefs.GetFloat(Constant.MUSIC);
     }
     public void ChangeSoundVolume()
     {
         float value = _soundSlider.GetComponent<Slider>().value;
         SoundDesigner.SetVolumeAudioSource(SoundBaseType.Sound, value);
-        PlayerPrefs.SetFloat(Constants.SOUND, value);
+        PlayerPrefs.SetFloat(Constant.SOUND, value);
         if (value == 0)
         {
             sound.color = Color.red;
@@ -116,7 +116,7 @@ public class ToggleSystem : MonoBehaviour
     {
         float value = _musicSlider.GetComponent<Slider>().value;
         SoundDesigner.SetVolumeAudioSource(SoundBaseType.Music, value);
-        PlayerPrefs.SetFloat(Constants.MUSIC, value);
+        PlayerPrefs.SetFloat(Constant.MUSIC, value);
         if(value == 0)
         {
             music.color = Color.red;
@@ -132,9 +132,9 @@ public class ToggleSystem : MonoBehaviour
     }
     public void ChangeSound()
     {
-        if(PlayerPrefs.GetFloat(Constants.SOUND) == 0)
+        if(PlayerPrefs.GetFloat(Constant.SOUND) == 0)
         {
-            PlayerPrefs.SetFloat(Constants.SOUND, 1);
+            PlayerPrefs.SetFloat(Constant.SOUND, 1);
             sound.color = Color.green;
             soundCheckmark.Show();
             data.sound = true;
@@ -143,7 +143,7 @@ public class ToggleSystem : MonoBehaviour
         }
         else
         {
-            PlayerPrefs.SetFloat(Constants.SOUND, 0);
+            PlayerPrefs.SetFloat(Constant.SOUND, 0);
             sound.color = Color.red;
             soundCheckmark.Hide();
             data.sound = false;
@@ -152,9 +152,9 @@ public class ToggleSystem : MonoBehaviour
     }
     public void ChangeMusic()
     {
-        if (PlayerPrefs.GetFloat(Constants.MUSIC) == 0)
+        if (PlayerPrefs.GetFloat(Constant.MUSIC) == 0)
         {
-            PlayerPrefs.SetFloat(Constants.MUSIC, 1);
+            PlayerPrefs.SetFloat(Constant.MUSIC, 1);
             music.color = Color.green;
             musicCheckmark.Show();
             data.music = true;
@@ -163,7 +163,7 @@ public class ToggleSystem : MonoBehaviour
         }
         else
         {
-            PlayerPrefs.SetFloat(Constants.MUSIC, 0);
+            PlayerPrefs.SetFloat(Constant.MUSIC, 0);
             music.color = Color.red;
             musicCheckmark.Hide();
             data.music = false;
@@ -172,9 +172,9 @@ public class ToggleSystem : MonoBehaviour
     }
     public void ChangeVibration()
     {
-        if (PlayerPrefs.GetFloat(Constants.VIBRO) == 0)
+        if (PlayerPrefs.GetFloat(Constant.VIBRO) == 0)
         {
-            PlayerPrefs.SetFloat(Constants.VIBRO, 1);
+            PlayerPrefs.SetFloat(Constant.VIBRO, 1);
             vibration.color = Color.green;
             vibrationCheckmark.Show();
             data.vibro = true;
@@ -183,7 +183,7 @@ public class ToggleSystem : MonoBehaviour
         }
         else
         {
-            PlayerPrefs.SetFloat(Constants.VIBRO, 0);
+            PlayerPrefs.SetFloat(Constant.VIBRO, 0);
             vibration.color = Color.red;
             vibrationCheckmark.Hide();
             data.vibro = false;

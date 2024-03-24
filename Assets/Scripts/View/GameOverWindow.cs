@@ -10,6 +10,7 @@ public class GameOverWindow : MonoBehaviour
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        audioSource.volume = PlayerPrefs.GetFloat(Constant.SOUND);
     }
     void Start()
     {

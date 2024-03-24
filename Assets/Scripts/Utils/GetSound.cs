@@ -8,7 +8,7 @@ public class GetSound : MonoBehaviour
     void OnEnable()
     {
         audioSource = gameObject.GetComponent<AudioSource>();
-        audioSource.volume = PlayerPrefs.GetFloat(Constants.SOUND);
+        audioSource.volume = PlayerPrefs.GetFloat(Constant.SOUND);
         if (bomb)
         {
             PlaySound();

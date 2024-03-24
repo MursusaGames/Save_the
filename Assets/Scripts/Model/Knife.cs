@@ -108,13 +108,13 @@ public class Knife : MonoBehaviour
     {
         if (levelController.data.sound)
         {
-            ai.volume = PlayerPrefs.GetFloat(Constants.SOUND);
-            tzong.volume = PlayerPrefs.GetFloat(Constants.SOUND);
-            tsssss.volume = PlayerPrefs.GetFloat(Constants.SOUND);
-            luser.volume = PlayerPrefs.GetFloat(Constants.SOUND);
-            blyak.volume = PlayerPrefs.GetFloat(Constants.SOUND);
-            zzzzz.volume = PlayerPrefs.GetFloat(Constants.SOUND);
-            laser.volume = PlayerPrefs.GetFloat(Constants.SOUND);
+            ai.volume = PlayerPrefs.GetFloat(Constant.SOUND);
+            tzong.volume = PlayerPrefs.GetFloat(Constant.SOUND);
+            tsssss.volume = PlayerPrefs.GetFloat(Constant.SOUND);
+            luser.volume = PlayerPrefs.GetFloat(Constant.SOUND);
+            blyak.volume = PlayerPrefs.GetFloat(Constant.SOUND);
+            zzzzz.volume = PlayerPrefs.GetFloat(Constant.SOUND);
+            laser.volume = PlayerPrefs.GetFloat(Constant.SOUND);
         }
     }
     public void SetTykw()

@@ -11,17 +11,17 @@ public class SaveDataSystem : MonoBehaviour
 
     private void Start()
     {
-        if (!PlayerPrefs.HasKey(Constants.SOUND))
+        if (!PlayerPrefs.HasKey(Constant.SOUND))
         {
-            PlayerPrefs.SetFloat(Constants.SOUND, 0.5f);            
+            PlayerPrefs.SetFloat(Constant.SOUND, 0.2f);            
         }
-        if (!PlayerPrefs.HasKey(Constants.MUSIC))
+        if (!PlayerPrefs.HasKey(Constant.MUSIC))
         {
-            PlayerPrefs.SetFloat(Constants.MUSIC, 0.5f);            
+            PlayerPrefs.SetFloat(Constant.MUSIC, 0.9f);            
         }
-        if (!PlayerPrefs.HasKey(Constants.VIBRO))
+        if (!PlayerPrefs.HasKey(Constant.VIBRO))
         {
-            PlayerPrefs.SetFloat(Constants.VIBRO, 1);            
+            PlayerPrefs.SetFloat(Constant.VIBRO, 1);            
         }
         LoadPlayerData();
     }
@@ -52,20 +52,20 @@ public class SaveDataSystem : MonoBehaviour
     #region LOADS
     private void LoadPlayerData()
     {
-        data.levelNumber = PlayerPrefs.GetInt(Constants.LEVEL, 1);
-        data.gameStage = PlayerPrefs.GetInt(Constants.GAMESTAGE,0);
-        data.technoStage = PlayerPrefs.GetInt(Constants.TECHNOSTAGE, 0);
-        data.forestStage = PlayerPrefs.GetInt(Constants.FORESTSTAGE, 0);
-        data.fermStage = PlayerPrefs.GetInt(Constants.FERMSTAGE, 0);
-        data.hellStage = PlayerPrefs.GetInt(Constants.HELLSTAGE, 0);
-        data.oceanStage = PlayerPrefs.GetInt(Constants.OCEANSTAGE, 0);
-        userData.apple.Value = PlayerPrefs.GetInt(Constants.SCORE);
+        data.levelNumber = PlayerPrefs.GetInt(Constant.LEVEL, 1);
+        data.gameStage = PlayerPrefs.GetInt(Constant.GAMESTAGE,0);
+        data.technoStage = PlayerPrefs.GetInt(Constant.TECHNOSTAGE, 0);
+        data.forestStage = PlayerPrefs.GetInt(Constant.FORESTSTAGE, 0);
+        data.fermStage = PlayerPrefs.GetInt(Constant.FERMSTAGE, 0);
+        data.hellStage = PlayerPrefs.GetInt(Constant.HELLSTAGE, 0);
+        data.oceanStage = PlayerPrefs.GetInt(Constant.OCEANSTAGE, 0);
+        userData.apple.Value = PlayerPrefs.GetInt(Constant.SCORE);
         if (PlayerPrefs.HasKey("FirstDay"))
         {
             data.firstDay = PlayerPrefs.GetInt("FirstDay");
         }
         data.currentTag = PlayerPrefs.GetString("CurentTag", "Knife");
-        if (PlayerPrefs.GetFloat(Constants.SOUND) > 0)
+        if (PlayerPrefs.GetFloat(Constant.SOUND) > 0)
         {
             data.sound = true;
         }
@@ -74,7 +74,7 @@ public class SaveDataSystem : MonoBehaviour
             data.sound = false;
         }
 
-        if (PlayerPrefs.GetFloat(Constants.MUSIC) > 0)
+        if (PlayerPrefs.GetFloat(Constant.MUSIC) > 0)
         {
             data.music = true;
         }
@@ -83,7 +83,7 @@ public class SaveDataSystem : MonoBehaviour
             data.music = false;
         }
 
-        if (PlayerPrefs.GetFloat(Constants.VIBRO) == 1)
+        if (PlayerPrefs.GetFloat(Constant.VIBRO) == 1)
         {
             data.vibro = true;
         }

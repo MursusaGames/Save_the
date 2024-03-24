@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd41356043e06e740ba1e70cfb8f5537, type: 3}
   m_Name: User Data
   m_EditorClassIdentifier: 
-  score: 0
   apple:
     value: 0
-  currentKnife: {fileID: 21300000, guid: 65dd06acab4f3aa47b5ce0576e429eae, type: 3}
+  currentKnife: {fileID: 21300000, guid: 13fe6a4c07b06fa44bf8ebe31a05f591, type: 3}

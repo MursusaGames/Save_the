@@ -41,7 +41,7 @@ public class GiftSystem : MonoBehaviour
     
     public void GetPrize(int id)
     {
-        PlayerPrefs.SetString(Constants.PRIZE_BAG + id, "yes");
+        PlayerPrefs.SetString(Constant.PRIZE_BAG + id, "yes");
         data.isGift = false;
     }
    

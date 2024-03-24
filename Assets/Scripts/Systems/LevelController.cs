@@ -9,6 +9,7 @@ using UniRx.Extensions;
 
 public class LevelController : MonoBehaviour
 {
+    [SerializeField] private AudioSource barab;
     [SerializeField] private AudioSource run;
     [SerializeField] private GameObject laser;
     [SerializeField] private Animator laserAnim;
@@ -501,7 +502,7 @@ public class LevelController : MonoBehaviour
     {
         if (data.sound)
         {
-            audioSource.volume = PlayerPrefs.GetFloat(Constants.SOUND);
+            audioSource.volume = PlayerPrefs.GetFloat(Constant.SOUND);
             audioSource.clip = clips[id];
             audioSource.Play();
         }        
@@ -856,7 +857,7 @@ public class LevelController : MonoBehaviour
     }
     public void Fall()
     {
-        
+        barab.Stop();
         bomb.SetActive(false);
         gas.SetActive(false);
         rocet.SetActive(false);
@@ -909,6 +910,7 @@ public class LevelController : MonoBehaviour
     }
     public void Win()
     {
+        barab.Stop();
         StopRunSound();
         ballPower = 2;
         if (bossFight)
@@ -918,27 +920,27 @@ public class LevelController : MonoBehaviour
             {
                 case "Game":
                     data.gameStage++;
-                    PlayerPrefs.SetInt(Constants.GAMESTAGE, data.gameStage);
+                    PlayerPrefs.SetInt(Constant.GAMESTAGE, data.gameStage);
                     break;
                 case "WildOcean":
                     data.oceanStage++;
-                    PlayerPrefs.SetInt(Constants.OCEANSTAGE, data.oceanStage);
+                    PlayerPrefs.SetInt(Constant.OCEANSTAGE, data.oceanStage);
                     break;
                 case "WildFerm":
                     data.fermStage++;
-                    PlayerPrefs.SetInt(Constants.FERMSTAGE, data.fermStage);
+                    PlayerPrefs.SetInt(Constant.FERMSTAGE, data.fermStage);
                     break;
                 case "WildForest":
                     data.forestStage++;
-                    PlayerPrefs.SetInt(Constants.FORESTSTAGE, data.forestStage);
+                    PlayerPrefs.SetInt(Constant.FORESTSTAGE, data.forestStage);
                     break;
                 case "Hell":
                     data.hellStage++;
-                    PlayerPrefs.SetInt(Constants.HELLSTAGE, data.hellStage);
+                    PlayerPrefs.SetInt(Constant.HELLSTAGE, data.hellStage);
                     break;
                 case "Technopolis":
                     data.technoStage++;
-                    PlayerPrefs.SetInt(Constants.TECHNOSTAGE, data.technoStage);
+                    PlayerPrefs.SetInt(Constant.TECHNOSTAGE, data.technoStage);
                     break;
             }
             return;
@@ -954,6 +956,16 @@ public class LevelController : MonoBehaviour
     public void Reload()
     {
         SceneManager.LoadScene(0);
+    }
+    public void ChangeWeapon()
+    {
+        data.weaponWindow = true;
+        SceneManager.LoadScene(0);
+    }
+    public void GetAppleForADS()
+    {
+        userData.apple.Value += 50;
+        PlayerPrefs.SetInt(Constant.SCORE, userData.apple.Value);
     }
 
     #endregion

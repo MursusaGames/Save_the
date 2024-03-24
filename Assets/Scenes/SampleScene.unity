@@ -273,6 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fac2367823a4a454a8ac9b7db3325021, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 74b1b7c04ef314840842cefd98d4efc8, type: 2}
   mainMenu: {fileID: 61557179}
   settingsMenu: {fileID: 170002097}
   challengeMenu: {fileID: 695705996}
@@ -1017,7 +1018,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 34.89}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -101.870125, y: 450}
+  m_AnchoredPosition: {x: -101.87012, y: 450}
   m_SizeDelta: {x: 134.5, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &17953597
@@ -4151,6 +4152,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 762024790772081146}
+        m_TargetAssemblyTypeName: YandexMobileAdsInterstitialDemoScript, Assembly-CSharp
+        m_MethodName: ShowInterstitial
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: ChallengeMenu
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 815250}
         m_TargetAssemblyTypeName: MainMenuSystem, Assembly-CSharp
         m_MethodName: SetMenu
@@ -5745,7 +5758,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Save the ...
+  m_text: Save Harry
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
@@ -6152,6 +6165,7 @@ Transform:
   - {fileID: 382186702}
   - {fileID: 510254294}
   - {fileID: 709731817}
+  - {fileID: 2029292447}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14277,7 +14291,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 34.89}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -101.870125, y: -346.85983}
+  m_AnchoredPosition: {x: -101.87012, y: -346.85983}
   m_SizeDelta: {x: 134.5, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &600851882
@@ -16059,7 +16073,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 34.89}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -101.870125, y: -249.99948}
+  m_AnchoredPosition: {x: -101.87012, y: -249.99948}
   m_SizeDelta: {x: 134.5, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &690950432
@@ -17610,7 +17624,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 34.89}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -101.870125, y: -149.99948}
+  m_AnchoredPosition: {x: -101.87012, y: -149.99948}
   m_SizeDelta: {x: 134.5, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &745944592
@@ -18525,7 +18539,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 34.89}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -101.870125, y: 50}
+  m_AnchoredPosition: {x: -101.87012, y: 50}
   m_SizeDelta: {x: 134.5, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &772759614
@@ -21989,6 +22003,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponImg: {fileID: 0}
   levelController: {fileID: 0}
+  data: {fileID: 0}
 --- !u!224 &921084944
 RectTransform:
   m_ObjectHideFlags: 0
@@ -22276,7 +22291,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 34.89}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -101.870125, y: 550}
+  m_AnchoredPosition: {x: -101.87012, y: 550}
   m_SizeDelta: {x: 134.5, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &927346986
@@ -24157,9 +24172,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1426604902}
-        m_TargetAssemblyTypeName: GetForAppleSystem, Assembly-CSharp
-        m_MethodName: GetAppleForADS
+      - m_Target: {fileID: 3856653885585518025}
+        m_TargetAssemblyTypeName: YandexMobileAdsRewardedAdDemoScript, Assembly-CSharp
+        m_MethodName: ShowRewardedAd
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -25707,7 +25722,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 34.89}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -101.86964, y: -49.99951}
+  m_AnchoredPosition: {x: -101.86963, y: -49.99951}
   m_SizeDelta: {x: 134.5, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1058093544
@@ -26174,7 +26189,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 34.89}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -101.870125, y: 650}
+  m_AnchoredPosition: {x: -101.87012, y: 650}
   m_SizeDelta: {x: 134.5, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1081537651
@@ -30316,6 +30331,7 @@ MonoBehaviour:
   scaleOffset: 1.6
   panPrefab: {fileID: 350754387416973950, guid: ba5351d8dfabae6469c767c77229d5a8, type: 3}
   customSystem: {fileID: 590640267}
+  apleSystem: {fileID: 1426604902}
   subscribeText: {fileID: 871879250}
   rings:
   - {fileID: 1880083328}
@@ -31578,7 +31594,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1347095885}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1426604902}
+        m_TargetAssemblyTypeName: GetForAppleSystem, Assembly-CSharp
+        m_MethodName: GetRandomWeapon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1347095885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33155,7 +33183,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 34.89}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -101.870125, y: 350}
+  m_AnchoredPosition: {x: -101.87012, y: 350}
   m_SizeDelta: {x: 134.5, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1414162192
@@ -33521,6 +33549,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d07a911f1ee86040a87be31e34ecc06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scriptList: []
+  randomBtn: {fileID: 1347095882}
   textForSmoulBtn: {fileID: 3894872527288464307, guid: ab45f4cbcd32a694c8b1d9bd38e3c324, type: 3}
   textForBigBtn: {fileID: 1816536545402678530, guid: 6ccc2f3c521505b4aa110ff72b68afaa, type: 3}
   subscribe: {fileID: 21615761}
@@ -38167,7 +38197,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 34.89}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -101.870125, y: 250}
+  m_AnchoredPosition: {x: -101.87012, y: 250}
   m_SizeDelta: {x: 134.5, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1654828215
@@ -46619,6 +46649,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2027764294}
   m_CullTransparentMesh: 1
+--- !u!1 &2029292446
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2029292447}
+  - component: {fileID: 2029292448}
+  m_Layer: 0
+  m_Name: LocalizationSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2029292447
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2029292446}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 245870453}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2029292448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2029292446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 648a5e95fd6490243807813abfa4a92d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _manualLocalizationObjects: []
+  matchData: {fileID: 11400000, guid: 74b1b7c04ef314840842cefd98d4efc8, type: 2}
 --- !u!1 &2030247033
 GameObject:
   m_ObjectHideFlags: 0
@@ -49123,7 +49199,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 34.89}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -101.870125, y: 150}
+  m_AnchoredPosition: {x: -101.87012, y: 150}
   m_SizeDelta: {x: 134.5, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2147033860
@@ -49164,6 +49240,65 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2147033858}
   m_CullTransparentMesh: 1
+--- !u!114 &762024790772081146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1698317570366913836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dbbc1c3fbb680b4cb65d234226ec68b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 167743924}
+--- !u!1 &1698317570366913836
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7078976203918402584}
+  - component: {fileID: 3856653885585518025}
+  - component: {fileID: 762024790772081146}
+  m_Layer: 0
+  m_Name: YandexADS
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &3856653885585518025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1698317570366913836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c395e71ee0ae4fa4db3fe8a3adbb8c55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  appleSystem: {fileID: 1426604902}
+--- !u!4 &7078976203918402584
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1698317570366913836}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.72886074, y: -2.804464, z: 237.87476}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &7966398394210813192
 PrefabInstance:
   m_ObjectHideFlags: 0

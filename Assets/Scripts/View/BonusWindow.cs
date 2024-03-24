@@ -6,6 +6,7 @@ public class BonusWindow : MonoBehaviour
 {
     [SerializeField] private Image weaponImg;
     [SerializeField] private LevelController levelController;
+    [SerializeField] private MatchData data;
     private int currentStage;
     private int currentID;
     private void OnEnable()
@@ -17,15 +18,16 @@ public class BonusWindow : MonoBehaviour
         currentID = levelController.stages[currentStage].weaponID;
         if (currentID < 16)
         {
-            PlayerPrefs.SetString(Constants.BOSS_BAG + currentID, "yes");
+            PlayerPrefs.SetString(Constant.BOSS_BAG + currentID, "yes");
         }            
         else
         {
-            PlayerPrefs.SetString(Constants.BOSS_BAG1 + (currentID-16), "yes");
+            PlayerPrefs.SetString(Constant.BOSS_BAG1 + (currentID-16), "yes");
         }
     }
     public void GetKnife()
     {
+        data.weaponWindow = true;
         SceneManager.LoadScene(0);
         gameObject.SetActive(false);
     }
@@ -35,27 +37,27 @@ public class BonusWindow : MonoBehaviour
         {
             case "Game":
                 levelController.data.gameStage =0;
-                PlayerPrefs.SetInt(Constants.GAMESTAGE, 0);
+                PlayerPrefs.SetInt(Constant.GAMESTAGE, 0);
                 break;
             case "WildOcean":
                 levelController.data.gameStage = 0;
-                PlayerPrefs.SetInt(Constants.OCEANSTAGE, 0);
+                PlayerPrefs.SetInt(Constant.OCEANSTAGE, 0);
                 break;
             case "WildFerm":
                 levelController.data.gameStage = 0;
-                PlayerPrefs.SetInt(Constants.FERMSTAGE, 0);
+                PlayerPrefs.SetInt(Constant.FERMSTAGE, 0);
                 break;
             case "WildForest":
                 levelController.data.gameStage = 0;
-                PlayerPrefs.SetInt(Constants.FORESTSTAGE, 0);
+                PlayerPrefs.SetInt(Constant.FORESTSTAGE, 0);
                 break;
             case "Hell":
                 levelController.data.gameStage = 0;
-                PlayerPrefs.SetInt(Constants.HELLSTAGE, 0);
+                PlayerPrefs.SetInt(Constant.HELLSTAGE, 0);
                 break;
             case "Technopolis":
                 levelController.data.gameStage = 0;
-                PlayerPrefs.SetInt(Constants.TECHNOSTAGE, 0);
+                PlayerPrefs.SetInt(Constant.TECHNOSTAGE, 0);
                 break;
         }
         GetKnife();

@@ -1,6 +1,6 @@
 
 
-public static class Constants
+public static class Constant
 {
     public const string DEVELOPER_URL = "https://play.google.com/store/apps/dev?id=5432149960976309187";
     public const string SOUND = "Sound";
@@ -18,7 +18,7 @@ public static class Constants
     public const string BOSS_BAG = "Boses_Bags";
     public const string BOSS_BAG1 = "Bosees__Bags1";
     public const string APPLE_BAG = "AppleBags";
-    public const string APPLE_1_DATA = "Apple_01";
+    public const string APPLE_1_DATA = "Apple_001";
     public const string APPLE_2_DATA = "Apple_2";
     public const string APPLE_3_DATA = "Apple_3";
     public const string VIDEO_BAG = "VideoBags";

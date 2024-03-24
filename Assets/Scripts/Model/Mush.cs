@@ -12,7 +12,7 @@ public class Mush : MonoBehaviour
     {
         if (data.sound)
         {
-            audioSource.volume = PlayerPrefs.GetFloat(Constants.SOUND);
+            audioSource.volume = PlayerPrefs.GetFloat(Constant.SOUND);
             audioSource.Play();
         }
     }

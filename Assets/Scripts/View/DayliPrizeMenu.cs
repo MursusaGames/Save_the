@@ -12,7 +12,7 @@ public class DayliPrizeMenu : MonoBehaviour
     {
         for (int i = 0; i < receiveds.Count; i++)
         {
-            if(PlayerPrefs.HasKey(Constants.PRIZE_BAG + i))
+            if(PlayerPrefs.HasKey(Constant.PRIZE_BAG + i))
             {
                 receiveds[i].SetActive(true);
                 btns[i].SetActive(false);
